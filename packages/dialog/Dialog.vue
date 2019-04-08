@@ -1,12 +1,14 @@
 <template>
-  <div :class="bem('wrap')">
-    <div :class="bem('header')">标题</div>
-    <div :class="bem('content')">代码是写出来给人看的，附带能在机器上运行</div>
-    <div :class="bem('btn-wrap')">
-      <div :class="bem('btn-item')" @click="onCancel">取 消</div>
-      <div :class="bem('btn-item')" @click="onConfirm">确 认</div>
+  <transition name="esc-dialog">
+    <div v-show="showDialog" :class="bem('wrap')">
+      <div :class="bem('header')">标题</div>
+      <div :class="bem('content')">代码是写出来给人看的，附带能在机器上运行</div>
+      <div :class="bem('btn-wrap')">
+        <div :class="bem('btn-item')" @click="handleAction('cancel')">取 消</div>
+        <div :class="bem('btn-item')" @click="handleAction('confirm')">确 认</div>
+      </div>
     </div>
-  </div>
+  </transition>
 </template>
 
 <script lang="ts">
@@ -17,8 +19,6 @@
 
   @Component
   export default class Dialog extends Mixins(popup) {
-    showDialog: boolean = false
-
     // pit 必须赋值非必须 Strict Class Initialization
     // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html
     @Prop() readonly content!: string
@@ -27,15 +27,13 @@
       return bem(model, modifier)
     }
 
-    created() {
-    }
+    callback(action: string) {}
 
-    onCancel() {
-
-    }
-
-    onConfirm() {
-
+    handleAction(action: string) {
+      this.close()
+      if (this.callback) {
+        this.callback(action)
+      }
     }
   }
 </script>
@@ -50,7 +48,7 @@
       width: 85%
       font-size: 16px
       overflow: hidden
-      transition: .3s
+      // transition: .3s
       background-color: #fff
       transform: translate3d(-50%, -50%, 0)
       backface-visibility: hidden
@@ -78,4 +76,22 @@
       color button-font-color
       &:first-child
         border-right 1px border-color solid
+  .esc-dialog-enter-active
+    animation scale-in .3s
+  .esc-dialog-leave-active
+    animation scale-out .3s
+  @keyframes scale-in
+    from
+      opacity 0
+      transform translate3d(-50%, -50%, 0) scale(0.5, 0.5)
+    to
+      opacity 1
+      transform translate3d(-50%, -50%, 0) scale(1, 1)
+  @keyframes scale-out
+    from
+      opacity 1
+      transform translate3d(-50%, -50%, 0) scale(1, 1)
+    to
+      opacity 0
+      transform translate3d(-50%, -50%, 0) scale(0.5, 0.5)
 </style>

@@ -1,7 +1,10 @@
 <template>
   <div class="home">
     <Layout>
-      <template slot="right">dialog</template>
+      <template slot="right">
+        <p>提示</p>
+        <a href="javascript:" @click="alert()">提示弹窗</a>
+      </template>
     </Layout>
   </div>
 </template>
@@ -17,9 +20,9 @@
     }
   })
   export default class Home extends Vue {
-    mounted () {
-      dialog.alert({
-        container: '.esc-layout__right'
+    alert () {
+      dialog.alert({ container: '.esc-layout__right' }).then(action => {
+        console.log(action)
       })
     }
   }
