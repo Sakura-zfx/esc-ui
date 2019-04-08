@@ -1,14 +1,15 @@
 import { Vue, Component, Watch, Prop } from 'vue-property-decorator'
 import EscMask from '../../mask-layer/index.vue'
+import context from './context'
 
 interface MaskOptions {
   container?: string
 }
 
-let instance: Vue
-const instanceInit = (): void => {
+let layerInstance: Vue
+const layerInstanceInit = (): void => {
   const MaskConstructor = Vue.extend(EscMask)
-  instance = new MaskConstructor({
+  layerInstance = new MaskConstructor({
     el: document.createElement('div')
   })
 }
@@ -17,31 +18,39 @@ const instanceInit = (): void => {
 
 })
 export default class Popup extends Vue {
+  containerElement: HTMLElement | HTMLBodyElement = document.body
+
   @Prop() readonly container!: string
 
   @Watch('container')
   onContainerChange(val: string, oldVal: string): void {
-    // console.log(val)
-    // this.showMask({ container: val })
+    this.initContainer()
     this.open()
   }
 
   mounted() {
   }
 
-  open() {
-
+  initContainer() {
+    if (this.container) {
+      this.containerElement = document.querySelector(this.container) || document.body
+    }
   }
 
-  showMask(options: MaskOptions) {
-    if (!instance) {
-      instanceInit()
+  open() {
+    this.showLayer({})
+    // @ts-ignore
+    this.$el.style.zIndex = context.index++
+    this.containerElement.appendChild(this.$el)
+  }
+
+  showLayer(options: MaskOptions) {
+    if (!layerInstance) {
+      layerInstanceInit()
     }
-    if (options.container) {
-      // @ts-ignore
-      document.querySelector(options.container).appendChild(instance.$el)
-    } else {
-      document.body.appendChild(instance.$el)
-    }
+    Object.assign(layerInstance, options, {
+      zIndex: context.index++
+    })
+    this.containerElement.appendChild(layerInstance.$el)
   }
 }

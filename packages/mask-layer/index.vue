@@ -6,11 +6,14 @@
   @Component({
   })
   export default class EscMask extends Vue {
+    @Prop() readonly zIndex!: number
+
     render() {
       return (
         <transition name="esc-fade">
           <div
             vShow={true}
+            style={{zIndex: this.zIndex}}
             class={bem()}
           />
         </transition>
