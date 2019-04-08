@@ -16,14 +16,14 @@ const Dialog = (options: DialogOptions) => new Promise((resolve, reject) => {
 		})
 	}
 
-	let containerElem
-	if (options.container) {
-		containerElem = document.querySelector(options.container)
-	}
-	if (!containerElem) {
-		containerElem = document.body
-	}
-	containerElem.appendChild(instance.$el)
+	// let containerElem
+	// if (options.container) {
+	// 	containerElem = document.querySelector(options.container)
+	// }
+	// if (!containerElem) {
+	// 	containerElem = document.body
+	// }
+	// containerElem.appendChild(instance.$el)
 
 	Object.assign(instance, options, {
 		resolve,
