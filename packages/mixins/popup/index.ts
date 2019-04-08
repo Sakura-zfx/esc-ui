@@ -1,12 +1,14 @@
 import { Vue, Component, Watch, Prop } from 'vue-property-decorator'
+import { VNode } from 'vue/types'
 import EscMask from '../../mask-layer/index.vue'
 import context from './context'
 
-interface MaskOptions {
-  container?: string
+interface layerVNode extends VNode{
+  visible: boolean,
+  $el: any
 }
 
-let layerInstance: Vue
+let layerInstance: layerVNode
 const layerInstanceInit = (): void => {
   const MaskConstructor = Vue.extend(EscMask)
   layerInstance = new MaskConstructor({
@@ -14,21 +16,30 @@ const layerInstanceInit = (): void => {
   })
 }
 
-@Component({
-
-})
+@Component
 export default class Popup extends Vue {
+  showDialog: boolean = false
+
   containerElement: HTMLElement | HTMLBodyElement = document.body
 
   @Prop() readonly container!: string
 
   @Watch('container')
-  onContainerChange(val: string, oldVal: string): void {
+  onContainerChange(): void {
     this.initContainer()
     this.open()
   }
 
+  @Watch('showDialog')
+  onVisibleChange(val: boolean): void {
+    if (val) {
+      this.open()
+    }
+  }
+
   mounted() {
+    if (this.showDialog) {
+    }
   }
 
   initContainer() {
@@ -38,18 +49,24 @@ export default class Popup extends Vue {
   }
 
   open() {
-    this.showLayer({})
+    this.showLayer()
     // @ts-ignore
     this.$el.style.zIndex = context.index++
     this.containerElement.appendChild(this.$el)
   }
 
-  showLayer(options: MaskOptions) {
+  close() {
+    this.showDialog = false
+    layerInstance.visible = false
+  }
+
+  showLayer() {
     if (!layerInstance) {
       layerInstanceInit()
     }
-    Object.assign(layerInstance, options, {
-      zIndex: context.index++
+    Object.assign(layerInstance, {
+      zIndex: context.index++,
+      visible: true
     })
     this.containerElement.appendChild(layerInstance.$el)
   }

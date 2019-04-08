@@ -7,12 +7,13 @@
   })
   export default class EscMask extends Vue {
     @Prop() readonly zIndex!: number
+    @Prop() readonly visible!: boolean
 
     render() {
       return (
         <transition name="esc-fade">
           <div
-            vShow={true}
+            vShow={this.visible}
             style={{zIndex: this.zIndex}}
             class={bem()}
           />
@@ -31,4 +32,18 @@
     top 0
     bottom 0
     background-color mask-background-color
+  .esc-fade-enter-active
+    animation fade-in .3s
+  .esc-fade-leave-active
+    animation fade-out .3s
+  @keyframes fade-in
+    from
+      opacity 0
+    to
+      opacity 1
+  @keyframes fade-out
+    from
+      opacity 1
+    to
+      opacity 0
 </style>

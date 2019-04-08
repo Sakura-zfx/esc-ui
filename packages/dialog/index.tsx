@@ -1,12 +1,27 @@
 import Vue from 'vue'
-// import { Component } from 'vue/types'
+import { VNode } from 'vue/types'
 import VueDialog from './Dialog.vue'
 
-export interface DialogOptions {
-  container?: string
+interface DialogOptions {
+  title?: string,
+  container?: string,
+  callback?: (action: string) => void
 }
 
-let instance: Vue
+interface DialogVnode extends VNode {
+  [index: string]: any,
+  resolve(action: string): any,
+  reject(action: string): any
+}
+
+let instance: DialogVnode
+const DialogDefaultOptions = {
+  title: '',
+  showDialog: true,
+  callback(action: string) {
+    instance[action === 'confirm' ? 'resolve' : 'reject'](action)
+  }
+}
 
 const Dialog = (options: DialogOptions) => new Promise((resolve, reject) => {
   if (!instance) {
@@ -16,16 +31,7 @@ const Dialog = (options: DialogOptions) => new Promise((resolve, reject) => {
     })
   }
 
-  // let containerElem
-  // if (options.container) {
-  // 	containerElem = document.querySelector(options.container)
-  // }
-  // if (!containerElem) {
-  // 	containerElem = document.body
-  // }
-  // containerElem.appendChild(instance.$el)
-
-  Object.assign(instance, options, {
+  Object.assign(instance, DialogDefaultOptions, options, {
     resolve,
     reject
   })
