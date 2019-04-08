@@ -1,22 +1,22 @@
 <script lang="tsx">
-	import { Component, Prop, Vue } from 'vue-property-decorator'
-	import Bem from '../utils/bem'
-	const bem = Bem('mask')
+  import { Component, Prop, Vue } from 'vue-property-decorator'
+  import Bem from '../utils/bem'
+  const bem = Bem('mask')
 
-	@Component({
-	})
-	export default class EscMask extends Vue {
-		render() {
-			return (
-				<transition name="esc-fade">
-					<div
-						vShow={true}
-						class={bem()}
-					/>
-				</transition>
-			)
-		}
-	}
+  @Component({
+  })
+  export default class EscMask extends Vue {
+    render() {
+      return (
+        <transition name="esc-fade">
+          <div
+            vShow={true}
+            class={bem()}
+          />
+        </transition>
+      )
+    }
+  }
 </script>
 
 <style lang="stylus">

@@ -10,34 +10,34 @@
 </template>
 
 <script lang="ts">
-	import { Component, Prop, Mixins } from 'vue-property-decorator'
-	import Bem from '@@/utils/bem'
-	import popup from '@@/mixins/popup'
-	const bem = Bem('dialog')
+  import { Component, Prop, Mixins } from 'vue-property-decorator'
+  import Bem from '@@/utils/bem'
+  import popup from '@@/mixins/popup'
+  const bem = Bem('dialog')
 
-	@Component
-	export default class Dialog extends Mixins(popup) {
-		showDialog: boolean = false
+  @Component
+  export default class Dialog extends Mixins(popup) {
+    showDialog: boolean = false
 
-		// pit 必须赋值非必须 Strict Class Initialization
-		// https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html
-		@Prop() readonly content!: string
+    // pit 必须赋值非必须 Strict Class Initialization
+    // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html
+    @Prop() readonly content!: string
 
-		bem(model: string, modifier?: string): string {
-			return bem(model, modifier)
-		}
+    bem(model: string, modifier?: string): string {
+      return bem(model, modifier)
+    }
 
-		created() {
-		}
+    created() {
+    }
 
-		onCancel() {
+    onCancel() {
 
-		}
+    }
 
-		onConfirm() {
+    onConfirm() {
 
-		}
-	}
+    }
+  }
 </script>
 
 <style lang="stylus">

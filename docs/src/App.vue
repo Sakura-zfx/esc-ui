@@ -6,18 +6,18 @@ import { Component, Vue } from 'vue-property-decorator'
   }
 })
 export default class App extends Vue {
-	render() {
-		return (
-			<div id="app">
-				<router-view />
-			</div>
+  render() {
+    return (
+      <div id="app">
+        <router-view />
+      </div>
     )
   }
 }
 </script>
 
 <style lang="stylus">
-body
-  margin 0
-  padding 0
+  body
+    margin 0
+    padding 0
 </style>
