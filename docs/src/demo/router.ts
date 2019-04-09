@@ -1,7 +1,7 @@
 import Vue, { AsyncComponent } from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
-import { routerDir } from './constant'
+import { routerDir } from '../constant'
+import Home from './Home.vue'
 
 Vue.use(Router)
 
@@ -14,18 +14,10 @@ interface Route {
 const composeRoute = (name: string): Route => ({
 	path: `/${name}`,
 	name: `/${name}`,
-	component: () => import(`@/views/MarkdownTransfer.vue`)
+	component: () => import(`@@/${name}/demo/index.vue`)
 })
 
 const routes: Route[] = []
-// const routes: Route[] = routerDir.reduce(
-//   (sum: Route[], x: PackageItemGroup): Route[] => {
-//     x.items.forEach((item: PackageItem): void => {
-// 	    sum.push(composeRoute(item.name))
-//     })
-//   },
-//   []
-// )
 routerDir.forEach(x => {
   x.items.forEach(item => {
 	  routes.push(composeRoute(item.name))

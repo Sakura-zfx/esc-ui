@@ -1,5 +1,5 @@
 <script lang="tsx">
-  import { Component, Vue, Prop } from 'vue-property-decorator'
+  import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
   import Bem from '../../../packages/utils/bem'
   import { PackageItemGroup, PackageItem } from '../constant'
 
@@ -12,8 +12,10 @@
     created () {
     }
 
-    redirect (nav: PackageItem): void {
+    @Emit('change')
+    redirect (nav: PackageItem): PackageItem {
       this.$router.push(`/${nav.name}`)
+      return nav
     }
 
     render() {

@@ -1,8 +1,8 @@
 <script lang="tsx">
-  import { Vue, Component, Prop } from 'vue-property-decorator'
+  import { Vue, Component } from 'vue-property-decorator'
   import Bem from '../../../packages/utils/bem'
   import NavItems from '../components/NavItems.vue'
-  import { PackageItemGroup, routerDir } from '../constant'
+  import { PackageItemGroup, PackageItem, routerDir } from '../constant'
 
   const bem = Bem('layout')
 
@@ -16,6 +16,15 @@
   })
   export default class Layout extends Vue {
     navItems: PackageItemGroup[] = routerDir
+    demoSrc: string = ''
+
+    created() {
+      this.demoSrc = `./demo.html#${this.$route.path}`
+    }
+
+    navChange(nav: PackageItem) {
+      this.demoSrc = `./demo.html#/${nav.name}`
+    }
 
     render () {
       return (
@@ -29,10 +38,12 @@
             </div>
           </div>
           <div class={bem('left')}>
-            <nav-items list={this.navItems} />
+            <nav-items list={this.navItems} onChange={this.navChange} />
           </div>
-          <div class={bem('center')} />
-          <div class={bem('right')}>{ this.$slots.right }</div>
+          <div class={bem('center')}>{this.$slots.center}</div>
+          <div class={bem('right')}>
+            <iframe slot="right" src={this.demoSrc} frameBorder="0"/>
+          </div>
         </div>
       )
     }
