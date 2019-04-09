@@ -5,7 +5,7 @@ import context from './context'
 
 interface layerVNode extends VNode{
   visible: boolean,
-  $el: any
+  $el: Node
 }
 
 let layerInstance: layerVNode
@@ -18,9 +18,9 @@ const layerInstanceInit = (): void => {
 
 @Component
 export default class Popup extends Vue {
-  showDialog: boolean = false
+  show: boolean = false
 
-  containerElement: HTMLElement | HTMLBodyElement = document.body
+  containerElement: Node = document.body
 
   @Prop() readonly container!: string
 
@@ -30,7 +30,7 @@ export default class Popup extends Vue {
     this.open()
   }
 
-  @Watch('showDialog')
+  @Watch('show')
   onVisibleChange(val: boolean): void {
     if (val) {
       this.open()
@@ -38,7 +38,7 @@ export default class Popup extends Vue {
   }
 
   mounted() {
-    if (this.showDialog) {
+    if (this.show) {
     }
   }
 
@@ -56,7 +56,7 @@ export default class Popup extends Vue {
   }
 
   close() {
-    this.showDialog = false
+    this.show = false
     layerInstance.visible = false
   }
 

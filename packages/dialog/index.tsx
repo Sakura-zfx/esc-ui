@@ -1,29 +1,23 @@
 import Vue from 'vue'
-import { VNode } from 'vue/types'
 import VueDialog from './Dialog.vue'
+import { DialogOptions, DialogType, DialogAction } from '../../types/dialog'
+import { isVNode } from '@@/utils'
 
-interface DialogOptions {
-  title?: string,
-  container?: string,
-  callback?: (action: string) => void
-}
+let instance: DialogType
 
-interface DialogVnode extends VNode {
-  [index: string]: any,
-  resolve(action: string): any,
-  reject(action: string): any
-}
-
-let instance: DialogVnode
 const DialogDefaultOptions = {
-  title: '',
-  showDialog: true,
-  callback(action: string) {
-    instance[action === 'confirm' ? 'resolve' : 'reject'](action)
-  }
+  title: '提示',
+  message: '',
+  show: true,
+  confirmButtonText: '确 定',
+  cancelButtonText: '取 消',
+  showConfirmButton: true,
+  showCancelButton: false,
+  beforeClose: undefined
 }
 
-const Dialog = (options: DialogOptions) => new Promise((resolve, reject) => {
+const Dialog = (options: string | DialogOptions): Promise<DialogAction> => new Promise((resolve, reject) => {
+  const multiTypeOptions = typeof options === 'string' ? { message: options } : options
   if (!instance) {
     const DialogConstructor = Vue.extend(VueDialog)
     instance = new DialogConstructor({
@@ -31,13 +25,20 @@ const Dialog = (options: DialogOptions) => new Promise((resolve, reject) => {
     })
   }
 
-  Object.assign(instance, DialogDefaultOptions, options, {
+  if (isVNode(multiTypeOptions.message)) {
+    instance.$slots.default = [multiTypeOptions.message]
+    multiTypeOptions.message = ''
+  }
+
+  Object.assign(instance, DialogDefaultOptions, multiTypeOptions, {
     resolve,
     reject
   })
 })
 
 Dialog.alert = Dialog
+Dialog.confirm = (options: string | DialogOptions): Promise<DialogAction> => Dialog(options)
+Vue.prototype.$dialog = Dialog
 
 export default Dialog
 

@@ -10,7 +10,7 @@ export interface PackageItemGroup {
 
 export const routerDir: PackageItemGroup[] = [
   {
-    title: '电商类',
+    title: '基础组件',
     items: [
       {
         title: '对话框',

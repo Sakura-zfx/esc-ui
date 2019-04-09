@@ -1,41 +1,105 @@
 <template>
   <transition name="esc-dialog">
-    <div v-show="showDialog" :class="bem('wrap')">
-      <div :class="bem('header')">标题</div>
-      <div :class="bem('content')">代码是写出来给人看的，附带能在机器上运行</div>
-      <div :class="bem('btn-wrap')">
-        <div :class="bem('btn-item')" @click="handleAction('cancel')">取 消</div>
-        <div :class="bem('btn-item')" @click="handleAction('confirm')">确 认</div>
+    <div v-show="show" :class="bem('wrap')">
+      <div
+        v-if="title"
+        :class="bem('header')"
+      >
+        {{ title }}
+      </div>
+      <div
+        :class="bem('content')"
+      >
+        <slot>
+          {{ message }}
+        </slot>
+      </div>
+      <div
+        v-if="showCancelButton || showConfirmButton"
+        :class="bem('btn-wrap')"
+      >
+        <div
+          v-if="showCancelButton"
+          :class="bem('btn-item')"
+          @click="handleAction('cancel')"
+        >
+          {{ cancelButtonText }}
+        </div>
+        <div
+          v-if="showConfirmButton"
+          :class="bem('btn-item')"
+          @click="handleAction('confirm')"
+        >
+          {{ confirmButtonText }}
+        </div>
       </div>
     </div>
   </transition>
 </template>
 
 <script lang="ts">
-  import { Component, Prop, Mixins } from 'vue-property-decorator'
-  import Bem from '@@/utils/bem'
-  import popup from '@@/mixins/popup'
-  const bem = Bem('dialog')
+import { Component, Prop, Mixins } from 'vue-property-decorator'
+import { VNode } from 'vue/types'
+import Bem from '@@/utils/bem'
+import popup from '@@/mixins/popup'
+import { DialogAction, DialogDone } from '../../types/dialog'
+const bem = Bem('dialog')
 
-  @Component
-  export default class Dialog extends Mixins(popup) {
-    // pit 必须赋值非必须 Strict Class Initialization
-    // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html
-    @Prop() readonly content!: string
+// interface D {
+//   loading: {
+//     [index: string]: boolean,
+//     confirm: boolean
+//     cancel: boolean
+//   }
+// }
 
-    bem(model: string, modifier?: string): string {
-      return bem(model, modifier)
-    }
+@Component({
+  methods: {
+    bem
+  }
+})
+export default class Dialog extends Mixins(popup) {
+  loading = {
+    confirm: false,
+    cancel: false
+  }
 
-    callback(action: string) {}
+  // pit 必须赋值非必须 Strict Class Initialization
+  // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html
+  @Prop() readonly title?: string
+  @Prop() readonly message!: string | VNode
+  @Prop() readonly confirmButtonText!: string
+  @Prop() readonly cancelButtonText!: string
+  @Prop() readonly showConfirmButton!: boolean
+  @Prop() readonly showCancelButton!: boolean
+  @Prop() readonly beforeClose?: (action: DialogAction, done: DialogDone) => void
 
-    handleAction(action: string) {
-      this.close()
-      if (this.callback) {
-        this.callback(action)
-      }
+  callback(action: string) {
+    // @ts-ignore
+    this[action === 'confirm' ? 'resolve' : 'reject'](action)
+  }
+
+  handleAction(action: DialogAction) {
+    if (this.beforeClose) {
+      this.loading[action] = true
+      this.beforeClose(action, (close?: boolean) => {
+        if (close !== false) {
+          this.onClose(action)
+        }
+        this.loading[action] = false
+      })
+    } else {
+      this.onClose(action)
     }
   }
+
+  onClose(action: string) {
+    this.close()
+    if (this.callback) {
+      this.callback(action)
+    }
+  }
+}
 </script>
 
 <style lang="stylus">
