@@ -18,6 +18,10 @@
       return nav
     }
 
+    isActive(nav: PackageItem): string {
+      return this.$route.path.substring(1) === nav.name ? ' active' : ''
+    }
+
     render() {
       return (
         <div class={bem('wrap')}>{
@@ -26,7 +30,9 @@
               <div class={bem('group', 'title')}>{ group.title }</div>
               {
                 group.items.map(nav => (
-                  <div class={bem('item')} onClick={this.redirect.bind(this, nav)}>{ nav.title }</div>
+                  <div class={bem('item') + this.isActive(nav)} onClick={this.redirect.bind(this, nav)}>
+                    { nav.title }
+                  </div>
                 ))
               }
             </div>
@@ -38,6 +44,8 @@
 </script>
 
 <style lang=stylus>
+  @import '../../../packages/style/var.styl'
+
   .esc-nav
     &__group
       &--title
@@ -51,4 +59,7 @@
       color: #455a64
       padding: 10px 20px 10px 0
       line-height: 24px
+      cursor pointer
+      &.active
+        color button-font-color
 </style>

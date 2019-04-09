@@ -1,33 +1,36 @@
 <template>
   <div class="home">
     <Layout>
-      <template slot="center">
-        <Aa />
-      </template>
+      <component :is="current" slot="center" />
     </Layout>
   </div>
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator'
-  // import marked from 'marked'
+  import { Component, Vue, Watch } from 'vue-property-decorator'
   import Layout from '../components/Layout.vue'
-  import Aa from '../../../packages/dialog/README.md'
+  import Dialog from '@@/dialog/README.md'
 
   @Component({
     components: {
       Layout,
-      Aa
+      Dialog
     }
   })
   export default class Home extends Vue {
+    current: string = ''
+
+    @Watch('this.$route.path')
+    onPathChange(val: string) {
+      this.pathChange(val)
+    }
+
     created() {
-      // 可以写一个webpack loader
-      // 将 md 读取为字符串
-      // import('../../../packages/dialog/README.md').then(res => {
-      //   console.log(res)
-      // })
-      // console.log(import('@@/dialog/README.md'))
+      this.pathChange()
+    }
+
+    pathChange(name: string = this.$route.path.substring(1)) {
+      this.current = name[0].toUpperCase() + name.substring(1)
     }
   }
 </script>

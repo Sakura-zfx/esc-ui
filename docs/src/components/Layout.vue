@@ -40,7 +40,7 @@
           <div class={bem('left')}>
             <nav-items list={this.navItems} onChange={this.navChange} />
           </div>
-          <div class={bem('center')}>{this.$slots.center}</div>
+          <div class={'van-doc-content ' + bem('center')}>{this.$slots.center}</div>
           <div class={bem('right')}>
             <iframe slot="right" src={this.demoSrc} frameBorder="0"/>
           </div>
@@ -81,11 +81,15 @@
       border-right: 1px solid #f1f4f8
       overflow-y: scroll
       padding: 25px 0 75px
+      z-index 1
     &__center
-      padding-left 240px
-      padding-right 400px
+      padding-left 240px !important
+      padding-right 400px !important
       width 1440px
       margin 0 auto
+      section
+        padding: 13px 40px
+        overflow: hidden
     &__right
       z-index: 1
       overflow: hidden
