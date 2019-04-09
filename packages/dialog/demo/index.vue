@@ -14,10 +14,10 @@
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
-  import { VNode } from 'vue/types'
   import Layout from '@/components/Layout.vue'
   import dialog from '@@/dialog/index.tsx'
-  import { DialogAction, DialogDone, DialogBeforeClose } from '../../../types/dialog'
+  import { VNode } from 'vue/types'
+  import { DialogAction, DialogDone, DialogBeforeClose } from '../declare'
 
   @Component({
     components: {

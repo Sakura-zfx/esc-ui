@@ -39,10 +39,12 @@
 
 <script lang="ts">
 import { Component, Prop, Mixins } from 'vue-property-decorator'
-import { VNode } from 'vue/types'
 import Bem from '@@/utils/bem'
 import popup from '@@/mixins/popup'
-import { DialogAction, DialogDone } from '../../types/dialog'
+// Types
+import { VNode } from 'vue/types'
+import { DialogAction, DialogDone } from './declare'
+
 const bem = Bem('dialog')
 
 // interface D {

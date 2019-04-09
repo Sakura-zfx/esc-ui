@@ -1,7 +1,8 @@
 import Vue from 'vue'
 import VueDialog from './Dialog.vue'
-import { DialogOptions, DialogType, DialogAction } from '../../types/dialog'
 import { isVNode } from '@@/utils'
+// Types
+import { DialogOptions, DialogType, DialogAction } from './declare'
 
 let instance: DialogType
 
@@ -26,6 +27,8 @@ const Dialog = (options: string | DialogOptions): Promise<DialogAction> => new P
   }
 
   if (isVNode(multiTypeOptions.message)) {
+    // todo 如何解决
+    // @ts-ignore
     instance.$slots.default = [multiTypeOptions.message]
     multiTypeOptions.message = ''
   }

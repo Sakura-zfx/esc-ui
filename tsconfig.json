@@ -37,7 +37,8 @@
     "packages/**/*.ts",
     "packages/**/*.tsx",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
