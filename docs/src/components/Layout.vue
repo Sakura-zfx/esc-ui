@@ -57,7 +57,7 @@ export default class Layout extends Vue {
         <div class={bem('center')}>
           <div class="van-doc-content">{this.$slots.center}</div>
         </div>
-        <div class={bem('right')}>
+        <div class={bem('right') + ' ' + (this.isScrollOut ? bem('right', 'sticky') : '')}>
           <iframe slot="right" src={this.demoSrc} frameBorder="0"/>
         </div>
       </div>
@@ -124,19 +124,24 @@ export default class Layout extends Vue {
     &__right
       z-index: 1
       overflow: hidden
-      position: fixed
+      position: absolute
       border-radius: 6px
       background: #fafafa
       box-sizing: border-box
-      /*right: 40px*/
       height 640px
       width 320px
       top: 100px
       right 40px
       box-shadow: 0 1px 4px rgba(0,0,0,.2), 0 1px 2px rgba(0,0,0,.2)
       transform translate3d(0, 0, 0)
+      @media (max-height 800px)
+        height 560px
       @media (min-width 1440px)
         right: 50%
         margin-right: -680px
         width: 360px
+      &--sticky
+        position fixed
+        top 40px
+        height 600px
 </style>
