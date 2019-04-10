@@ -19,7 +19,7 @@ export default class Layout extends Vue {
   demoSrc: string = ''
   docScrollTop: number = 0
 
-  get isScrollOut(): void {
+  get isScrollOut(): boolean {
     return this.docScrollTop > 40
   }
 
@@ -135,7 +135,7 @@ export default class Layout extends Vue {
       box-shadow: 0 1px 4px rgba(0,0,0,.2), 0 1px 2px rgba(0,0,0,.2)
       transform translate3d(0, 0, 0)
       @media (max-height 800px)
-        height 560px
+        height 500px
       @media (min-width 1440px)
         right: 50%
         margin-right: -680px
@@ -143,5 +143,5 @@ export default class Layout extends Vue {
       &--sticky
         position fixed
         top 40px
-        height 600px
+        height 560px
 </style>
