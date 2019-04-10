@@ -1,4 +1,4 @@
-import { Vue, Component, Watch, Prop } from 'vue-property-decorator'
+import { Vue, Component, Watch, Prop, Model } from 'vue-property-decorator'
 import { VNode } from 'vue/types'
 import EscMask from '../../mask-layer/index.vue'
 import context from './context'
@@ -18,29 +18,31 @@ const layerInstanceInit = (): void => {
 
 @Component
 export default class Popup extends Vue {
-  show: boolean = false
-
   containerElement: Node = document.body
 
   @Prop() readonly container!: string
+  @Prop() readonly isLayerTransparent!: boolean
+
+  @Model('input') readonly show!: boolean
 
   @Watch('container')
   onContainerChange(): void {
     this.initContainer()
-    this.open()
+    this.openSelfAndLayer()
   }
 
   @Watch('show')
   onVisibleChange(val: boolean): void {
     if (val) {
-      this.open()
+      this.openSelfAndLayer()
     }
   }
 
-  mounted() {
-    if (this.show) {
-    }
-  }
+  // mounted() {
+  //   if (this.show) {
+  //     this.openSelfAndLayer()
+  //   }
+  // }
 
   initContainer() {
     if (this.container) {
@@ -48,7 +50,7 @@ export default class Popup extends Vue {
     }
   }
 
-  open() {
+  openSelfAndLayer() {
     this.showLayer()
     // @ts-ignore
     this.$el.style.zIndex = context.index++
@@ -56,7 +58,8 @@ export default class Popup extends Vue {
   }
 
   close() {
-    this.show = false
+    // this.show = false
+    this.$emit('input', false)
     layerInstance.visible = false
   }
 
@@ -66,7 +69,8 @@ export default class Popup extends Vue {
     }
     Object.assign(layerInstance, {
       zIndex: context.index++,
-      visible: true
+      visible: true,
+      isTransparent: this.isLayerTransparent
     })
     this.containerElement.appendChild(layerInstance.$el)
   }

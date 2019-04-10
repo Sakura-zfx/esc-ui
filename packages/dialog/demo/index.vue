@@ -15,7 +15,7 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import Layout from '@/components/Layout.vue'
-  import dialog from '@@/dialog/index.tsx'
+  import dialog from '@@/dialog/index.ts'
   import { VNode } from 'vue/types'
   import { DialogAction, DialogDone, DialogBeforeClose } from '../declare'
 
@@ -44,6 +44,7 @@
         options.showCancelButton = true
       } else if (type === 3) {
         options.title = '异步2s关闭'
+        options.showCancelButton = true
         options.beforeClose = (action: DialogAction, done: DialogDone) => {
           setTimeout(() => {
             done()

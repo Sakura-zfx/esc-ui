@@ -1,4 +1,4 @@
-import { VNode } from 'vue/types'
+import Vue, { VNode } from 'vue/types'
 
 export type DialogAction = 'confirm' | 'cancel'
 
@@ -12,12 +12,13 @@ export interface DialogDone {
 
 export interface DialogOptions {
   title?: string,
+  show?: boolean,
   message?: string | VNode,
   container?: string,
   beforeClose?: undefined | DialogBeforeClose
 }
 
-export interface DialogType {
+export interface DialogType extends Vue {
   // todo resolve() / reject() 回调的类型如何写？
   // [index: string]: (options: DialogOptions) => Promise<DialogAction>,
   // resolve(): void,

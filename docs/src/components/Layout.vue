@@ -1,53 +1,53 @@
 <script lang="tsx">
-  import { Vue, Component } from 'vue-property-decorator'
-  import Bem from '../../../packages/utils/bem'
-  import NavItems from '../components/NavItems.vue'
-  import { PackageItemGroup, PackageItem, routerDir } from '../constant'
+import { Vue, Component } from 'vue-property-decorator'
+import Bem from '../../../packages/utils/bem'
+import NavItems from '../components/NavItems.vue'
+import { PackageItemGroup, PackageItem, routerDir } from '../constant'
 
-  const bem = Bem('layout')
+const bem = Bem('layout')
 
-  @Component({
-    components: {
-      // pit 如果使用 tsx，必须使用小写
-      // 反之使用 template 必须使用 大写
-      // https://github.com/vuejs/vue-cli/issues/2417#issuecomment-419667646
-      'nav-items': NavItems
-    }
-  })
-  export default class Layout extends Vue {
-    navItems: PackageItemGroup[] = routerDir
-    demoSrc: string = ''
+@Component({
+  components: {
+    // pit 如果使用 tsx，必须使用小写
+    // 反之使用 template 必须使用 大写
+    // https://github.com/vuejs/vue-cli/issues/2417#issuecomment-419667646
+    'nav-items': NavItems
+  }
+})
+export default class Layout extends Vue {
+  navItems: PackageItemGroup[] = routerDir
+  demoSrc: string = ''
 
-    created() {
-      this.demoSrc = `./demo.html#${this.$route.path}`
-    }
+  created() {
+    this.demoSrc = `./demo.html#${this.$route.path}`
+  }
 
-    navChange(nav: PackageItem) {
-      this.demoSrc = `./demo.html#/${nav.name}`
-    }
+  navChange(nav: PackageItem) {
+    this.demoSrc = `./demo.html#/${nav.name}`
+  }
 
-    render () {
-      return (
-        <div class={bem()}>
-          <div class={bem('top')}>
-            <div class={bem('top', 'content')}>
-              <a href="">
-                <span>{ 'Esc-ui' }</span>
-                <span class={bem('top', 'content-small')}> 企业服务业务组件库</span>
-              </a>
-            </div>
-          </div>
-          <div class={bem('left')}>
-            <nav-items list={this.navItems} onChange={this.navChange} />
-          </div>
-          <div class={'van-doc-content ' + bem('center')}>{this.$slots.center}</div>
-          <div class={bem('right')}>
-            <iframe slot="right" src={this.demoSrc} frameBorder="0"/>
+  render () {
+    return (
+      <div class={bem()}>
+        <div class={bem('top')}>
+          <div class={bem('top', 'content')}>
+            <a href="">
+              <span>{ 'Esc-ui' }</span>
+              <span class={bem('top', 'content-small')}> 企业服务业务组件库</span>
+            </a>
           </div>
         </div>
-      )
-    }
+        <div class={bem('left')}>
+          <nav-items list={this.navItems} onChange={this.navChange} />
+        </div>
+        <div class={'van-doc-content ' + bem('center')}>{this.$slots.center}</div>
+        <div class={bem('right')}>
+          <iframe slot="right" src={this.demoSrc} frameBorder="0"/>
+        </div>
+      </div>
+    )
   }
+}
 </script>
 
 <style lang="stylus">
@@ -93,7 +93,7 @@
     &__right
       z-index: 1
       overflow: hidden
-      position: absolute
+      position: fixed
       border-radius: 6px
       background: #fafafa
       box-sizing: border-box

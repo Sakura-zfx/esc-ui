@@ -4,7 +4,7 @@ import { isVNode } from '@@/utils'
 // Types
 import { DialogOptions, DialogType, DialogAction } from './declare'
 
-let instance: DialogType
+let instance: DialogType & DialogOptions
 
 const DialogDefaultOptions = {
   title: '提示',
@@ -14,7 +14,8 @@ const DialogDefaultOptions = {
   cancelButtonText: '取 消',
   showConfirmButton: true,
   showCancelButton: false,
-  beforeClose: undefined
+  beforeClose: undefined,
+  isLayerTransparent: false
 }
 
 const Dialog = (options: string | DialogOptions): Promise<DialogAction> => new Promise((resolve, reject) => {
@@ -23,6 +24,9 @@ const Dialog = (options: string | DialogOptions): Promise<DialogAction> => new P
     const DialogConstructor = Vue.extend(VueDialog)
     instance = new DialogConstructor({
       el: document.createElement('div')
+    })
+    instance.$on('input', (value: boolean): void => {
+      instance.show = value
     })
   }
 

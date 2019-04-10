@@ -23,14 +23,16 @@
           :class="bem('btn-item')"
           @click="handleAction('cancel')"
         >
-          {{ cancelButtonText }}
+          <loading :value="true" v-if="loading.cancel" />
+          <span v-else>{{ cancelButtonText }}</span>
         </div>
         <div
           v-if="showConfirmButton"
           :class="bem('btn-item')"
           @click="handleAction('confirm')"
         >
-          {{ confirmButtonText }}
+          <loading :value="true" v-if="loading.confirm" />
+          <span v-else>{{ confirmButtonText }}</span>
         </div>
       </div>
     </div>
@@ -41,6 +43,7 @@
 import { Component, Prop, Mixins } from 'vue-property-decorator'
 import Bem from '@@/utils/bem'
 import popup from '@@/mixins/popup'
+import Loading from '@@/loading/Loading.vue'
 // Types
 import { VNode } from 'vue/types'
 import { DialogAction, DialogDone } from './declare'
@@ -56,6 +59,9 @@ const bem = Bem('dialog')
 // }
 
 @Component({
+  components: {
+    Loading
+  },
   methods: {
     bem
   }
@@ -137,11 +143,15 @@ export default class Dialog extends Mixins(popup) {
       display flex
       align-items center
       justify-content center
+      flex-basis 50%
       flex-grow 1
+      flex-shrink 0
       height 44px
+      padding 0 5px
       color button-font-color
-      &:first-child
-        border-right 1px border-color solid
+      border-right 1px border-color solid
+      &:last-child
+        border-right none
   .esc-dialog-enter-active
     animation scale-in .3s
   .esc-dialog-leave-active
