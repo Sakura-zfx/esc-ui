@@ -71,7 +71,7 @@ export default class Dialog extends Mixins(popup) {
   @Prop(String) readonly cancelButtonText!: string
   @Prop(Boolean) readonly showConfirmButton!: boolean
   @Prop(Boolean) readonly showCancelButton!: boolean
-  @Prop(Function) readonly beforeClose?: (action: DialogAction, done: DialogDone) => void
+  @Prop(Function) readonly beforeClose!: (action: DialogAction, done: DialogDone) => void
 
   callback(action: string) {
     // @ts-ignore

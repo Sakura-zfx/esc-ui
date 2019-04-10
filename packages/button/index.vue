@@ -42,9 +42,9 @@ export default class EscButton extends Vue {
   @Prop({ default: false, type: Boolean }) readonly loading!: boolean
   @Prop({ default: false, type: Boolean }) readonly block!: boolean
   @Prop({ default: false, type: Boolean }) readonly replace!: boolean
-  @Prop(Number) readonly radius?: number
-  @Prop(String) readonly color?: string
-  @Prop(String) readonly url?: string
+  @Prop(Number) readonly radius!: number
+  @Prop(String) readonly color!: string
+  @Prop(String) readonly url!: string
 
   get buttonClass() {
     return {

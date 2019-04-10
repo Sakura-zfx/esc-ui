@@ -3,10 +3,9 @@
     v-show="value"
     :class="loadingClass"
   >
-    <svg class="circular" viewBox="25 25 50 50">
+    <svg :class="bem('circular')" viewBox="25 25 50 50">
       <circle
-        :style="loadingPathStyle"
-        class="path"
+        :class="pathClass"
         cx="50"
         cy="50"
         r="20"
@@ -46,9 +45,11 @@ export default class Loading extends Vue {
     }
   }
 
-  get loadingPathStyle() {
+  get pathClass() {
     return {
-      stroke: this.color === 'black' ? '#aaa' : '#fff'
+      [bem('path')]: true,
+      [bem('path', 'white')]: this.isWhiteLoading,
+      [bem('path', 'black')]: !this.isWhiteLoading
     }
   }
 }
@@ -82,17 +83,21 @@ export default class Loading extends Vue {
     font-size 12px
     color #fff
 
-  .circular
+  &__circular
     width 100%
     height 100%
     animation loading-rotate 2s linear infinite
 
-  .path
+  &__path
     animation loading-dash 1.5s ease-in-out infinite
     stroke-dasharray 90, 150
     stroke-dashoffset 0
     stroke-width 2
     stroke-linecap round
+    &--black
+      stroke loading-black-path-stroke
+    &--white
+      stroke white
 
   @keyframes loading-rotate
     100%
