@@ -66,5 +66,5 @@
         font-size 14px
         padding: 10px 20px 10px 40px
       &.active
-        color button-font-color
+        color link-color
 </style>

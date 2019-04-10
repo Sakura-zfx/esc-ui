@@ -5,9 +5,9 @@ const bem = Bem('mask')
 
 @Component
 export default class EscMask extends Vue {
-  @Prop() readonly zIndex!: number
-  @Prop() readonly visible!: boolean
-  @Prop({ default: false }) readonly isTransparent!: boolean
+  @Prop(Number) readonly zIndex!: number
+  @Prop(Boolean) readonly visible!: boolean
+  @Prop({ default: false, type: Boolean }) readonly isTransparent!: boolean
 
   render() {
     return (

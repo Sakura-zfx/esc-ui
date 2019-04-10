@@ -1,14 +1,39 @@
 <template>
-  <div class="home">
+  <div class="demo">
     <p>提示</p>
-    <a href="javascript:" @click="alert(0)">提示弹窗</a> /
-    <a href="javascript:" @click="alert(1)">提示弹窗(无标题)</a>
+    <esc-button
+      plain
+      color="#07c160"
+      text="提示弹窗"
+      @on-click="alert(0)"
+    />
+    <esc-button
+      plain
+      color="#07c160"
+      text="提示弹窗(无标题)"
+      @on-click="alert(1)"
+    />
     <p>确认弹窗</p>
-    <a href="javascript:" @click="alert(2)">确认弹窗</a>
+    <esc-button
+      plain
+      color="#07c160"
+      text="确认弹窗"
+      @on-click="alert(2)"
+    />
     <p>异步关闭</p>
-    <a href="javascript:" @click="alert(3)">异步关闭</a>
+    <esc-button
+      plain
+      type="primary"
+      text="异步关闭"
+      @on-click="alert(3)"
+    />
     <p>VNode</p>
-    <a href="javascript:" @click="alert(4)">VNode message</a>
+    <esc-button
+      plain
+      color="red"
+      text="VNode message"
+      @on-click="alert(4)"
+    />
   </div>
 </template>
 
@@ -16,15 +41,24 @@
   import { Component, Vue } from 'vue-property-decorator'
   import Layout from '@/components/Layout.vue'
   import dialog from '@@/dialog/index.ts'
+  import EscButton from '@@/button/index.vue'
   import { VNode } from 'vue/types'
   import { DialogAction, DialogDone, DialogBeforeClose } from '../declare'
 
   @Component({
     components: {
-      Layout
+      Layout,
+      EscButton
     }
   })
   export default class Home extends Vue {
+    // created() {
+    //   dialog.alert({
+    //     title: '没有背景',
+    //     isLayerTransparent: true
+    //   })
+    // }
+
     alert (type: number) {
       const options: {
         title: string,
@@ -62,6 +96,5 @@
 </script>
 
 <style lang="stylus">
-.home
-  padding 10px
+  @import '~@/demo/common.styl'
 </style>

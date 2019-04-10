@@ -1,6 +1,6 @@
 <template>
   <div v-show="show" class="esc-loading__service">
-    <loading :value="show" color="white" />
+    <loading :value="true" color="white" />
   </div>
 </template>
 
@@ -23,7 +23,7 @@ export default class LoadingService extends Mixins(Popup) {
 
 <style lang="stylus">
 .esc-loading__service
-  position absolute
+  position fixed
   left 50%
   top 50%
   transform translate(-50%, -50%)

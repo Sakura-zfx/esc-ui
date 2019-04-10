@@ -3,13 +3,13 @@
     <p class="demo-home-title">esc-ui 企业服务业务组件库</p>
     <div
       class="demo-home-list"
-      v-for="(item, index) in routerDir" 
+      v-for="(item, index) in routerDir"
       :key="item.title">
       <p class="demo-home-list-title" @click="toggleVisible(index)">{{ item.title }}</p>
       <div v-show="showIndex.indexOf(index) >= 0">
-        <div 
+        <div
           class="demo-home-list-item"
-          v-for="nav in item.items" 
+          v-for="nav in item.items"
           :key="nav.title"
           @click="toUrl(nav.name)">
           {{ nav.title }}
@@ -45,13 +45,13 @@ export default class HomeDemo extends Vue {
 </script>
 
 <style lang="stylus">
-  .demo-home 
+  .demo-home
     padding 15px 20px
-    &-list 
+    &-list
       user-select none
       background-color #fff
       margin-bottom 20px
-      border-radius 3px 
+      border-radius 3px
       &-title
         font-size 16px
         padding 15px 20px

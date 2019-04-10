@@ -1,19 +1,28 @@
 <template>
-  <div class="demo-loading">
+  <div class="demo">
     <p>组件 loading</p>
     <esc-loading v-model="showLoading" />
     <esc-loading v-model="showLoading" color="white" />
     <p>api 调用 - 透明背景</p>
-    <a href="javascript:" @click="open()">打开 loading 2s 后关闭</a>
+    <esc-button
+      type="primary"
+      text="打开 loading 2s 后关闭"
+      @on-click="open()"
+    />
   </div>
 </template>
 
 <script>
 import Vue from 'vue'
 import Loading from '../index'
+import EscButton from '@@/button/index.vue'
 
 export default {
   name: 'index',
+
+  components: {
+    EscButton
+  },
 
   data() {
     return {
@@ -37,6 +46,5 @@ export default {
 </script>
 
 <style lang="stylus">
-.demo-loading
-  padding 10px
+  @import '~@/demo/common.styl'
 </style>

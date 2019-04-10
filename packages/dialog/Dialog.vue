@@ -49,15 +49,6 @@ import { VNode } from 'vue/types'
 import { DialogAction, DialogDone } from './declare'
 
 const bem = Bem('dialog')
-
-// interface D {
-//   loading: {
-//     [index: string]: boolean,
-//     confirm: boolean
-//     cancel: boolean
-//   }
-// }
-
 @Component({
   components: {
     Loading
@@ -74,13 +65,13 @@ export default class Dialog extends Mixins(popup) {
 
   // pit 必须赋值非必须 Strict Class Initialization
   // https://www.typescriptlang.org/docs/handbook/release-notes/typescript-2-7.html
-  @Prop() readonly title?: string
-  @Prop() readonly message!: string | VNode
-  @Prop() readonly confirmButtonText!: string
-  @Prop() readonly cancelButtonText!: string
-  @Prop() readonly showConfirmButton!: boolean
-  @Prop() readonly showCancelButton!: boolean
-  @Prop() readonly beforeClose?: (action: DialogAction, done: DialogDone) => void
+  @Prop(String) readonly title?: string
+  @Prop([String, Object]) readonly message!: string | VNode
+  @Prop(String) readonly confirmButtonText!: string
+  @Prop(String) readonly cancelButtonText!: string
+  @Prop(Boolean) readonly showConfirmButton!: boolean
+  @Prop(Boolean) readonly showCancelButton!: boolean
+  @Prop(Function) readonly beforeClose?: (action: DialogAction, done: DialogDone) => void
 
   callback(action: string) {
     // @ts-ignore
@@ -148,7 +139,7 @@ export default class Dialog extends Mixins(popup) {
       flex-shrink 0
       height 44px
       padding 0 5px
-      color button-font-color
+      color link-color
       border-right 1px border-color solid
       &:last-child
         border-right none
