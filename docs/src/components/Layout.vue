@@ -43,8 +43,11 @@ export default class Layout extends Vue {
         <div class={bem('top')}>
           <div class={bem('top', 'content')}>
             <a class={bem('top', 'title')} href="">
-              <span>{ 'Esc-ui' }</span>
-              <span class={bem('top', 'content-small')}> 企业服务业务组件库</span>
+              <img src={require('../assets/logo.png')} width="40px" alt="" />
+              <div>
+                <span>{'Esc-ui'}</span>
+                <span class={bem('top', 'content-small')}> 企业服务业务组件库</span>
+              </div>
             </a>
             <ul>
               <li><a target="_blank" href="https://github.com/Jmingzi/esc-ui">github</a></li>
@@ -80,13 +83,16 @@ export default class Layout extends Vue {
         padding 0 40px
         @media (min-width 1440px)
           width 1440px
+        div
+          margin-left 10px
         &-small
           font-size 12px
           color #999
       &--title
-        display block
-        width 200px
-        line-height 60px
+        display flex
+        // width 200px
+        // line-height 60px
+        align-items center
         font-size 24px
         text-decoration none
         color #333
