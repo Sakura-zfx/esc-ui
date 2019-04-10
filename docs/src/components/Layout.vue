@@ -17,9 +17,20 @@ const bem = Bem('layout')
 export default class Layout extends Vue {
   navItems: PackageItemGroup[] = routerDir
   demoSrc: string = ''
+  docScrollTop: number = 0
+
+  get isScrollOut(): void {
+    return this.docScrollTop > 40
+  }
 
   created() {
     this.demoSrc = `./demo.html#${this.$route.path}`
+  }
+
+  mounted() {
+    window.onscroll = () => {
+      this.docScrollTop = document.documentElement.scrollTop
+    }
   }
 
   navChange(nav: PackageItem) {
@@ -31,16 +42,21 @@ export default class Layout extends Vue {
       <div class={bem()}>
         <div class={bem('top')}>
           <div class={bem('top', 'content')}>
-            <a href="">
+            <a class={bem('top', 'title')} href="">
               <span>{ 'Esc-ui' }</span>
               <span class={bem('top', 'content-small')}> 企业服务业务组件库</span>
             </a>
+            <ul>
+              <li><a target="_blank" href="https://github.com/Jmingzi/esc-ui">github</a></li>
+            </ul>
           </div>
         </div>
-        <div class={bem('left')}>
+        <div class={bem('left') + ' ' + (this.isScrollOut ? bem('left', 'sticky') : '')}>
           <nav-items list={this.navItems} onChange={this.navChange} />
         </div>
-        <div class={'van-doc-content ' + bem('center')}>{this.$slots.center}</div>
+        <div class={bem('center')}>
+          <div class="van-doc-content">{this.$slots.center}</div>
+        </div>
         <div class={bem('right')}>
           <iframe slot="right" src={this.demoSrc} frameBorder="0"/>
         </div>
@@ -57,24 +73,29 @@ export default class Layout extends Vue {
       border-bottom 1px #eee solid
       &--content
         display flex
-        width 1440px
+        justify-content space-between
+        align-items center
         height 100%
         margin 0 auto
         padding 0 40px
-        a
-          display block
-          width 200px
-          line-height 60px
-          font-size 20px
-          text-decoration none
-          color #333
+        @media (min-width 1440px)
+          width 1440px
         &-small
           font-size 12px
           color #999
+      &--title
+        display block
+        width 200px
+        line-height 60px
+        font-size 24px
+        text-decoration none
+        color #333
+      ul a
+        font-size 12px
+        color #333
+        text-decoration underline
     &__left
-      position fixed
-      left 50%
-      margin-left -720px
+      position absolute
       top 60px
       bottom 0
       width 240px
@@ -82,11 +103,21 @@ export default class Layout extends Vue {
       overflow-y: scroll
       padding: 25px 0 75px
       z-index 1
+      @media (min-width 1440px)
+        margin-left -720px
+        left 50%
+      &--sticky
+        position fixed
+        top 0
+
     &__center
-      padding-left 240px !important
-      padding-right 400px !important
-      width 1440px
+      padding-left 240px
+      padding-right 360px
       margin 0 auto
+      @media (min-width 1440px)
+        width 1440px
+        padding-right 400px
+
       section
         padding: 13px 40px
         overflow: hidden
@@ -98,12 +129,14 @@ export default class Layout extends Vue {
       background: #fafafa
       box-sizing: border-box
       /*right: 40px*/
-      width: 360px
       height 640px
-      min-width: 360px
+      width 320px
       top: 100px
+      right 40px
       box-shadow: 0 1px 4px rgba(0,0,0,.2), 0 1px 2px rgba(0,0,0,.2)
-      right: 50%
-      margin-right: -680px
       transform translate3d(0, 0, 0)
+      @media (min-width 1440px)
+        right: 50%
+        margin-right: -680px
+        width: 360px
 </style>

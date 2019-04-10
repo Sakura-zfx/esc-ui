@@ -53,13 +53,18 @@
         color: #455a64
         line-height: 24px
         font-weight 700
-        padding: 10px 20px 10px 0
+        padding: 10px 0 0 40px
+        @media (min-width 1440px)
+           padding: 10px 20px 10px 40px
     &__item
-      font-size 14px
+      font-size 12px
       color: #455a64
-      padding: 10px 20px 10px 0
+      padding: 10px 0 0 40px
       line-height: 24px
       cursor pointer
+      @media (min-width 1440px)
+        font-size 14px
+        padding: 10px 20px 10px 40px
       &.active
         color button-font-color
 </style>
