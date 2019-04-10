@@ -43,7 +43,7 @@
   }
 </script>
 
-<style lang=stylus>
+<style lang="stylus">
   @import '../../../packages/style/var.styl'
 
   .esc-nav
