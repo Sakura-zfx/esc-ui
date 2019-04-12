@@ -1,8 +1,35 @@
-// todo types 文件夹需要加入到 includes 下才能被自动识别？
-import { DialogType } from '@@/dialog/declare'
+import { VNode } from 'vue/types'
+
+export type DialogAction = 'confirm' | 'cancel'
+
+export interface DialogBeforeClose {
+  (action: DialogAction, done: (close?: boolean) => void): void
+}
+
+export interface DialogOptions {
+  title?: string,
+  message?: string | VNode,
+  container?: string,
+  beforeClose?: DialogBeforeClose,
+  confirmButtonText?: string,
+  cancelButtonText?: string,
+  showConfirmButton?: boolean,
+  showCancelButton?: boolean,
+  isLayerTransparent?: boolean
+}
+
+export interface Dialog {
+  (options: string | DialogOptions): Promise<DialogAction>
+  alert(options: string | DialogOptions): Promise<DialogAction>
+  confirm(options: string | DialogOptions): Promise<DialogAction>
+  close(): void,
+  install(): void
+}
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $dialog: DialogType
+    $dialog: Dialog
   }
 }
+
+export const Dialog: Dialog

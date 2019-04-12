@@ -2,9 +2,9 @@ import Vue from 'vue'
 import VueDialog from './Dialog.vue'
 import { isVNode } from '@@/utils'
 // Types
-import { DialogOptions, DialogType, DialogAction } from './declare'
+import { Dialog, DialogOptions } from 'types/dialog'
 
-let instance: DialogType & DialogOptions
+let instance: Vue & DialogOptions & { show?: boolean }
 
 const DialogDefaultOptions = {
   title: '提示',
@@ -18,8 +18,11 @@ const DialogDefaultOptions = {
   isLayerTransparent: false
 }
 
-const Dialog = (options: string | DialogOptions): Promise<DialogAction> => new Promise((resolve, reject) => {
-  const multiTypeOptions = typeof options === 'string' ? { message: options } : options
+const DialogClass: Dialog = options => new Promise((resolve, reject) => {
+  const multiTypeOptions = typeof options === 'string'
+    ? { message: options }
+    : options
+
   if (!instance) {
     const DialogConstructor = Vue.extend(VueDialog)
     instance = new DialogConstructor({
@@ -31,7 +34,6 @@ const Dialog = (options: string | DialogOptions): Promise<DialogAction> => new P
   }
 
   if (isVNode(multiTypeOptions.message)) {
-    // todo 如何解决
     // @ts-ignore
     instance.$slots.default = [multiTypeOptions.message]
     multiTypeOptions.message = ''
@@ -43,9 +45,12 @@ const Dialog = (options: string | DialogOptions): Promise<DialogAction> => new P
   })
 })
 
-Dialog.alert = Dialog
-Dialog.confirm = (options: string | DialogOptions): Promise<DialogAction> => Dialog(options)
-Vue.prototype.$dialog = Dialog
+DialogClass.alert = DialogClass
+DialogClass.confirm = options => DialogClass(options)
+DialogClass.close = () => null
+DialogClass.install = () => {
+  Vue.prototype.$dialog = DialogClass
+}
 
-export default Dialog
+export default DialogClass
 

@@ -40,10 +40,11 @@
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import Layout from '@/components/Layout.vue'
-  import dialog from '@@/dialog/index.ts'
+  import Dialog from '@@/dialog/index.ts'
   import EscButton from '@@/button/index.vue'
+  // Types
   import { VNode } from 'vue/types'
-  import { DialogAction, DialogDone, DialogBeforeClose } from '../declare'
+  import { DialogAction, DialogBeforeClose } from 'types/dialog'
 
   @Component({
     components: {
@@ -52,12 +53,13 @@
     }
   })
   export default class Home extends Vue {
-    // created() {
-    //   dialog.alert({
-    //     title: '没有背景',
-    //     isLayerTransparent: true
-    //   })
-    // }
+    created() {
+      // dialog.alert({
+      //   title: '没有背景',
+      //   isLayerTransparent: true
+      // })
+      Vue.use(Dialog)
+    }
 
     alert (type: number) {
       const options: {
@@ -79,7 +81,7 @@
       } else if (type === 3) {
         options.title = '异步2s关闭'
         options.showCancelButton = true
-        options.beforeClose = (action: DialogAction, done: DialogDone) => {
+        options.beforeClose = (action: DialogAction, done: () => void) => {
           setTimeout(() => {
             done()
           }, 2000)
@@ -88,7 +90,7 @@
         options.title = 'VNode'
         options.message = this.$createElement('p', undefined, '我是VNode')
       }
-      dialog.alert(options).then(action => {
+      this.$dialog.alert(options).then(action => {
         console.log(action)
       })
     }

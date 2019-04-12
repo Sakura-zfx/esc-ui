@@ -46,7 +46,7 @@ import popup from '@@/mixins/popup'
 import Loading from '@@/loading/Loading.vue'
 // Types
 import { VNode } from 'vue/types'
-import { DialogAction, DialogDone } from './declare'
+import { DialogAction } from 'types/dialog'
 
 const bem = Bem('dialog')
 @Component({
@@ -71,7 +71,7 @@ export default class Dialog extends Mixins(popup) {
   @Prop(String) readonly cancelButtonText!: string
   @Prop(Boolean) readonly showConfirmButton!: boolean
   @Prop(Boolean) readonly showCancelButton!: boolean
-  @Prop(Function) readonly beforeClose!: (action: DialogAction, done: DialogDone) => void
+  @Prop(Function) readonly beforeClose!: (action: DialogAction, done: (close?: boolean) => void) => void
 
   callback(action: string) {
     // @ts-ignore
@@ -92,7 +92,7 @@ export default class Dialog extends Mixins(popup) {
     }
   }
 
-  onClose(action: string) {
+  onClose(action: DialogAction) {
     this.close()
     if (this.callback) {
       this.callback(action)
