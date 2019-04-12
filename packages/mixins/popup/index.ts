@@ -1,14 +1,15 @@
 import { Vue, Component, Watch, Prop, Model } from 'vue-property-decorator'
-import { VNode } from 'vue/types'
-import EscMask from '../../mask-layer/index.vue'
+import EscMask from '@@/mask-layer/index.vue'
 import context from './context'
+// Types
+import { VNode } from 'vue/types'
 
-interface layerVNode extends VNode{
+interface layerVNode {
   visible: boolean,
   $el: Node
 }
 
-let layerInstance: layerVNode
+let layerInstance: layerVNode & VNode
 const layerInstanceInit = (): void => {
   const MaskConstructor = Vue.extend(EscMask)
   layerInstance = new MaskConstructor({
@@ -20,10 +21,9 @@ const layerInstanceInit = (): void => {
 export default class Popup extends Vue {
   containerElement: Node = document.body
 
-  @Prop() readonly container!: string
-  @Prop() readonly isLayerTransparent!: boolean
-
-  @Model('input') readonly show!: boolean
+  @Model('input', { type: Boolean, default: false }) readonly show!: boolean
+  @Prop(String) readonly container!: string
+  @Prop({ type: Boolean, default: false }) readonly isLayerTransparent!: boolean
 
   @Watch('container')
   onContainerChange(): void {
@@ -37,12 +37,6 @@ export default class Popup extends Vue {
       this.openSelfAndLayer()
     }
   }
-
-  // mounted() {
-  //   if (this.show) {
-  //     this.openSelfAndLayer()
-  //   }
-  // }
 
   initContainer() {
     if (this.container) {
@@ -58,7 +52,6 @@ export default class Popup extends Vue {
   }
 
   close() {
-    // this.show = false
     this.$emit('input', false)
     layerInstance.visible = false
   }

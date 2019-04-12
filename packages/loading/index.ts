@@ -1,15 +1,10 @@
 import Vue from 'vue'
-import Loading from './Loading.vue'
+import VueLoading from './Loading.vue'
 import LoadingService from './LoadingService.vue'
 
 // Types
-interface LoadingType extends Vue {
-  show: boolean,
-  open(): void,
-  close(): void
-}
+import { Loading, LoadingType } from 'types/loading'
 
-const LoadingConstructor = Vue.extend(Loading)
 const LoadingServiceConstructor = Vue.extend(LoadingService)
 const instance: LoadingType = new LoadingServiceConstructor({
   el: document.createElement('div')
@@ -19,14 +14,18 @@ instance.$on('input', (value: boolean): void => {
   instance.show = value
 })
 
-const Install = () => {
-  Vue.prototype.$loading = Object.assign(instance, {
-    show: false,
-    isLayerTransparent: true
-  })
-  Vue.component('esc-loading', LoadingConstructor)
+const LoadingClass: Loading = {
+  instance,
+  component: VueLoading,
+  open: () => null,
+  close: () => null,
+  install: () => {
+    Vue.prototype.$loading = Object.assign(instance, {
+      show: false,
+      isLayerTransparent: true
+    })
+    Vue.component('esc-loading', VueLoading)
+  }
 }
-Install.instance = instance
-Install.component = LoadingConstructor
 
-export default Install
+export default LoadingClass

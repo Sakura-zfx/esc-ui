@@ -20,8 +20,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import Bem from '@@/utils/bem'
 const bem = Bem('loading')
 
-type LoadingColor = 'black' | 'white'
-type propSize = 'default' | 'small'
+import { LoadingColor, LoadingSize } from 'types/loading'
 
 @Component({
   methods: {
@@ -30,7 +29,7 @@ type propSize = 'default' | 'small'
 })
 export default class Loading extends Vue {
   @Prop({ default: false, type: Boolean }) readonly value!: boolean
-  @Prop({ default: 'default', type: String }) readonly size!: propSize
+  @Prop({ default: 'default', type: String }) readonly size!: LoadingSize
   @Prop({ default: 'black', type: String }) readonly color!: LoadingColor
 
   get isWhiteLoading() {
