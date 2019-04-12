@@ -43,6 +43,7 @@
 import { Component, Prop, Mixins } from 'vue-property-decorator'
 import Bem from '@@/utils/bem'
 import popup from '@@/mixins/popup'
+// 关于loading的引入，是否可以采用外部引入？以减少代码冗余
 import Loading from '@@/loading/Loading.vue'
 // Types
 import { VNode } from 'vue/types'
