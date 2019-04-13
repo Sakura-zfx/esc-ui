@@ -1,11 +1,11 @@
 <template>
   <div
     v-show="value"
-    :class="loadingClass"
+    :class="bem([ size, { white: isWhiteLoading }])"
   >
-    <svg :class="bem('circular')" viewBox="25 25 50 50">
+    <svg :class="bem('circular', false)" viewBox="25 25 50 50">
       <circle
-        :class="pathClass"
+        :class="bem('path', { white: isWhiteLoading, black: !isWhiteLoading })"
         cx="50"
         cy="50"
         r="20"
@@ -18,13 +18,11 @@
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import Bem from '@@/utils/bem'
-const bem = Bem('loading')
-
 import { LoadingColor, LoadingSize } from 'types/loading'
 
 @Component({
   methods: {
-    bem
+    bem: Bem('loading')
   }
 })
 export default class Loading extends Vue {
@@ -34,22 +32,6 @@ export default class Loading extends Vue {
 
   get isWhiteLoading() {
     return this.color === 'white'
-  }
-
-  get loadingClass() {
-    return {
-      [bem()]: true,
-      [bem('white')]: this.isWhiteLoading,
-      [bem(this.size)]: true
-    }
-  }
-
-  get pathClass() {
-    return {
-      [bem('path')]: true,
-      [bem('path', 'white')]: this.isWhiteLoading,
-      [bem('path', 'black')]: !this.isWhiteLoading
-    }
   }
 }
 </script>

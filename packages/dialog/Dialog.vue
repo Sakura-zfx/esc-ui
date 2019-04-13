@@ -49,13 +49,12 @@ import Loading from '@@/loading/Loading.vue'
 import { VNode } from 'vue/types'
 import { DialogAction } from 'types/dialog'
 
-const bem = Bem('dialog')
 @Component({
   components: {
     Loading
   },
   methods: {
-    bem
+    bem: Bem('dialog')
   }
 })
 export default class Dialog extends Mixins(popup) {

@@ -1,7 +1,6 @@
 <script lang="tsx">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import Bem from '../utils/bem'
-const bem = Bem('mask')
 
 @Component
 export default class EscMask extends Vue {
@@ -10,12 +9,14 @@ export default class EscMask extends Vue {
   @Prop({ default: false, type: Boolean }) readonly isTransparent!: boolean
 
   render() {
+    const bem = Bem('mask')
+
     return (
       <transition name="esc-fade">
         <div
           vShow={this.visible}
           style={{zIndex: this.zIndex}}
-          class={`${bem()}${this.isTransparent ? ' transparent' : ''}`}
+          class={bem({ transparent: this.isTransparent })}
         />
       </transition>
     )
@@ -32,7 +33,7 @@ export default class EscMask extends Vue {
   top 0
   bottom 0
   background-color mask-background-color
-  &.transparent
+  &__transparent
     background-color transparent
 .esc-fade-enter-active
   animation fade-in .3s

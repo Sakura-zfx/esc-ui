@@ -4,7 +4,7 @@
     :style="hackButtonStyle"
     @click="onClick"
   >
-    <div :class="bem('loading')" v-if="loading">
+    <div :class="bem('loading', false)" v-if="loading">
       <loading size="small" :value="loading" />
       <span v-if="loadingText">{{ loadingText }}</span>
     </div>
@@ -47,16 +47,17 @@ export default class EscButton extends Vue {
   @Prop(String) readonly url!: string
 
   get buttonClass() {
-    return {
-      [bem()]: true,
-      [bem(this.type)]: true,
-      [bem(this.size)]: true,
-      [bem('round')]: this.round,
-      [bem('square')]: this.square,
-      [bem('plain')]: this.plain,
-      [bem('disabled')]: this.disabled,
-      [bem('block')]: this.block
-    }
+    return bem([
+      this.type,
+      this.size,
+      {
+        round: this.round,
+        square: this.square,
+        plain: this.plain,
+        disabled: this.disabled,
+        block: this.block
+      }
+    ])
   }
 
   get hackButtonStyle() {

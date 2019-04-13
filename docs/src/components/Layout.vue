@@ -4,8 +4,6 @@ import Bem from '../../../packages/utils/bem'
 import NavItems from '../components/NavItems.vue'
 import { PackageItemGroup, PackageItem, routerDir } from '../constant'
 
-const bem = Bem('layout')
-
 @Component({
   components: {
     // pit 如果使用 tsx，必须使用小写
@@ -38,15 +36,17 @@ export default class Layout extends Vue {
   }
 
   render () {
+    const bem = Bem('layout')
+
     return (
       <div class={bem()}>
-        <div class={bem('top')}>
-          <div class={bem('top', 'content')}>
-            <a class={bem('top', 'title')} href="">
+        <div class={bem('top', false)}>
+          <div class={bem('top', 'content', false)}>
+            <a class={bem('top', 'title', false)} href="">
               <img src={require('../assets/logo.png')} width="40px" alt="" />
               <div>
                 <span>{'Esc-ui'}</span>
-                <span class={bem('top', 'content-small')}> 企业服务业务组件库</span>
+                <span class={bem('top', 'content-small', false)}> 企业服务业务组件库</span>
               </div>
             </a>
             <ul>
@@ -54,13 +54,13 @@ export default class Layout extends Vue {
             </ul>
           </div>
         </div>
-        <div class={bem('left') + ' ' + (this.isScrollOut ? bem('left', 'sticky') : '')}>
+        <div class={(this.isScrollOut ? bem('left', 'sticky') : bem('left', false))}>
           <nav-items list={this.navItems} onChange={this.navChange} />
         </div>
-        <div class={bem('center')}>
+        <div class={bem('center', false)}>
           <div class="van-doc-content">{this.$slots.center}</div>
         </div>
-        <div class={bem('right') + ' ' + (this.isScrollOut ? bem('right', 'sticky') : '')}>
+        <div class={(this.isScrollOut ? bem('right', 'sticky') : bem('right', false))}>
           <iframe slot="right" src={this.demoSrc} frameBorder="0"/>
         </div>
       </div>
