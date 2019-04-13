@@ -15,12 +15,13 @@
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import Loading from '../loading/Loading.vue'
-import Bem from '@@/utils/bem'
+import { use } from '@@/utils'
 
 type propType = 'default' | 'primary'
 type propSize = 'large' | 'normal' | 'small' | 'mini'
 
-const bem = Bem('button')
+const [ bem ] = use('button')
+
 @Component({
   components: {
     Loading

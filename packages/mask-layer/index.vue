@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { Component, Prop, Vue } from 'vue-property-decorator'
-import Bem from '../utils/bem'
+import { use } from '@@/utils'
 
 @Component
 export default class EscMask extends Vue {
@@ -9,7 +9,7 @@ export default class EscMask extends Vue {
   @Prop({ default: false, type: Boolean }) readonly isTransparent!: boolean
 
   render() {
-    const bem = Bem('mask')
+    const [ bem ] = use('mask')
 
     return (
       <transition name="esc-fade">

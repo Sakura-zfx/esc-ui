@@ -1,8 +1,9 @@
 <script lang="tsx">
 import { Vue, Component } from 'vue-property-decorator'
-import Bem from '../../../packages/utils/bem'
+// import Bem from '../../../packages/utils/bem'
 import NavItems from '../components/NavItems.vue'
 import { PackageItemGroup, PackageItem, routerDir } from '../constant'
+import { use } from '@@/utils'
 
 @Component({
   components: {
@@ -36,7 +37,7 @@ export default class Layout extends Vue {
   }
 
   render () {
-    const bem = Bem('layout')
+    const [ bem ] = use('layout')
 
     return (
       <div class={bem()}>

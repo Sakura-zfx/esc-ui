@@ -17,12 +17,14 @@
 
 <script lang="ts">
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import Bem from '@@/utils/bem'
+import { use } from '@@/utils'
 import { LoadingColor, LoadingSize } from 'types/loading'
+
+const [ bem ] = use('loading')
 
 @Component({
   methods: {
-    bem: Bem('loading')
+    bem
   }
 })
 export default class Loading extends Vue {
