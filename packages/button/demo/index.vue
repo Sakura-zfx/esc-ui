@@ -1,5 +1,5 @@
 <template>
-  <div class="demo">
+  <demo-wrap name="button">
     <div>
       <p>按钮尺寸</p>
       <esc-button
@@ -111,21 +111,22 @@
         block
       />
     </div>
-  </div>
+  </demo-wrap>
 </template>
 
 <script>
 import EscButton from '../index.vue'
+import DemoWrap from '@/components/DemoWrap.vue'
 
 export default {
   name: 'index',
 
   components: {
-    EscButton
+    EscButton,
+    DemoWrap
   }
 }
 </script>
 
 <style lang="stylus">
-@import '~@/demo/common.styl'
 </style>

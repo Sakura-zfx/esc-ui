@@ -1,5 +1,5 @@
 <template>
-  <div class="demo">
+  <demo-wrap name="dialog">
     <p>提示</p>
     <esc-button
       plain
@@ -34,12 +34,13 @@
       text="VNode message"
       @on-click="alert(4)"
     />
-  </div>
+  </demo-wrap>
 </template>
 
 <script lang="ts">
   import { Component, Vue } from 'vue-property-decorator'
   import Layout from '@/components/Layout.vue'
+  import DemoWrap from '@/components/DemoWrap.vue'
   import Dialog from '@@/dialog/index.ts'
   import EscButton from '@@/button/index.vue'
   // Types
@@ -49,7 +50,8 @@
   @Component({
     components: {
       Layout,
-      EscButton
+      EscButton,
+      DemoWrap
     }
   })
   export default class Home extends Vue {
@@ -98,5 +100,4 @@
 </script>
 
 <style lang="stylus">
-  @import '~@/demo/common.styl'
 </style>

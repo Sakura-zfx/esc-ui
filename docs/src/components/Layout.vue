@@ -1,9 +1,10 @@
 <script lang="tsx">
-import { Vue, Component } from 'vue-property-decorator'
-// import Bem from '../../../packages/utils/bem'
+import { Vue, Component, Watch } from 'vue-property-decorator'
 import NavItems from '../components/NavItems.vue'
 import { PackageItemGroup, PackageItem, routerDir } from '../constant'
 import { use } from '@@/utils'
+
+const [ bem ] = use('layout')
 
 @Component({
   components: {
@@ -22,8 +23,13 @@ export default class Layout extends Vue {
     return this.docScrollTop > 40
   }
 
+  @Watch('$route.path')
+  onRouteChange(val: string) {
+    this.changeIframe(val.substr(1))
+  }
+
   created() {
-    this.demoSrc = `./demo.html#${this.$route.path}`
+    this.changeIframe(this.$route.path.substr(1))
   }
 
   mounted() {
@@ -33,12 +39,14 @@ export default class Layout extends Vue {
   }
 
   navChange(nav: PackageItem) {
-    this.demoSrc = `./demo.html#/${nav.name}`
+    this.changeIframe(nav.name)
+  }
+
+  changeIframe(pathName: string) {
+    this.demoSrc = `./demo.html#/${pathName}`
   }
 
   render () {
-    const [ bem ] = use('layout')
-
     return (
       <div class={bem()}>
         <div class={bem('top', false)}>
@@ -51,7 +59,7 @@ export default class Layout extends Vue {
               </div>
             </a>
             <ul>
-              <li><a target="_blank" href="https://github.com/Jmingzi/esc-ui">github</a></li>
+              <li><a target="_blank" href="https://github.com/Jmingzi/esc-ui">Github</a></li>
             </ul>
           </div>
         </div>
@@ -62,7 +70,7 @@ export default class Layout extends Vue {
           <div class="van-doc-content">{this.$slots.center}</div>
         </div>
         <div class={(this.isScrollOut ? bem('right', 'sticky') : bem('right', false))}>
-          <iframe slot="right" src={this.demoSrc} frameBorder="0"/>
+          <iframe slot="right" src={this.demoSrc} frameBorder="0" />
         </div>
       </div>
     )
@@ -152,5 +160,5 @@ export default class Layout extends Vue {
       &--sticky
         position fixed
         top 40px
-        height 560px
+        // height 560px
 </style>

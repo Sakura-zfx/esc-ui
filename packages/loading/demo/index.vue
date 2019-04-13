@@ -1,5 +1,5 @@
 <template>
-  <div class="demo">
+  <demo-wrap name="loading">
     <p>组件 loading</p>
     <esc-loading v-model="showLoading" />
     <esc-loading v-model="showLoading" color="white" />
@@ -9,19 +9,21 @@
       text="打开 loading 2s 后关闭"
       @on-click="open()"
     />
-  </div>
+  </demo-wrap>
 </template>
 
 <script>
 import Vue from 'vue'
 import Loading from '../index'
+import DemoWrap from '@/components/DemoWrap.vue'
 import EscButton from '@@/button/index.vue'
 
 export default {
   name: 'index',
 
   components: {
-    EscButton
+    EscButton,
+    DemoWrap
   },
 
   data() {
@@ -46,5 +48,4 @@ export default {
 </script>
 
 <style lang="stylus">
-  @import '~@/demo/common.styl'
 </style>
