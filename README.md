@@ -1,3 +1,10 @@
+usage
+```
+git clone ...
+npm install
+npm run serve
+```
+
 links
 
-- [如何编写 Typescript 声明文件](https://juejin.im/post/5bc406795188255c451ed3b3)
+- [Typescript 入门梳理](https://github.com/Jmingzi/blog/blob/master/post/ts.md)
