@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import EscButton from '../index.vue'
+import EscButton from '../'
 import DemoWrap from '@/components/DemoWrap.vue'
 
 export default {
@@ -129,4 +129,5 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../index.styl'
 </style>

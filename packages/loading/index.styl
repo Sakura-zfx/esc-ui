@@ -1,44 +1,3 @@
-<template>
-  <div
-    v-show="value"
-    :class="bem([ size, { white: isWhiteLoading }])"
-  >
-    <svg :class="bem('circular', false)" viewBox="25 25 50 50">
-      <circle
-        :class="bem('path', { white: isWhiteLoading, black: !isWhiteLoading })"
-        cx="50"
-        cy="50"
-        r="20"
-        fill="none"
-      />
-    </svg>
-  </div>
-</template>
-
-<script lang="ts">
-import { Vue, Component, Prop } from 'vue-property-decorator'
-import { use } from '@@/utils'
-import { LoadingColor, LoadingSize } from 'types/loading'
-
-const [ bem ] = use('loading')
-
-@Component({
-  methods: {
-    bem
-  }
-})
-export default class Loading extends Vue {
-  @Prop({ default: false, type: Boolean }) readonly value!: boolean
-  @Prop({ default: 'default', type: String }) readonly size!: LoadingSize
-  @Prop({ default: 'black', type: String }) readonly color!: LoadingColor
-
-  get isWhiteLoading() {
-    return this.color === 'white'
-  }
-}
-</script>
-
-<style lang="stylus">
 @import '../style/var.styl'
 
 .esc-loading
@@ -82,6 +41,12 @@ export default class Loading extends Vue {
     &--white
       stroke white
 
+  &__service
+    position fixed
+    left 50%
+    top 50%
+    transform translate(-50%, -50%)
+
   @keyframes loading-rotate
     100%
       transform rotate(360deg)
@@ -95,4 +60,3 @@ export default class Loading extends Vue {
     100%
       stroke-dasharray 90,150
       stroke-dashoffset -120px
-</style>

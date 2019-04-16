@@ -1,5 +1,7 @@
 import Vue from 'vue'
-import VueDialog from './Dialog.vue'
+// import VueDialog from './Dialog.vue'
+// @ts-ignore
+import VueDialog from './dialog.tsx'
 import { isVNode } from '@@/utils'
 // Types
 import { Dialog, DialogOptions } from 'types/dialog'

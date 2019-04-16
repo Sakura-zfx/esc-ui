@@ -29,7 +29,7 @@ module.exports = {
       .set('@', `${__dirname}/docs/src`)
       .set('@@', `${__dirname}/packages`)
       .end()
-      .extensions.add('md')
+      .extensions.add('.md')
       .end()
 
     config.module

@@ -1,0 +1,60 @@
+@import '../style/var.styl'
+.esc-dialog
+  &__wrap
+    position: fixed
+    top: 50%
+    left: 50%
+    width: 85%
+    font-size: 16px
+    overflow: hidden
+    // transition: .3s
+    background-color: #fff
+    transform: translate3d(-50%, -50%, 0)
+    backface-visibility: hidden
+    text-align: center
+    border-radius: 12px
+  &__header
+    font-weight: 500
+    padding: 20px 20px 0
+  &__content
+    max-height: 250px
+    overflow: auto
+    color: #262a30
+    padding: 15px 20px
+    font-size 14px
+  &__btn-wrap
+    display flex
+    align-items center
+    border-top 1px border-color solid
+  &__btn-item
+    display flex
+    align-items center
+    justify-content center
+    flex-basis 50%
+    flex-grow 1
+    flex-shrink 0
+    height 44px
+    padding 0 5px
+    color link-color
+    border-right 1px border-color solid
+    &:last-child
+      border-right none
+
+.esc-dialog-enter-active
+  animation scale-in .3s
+.esc-dialog-leave-active
+  animation scale-out .3s
+@keyframes scale-in
+  from
+    opacity 0
+    transform translate3d(-50%, -50%, 0) scale(0.5, 0.5)
+  to
+    opacity 1
+    transform translate3d(-50%, -50%, 0) scale(1, 1)
+@keyframes scale-out
+  from
+    opacity 1
+    transform translate3d(-50%, -50%, 0) scale(1, 1)
+  to
+    opacity 0
+    transform translate3d(-50%, -50%, 0) scale(0.5, 0.5)

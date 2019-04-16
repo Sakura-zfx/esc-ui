@@ -5,34 +5,34 @@
       plain
       color="#07c160"
       text="提示弹窗"
-      @on-click="alert(0)"
+      @on-click="handleClick(0)"
     />
     <esc-button
       plain
       color="#07c160"
       text="提示弹窗(无标题)"
-      @on-click="alert(1)"
+      @on-click="handleClick(1)"
     />
     <p>确认弹窗</p>
     <esc-button
       plain
       color="#07c160"
       text="确认弹窗"
-      @on-click="alert(2)"
+      @on-click="handleClick(2)"
     />
     <p>异步关闭</p>
     <esc-button
       plain
       type="primary"
       text="异步关闭"
-      @on-click="alert(3)"
+      @on-click="handleClick(3)"
     />
     <p>VNode</p>
     <esc-button
       plain
       color="red"
       text="VNode message"
-      @on-click="alert(4)"
+      @on-click="handleClick(4)"
     />
   </demo-wrap>
 </template>
@@ -42,7 +42,7 @@
   import Layout from '@/components/Layout.vue'
   import DemoWrap from '@/components/DemoWrap.vue'
   import Dialog from '@@/dialog/index.ts'
-  import EscButton from '@@/button/index.vue'
+  import EscButton from '@@/button/index.tsx'
   // Types
   import { VNode } from 'vue/types'
   import { DialogAction, DialogBeforeClose } from 'types/dialog'
@@ -63,7 +63,7 @@
       Vue.use(Dialog)
     }
 
-    alert (type: number) {
+    handleClick (type: number) {
       const options: {
         title: string,
         message: string | VNode,
@@ -100,4 +100,6 @@
 </script>
 
 <style lang="stylus">
+@import '../index.styl'
+@import '../../button/index.styl'
 </style>

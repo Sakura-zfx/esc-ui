@@ -1,6 +1,11 @@
 import Vue from 'vue'
-import VueLoading from './Loading.vue'
-import LoadingService from './LoadingService.vue'
+// import VueLoading from './Loading.vue'
+// @ts-ignore
+import VueLoading from './loading.tsx'
+// import LoadingService from './LoadingService.vue'
+// @ts-ignore
+import LoadingService from './loading-service.tsx'
+// import LoadingService from './LoadingService.vue'
 
 // Types
 import { Loading, LoadingType } from 'types/loading'
