@@ -1,6 +1,5 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
-// @ts-ignore
-import Loading from '../loading/loading.tsx'
+import Loading from '../loading/loading'
 import { use } from '@@/utils'
 
 type propType = 'default' | 'primary'

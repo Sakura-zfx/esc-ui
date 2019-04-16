@@ -17,6 +17,8 @@ import Vue from 'vue'
 import Loading from '../index.ts'
 import DemoWrap from '@/components/DemoWrap.vue'
 import EscButton from '@@/button/index.tsx'
+import '../index.styl'
+import '../../button/index.styl'
 
 export default {
   name: 'index',
@@ -48,6 +50,4 @@ export default {
 </script>
 
 <style lang="stylus">
-@import '../index.styl'
-@import '../../button/index.styl'
 </style>

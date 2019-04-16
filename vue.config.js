@@ -26,11 +26,14 @@ module.exports = {
       // .add('./docs/src/main.ts')
       // .end()
       .resolve.alias
-      .set('@', `${__dirname}/docs/src`)
-      .set('@@', `${__dirname}/packages`)
-      .end()
-      .extensions.add('.md')
-      .end()
+        .set('@', `${__dirname}/docs/src`)
+        .set('@@', `${__dirname}/packages`)
+        .end()
+      .extensions
+        .add('.md')
+        .prepend('.ts')
+        .prepend('.tsx')
+        .end()
 
     config.module
       .rule('md')
@@ -42,12 +45,5 @@ module.exports = {
       .rule('md')
       .use('marked2')
         .loader('@vant/markdown-loader')
-
-    // config.plugin('html')
-    //   .tap(args => {
-    //     console.log(args)
-    //     args[0].template = `${__dirname}/docs/public/index.html`
-    //     return args
-    //   })
   }
 }
