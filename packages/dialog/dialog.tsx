@@ -73,7 +73,7 @@ export default class Dialog extends Mixins(popup) {
 
   render() {
     const Title = this.title && <div class={bem('header', false)}>{this.title}</div>
-    const Content = <div class={bem('content', false)}><slot>{this.message}</slot></div>
+    const Content = <div class={bem('content', false)}>{this.message}</div>
     const Btn = (this.showCancelButton || this.showConfirmButton) && (
       <div class={bem('btn-wrap', false)}>
         {this.showCancelButton && this.renderBtnItem('cancel')}

@@ -1,36 +1,20 @@
 import { Vue, Component, Watch, Prop, Model } from 'vue-property-decorator'
-import EscMask from '../../mask-layer/index'
 import context from './context'
-// Types
-import { VNode } from 'vue/types'
-
-interface layerVNode {
-  visible: boolean,
-  $el: Node
-}
-
-let layerInstance: layerVNode & VNode
-const layerInstanceInit = (): void => {
-  const MaskConstructor = Vue.extend(EscMask)
-  layerInstance = new MaskConstructor({
-    el: document.createElement('div')
-  })
-}
+import { showLayer, closeLayer } from './mask-layer'
 
 @Component
 export default class Popup extends Vue {
-  containerElement: Node = document.body
+  containerElement: Node | null = null
 
   @Model('input', { type: Boolean, default: false }) readonly show!: boolean
   @Prop(String) readonly container!: string
   @Prop({ type: Boolean, default: false }) readonly isLayerTransparent!: boolean
+  @Prop({ type: Boolean, default: false }) readonly closeOnClickLayer!: boolean
 
-  @Watch('container')
-  onContainerChange(): void {
-    this.initContainer()
-    this.openSelfAndLayer()
-  }
-
+  // @Watch('container')
+  // onContainerChange(): void {
+  //   this.openSelfAndLayer()
+  // }
   @Watch('show')
   onVisibleChange(val: boolean): void {
     if (val) {
@@ -38,33 +22,40 @@ export default class Popup extends Vue {
     }
   }
 
+  mounted() {
+    if (this.show) {
+      this.openSelfAndLayer()
+    }
+  }
+
   initContainer() {
     if (this.container) {
-      this.containerElement = document.querySelector(this.container) || document.body
+      this.containerElement = document.querySelector(this.container)
+    } else if (this.$parent) {
+      this.containerElement = this.$parent.$el
+    } else {
+      this.containerElement = document.body
     }
   }
 
   openSelfAndLayer() {
-    this.showLayer()
-    // @ts-ignore
-    this.$el.style.zIndex = context.index++
-    this.containerElement.appendChild(this.$el)
+    this.initContainer()
+    showLayer(this, {
+      zIndex: context.index++,
+      isTransparent: this.isLayerTransparent,
+      containerElement: <Node>this.containerElement
+    })
+    this.showSelf()
   }
 
   close() {
     this.$emit('input', false)
-    layerInstance.visible = false
+    closeLayer(this)
   }
 
-  showLayer() {
-    if (!layerInstance) {
-      layerInstanceInit()
-    }
-    Object.assign(layerInstance, {
-      zIndex: context.index++,
-      visible: true,
-      isTransparent: this.isLayerTransparent
-    })
-    this.containerElement.appendChild(layerInstance.$el)
+  showSelf() {
+    // @ts-ignore
+    this.$el.style.zIndex = context.index++
+    (<Node>this.containerElement).appendChild(this.$el)
   }
 }

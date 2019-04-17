@@ -15,7 +15,8 @@ const DialogDefaultOptions = {
   showConfirmButton: true,
   showCancelButton: false,
   beforeClose: undefined,
-  isLayerTransparent: false
+  isLayerTransparent: false,
+  container: 'body'
 }
 
 const DialogClass: Dialog = options => new Promise((resolve, reject) => {

@@ -43,8 +43,6 @@
   import DemoWrap from '@/components/DemoWrap.vue'
   import Dialog from '@@/dialog/index.ts'
   import EscButton from '@@/button/index.tsx'
-  import '../index.styl'
-  import '../../button/index.styl'
   // Types
   import { VNode } from 'vue/types'
   import { DialogAction, DialogBeforeClose } from 'types/dialog'
@@ -102,4 +100,8 @@
 </script>
 
 <style lang="stylus">
+  @import '../../style/base.styl'
+  @import '../index.styl'
+  @import '../../button/index.styl'
+  @import '../../mask-layer/index.styl'
 </style>

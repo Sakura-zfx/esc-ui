@@ -4,11 +4,7 @@ import { LoadingColor, LoadingSize } from 'types/loading'
 
 const [ bem ] = use('loading')
 
-@Component({
-  // methods: {
-  //   bem
-  // }
-})
+@Component
 export default class Loading extends Vue {
   @Prop({ default: false, type: Boolean }) readonly value!: boolean
   @Prop({ default: 'default', type: String }) readonly size!: LoadingSize

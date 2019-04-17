@@ -22,7 +22,8 @@ const LoadingClass: Loading = {
   install: () => {
     Vue.prototype.$loading = Object.assign(instance, {
       show: false,
-      isLayerTransparent: true
+      isLayerTransparent: true,
+      container: 'body'
     })
     Vue.component('esc-loading', VueLoading)
   }

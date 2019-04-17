@@ -16,6 +16,7 @@ export default class EscMask extends Vue {
           vShow={this.visible}
           style={{zIndex: this.zIndex}}
           class={bem({ transparent: this.isTransparent })}
+          onClick={() => this.$emit('on-close')}
         />
       </transition>
     )

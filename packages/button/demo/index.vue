@@ -117,6 +117,7 @@
 <script>
 import EscButton from '../'
 import '../index.styl'
+import '../../loading/index.styl'
 import DemoWrap from '@/components/DemoWrap.vue'
 
 export default {

@@ -1,6 +1,7 @@
 import Dialog from '@@/dialog/README.md'
 import Button from '@@/button/README.md'
 import Loading from '@@/loading/README.md'
+import Popup from '@@/popup/README.md'
 
 export interface PackageItem {
   title: string,
@@ -27,6 +28,10 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'Loading 加载',
         name: 'loading'
+      },
+      {
+        title: 'Popup 弹层',
+        name: 'popup'
       }
     ]
   }
@@ -35,5 +40,6 @@ export const routerDir: PackageItemGroup[] = [
 export const markdown = {
   Dialog,
   Button,
-  Loading
+  Loading,
+  Popup
 }

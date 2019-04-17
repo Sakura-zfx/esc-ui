@@ -4,6 +4,12 @@ import { use } from '../utils'
 
 type propType = 'default' | 'primary'
 type propSize = 'large' | 'normal' | 'small' | 'mini'
+// 此处并没有起到提示的效果
+interface EscButtonProps {
+  type: string
+  size: string
+  text?: string
+}
 
 const [ bem ] = use('button')
 
@@ -11,11 +17,8 @@ const [ bem ] = use('button')
   components: {
     'esc-loading': Loading
   }
-  // methods: {
-  //   bem
-  // }
 })
-export default class EscButton extends Vue {
+export default class EscButton extends Vue implements EscButtonProps {
   // pit 类型要写2遍
   @Prop({ default: 'default', type: String }) readonly type!: propType
   @Prop({ default: 'normal', type: String }) readonly size!: propSize
@@ -75,7 +78,7 @@ export default class EscButton extends Vue {
   renderLoading() {
    return (
      <div class={bem('loading', false)}>
-       <esc-loading size="small" value={this.loading}/>
+       <esc-loading size="small" value={this.loading} />
        {this.loadingText && <span>{this.loadingText}</span>}
      </div>
    )

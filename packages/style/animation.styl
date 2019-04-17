@@ -1,0 +1,18 @@
+.esc-dialog-enter-active
+  animation scale-in .3s
+.esc-dialog-leave-active
+  animation scale-out .3s
+@keyframes scale-in
+  from
+    opacity 0
+    transform translate3d(-50%, -50%, 0) scale(0.5, 0.5)
+  to
+    opacity 1
+    transform translate3d(-50%, -50%, 0) scale(1, 1)
+@keyframes scale-out
+  from
+    opacity 1
+    transform translate3d(-50%, -50%, 0) scale(1, 1)
+  to
+    opacity 0
+    transform translate3d(-50%, -50%, 0) scale(0.5, 0.5)
