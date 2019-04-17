@@ -1,6 +1,6 @@
 import { Component, Prop, Vue } from 'vue-property-decorator'
 import Loading from '../loading/loading'
-import { use } from '@@/utils'
+import { use } from '../utils'
 
 type propType = 'default' | 'primary'
 type propSize = 'large' | 'normal' | 'small' | 'mini'

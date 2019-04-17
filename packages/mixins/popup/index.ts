@@ -1,5 +1,5 @@
 import { Vue, Component, Watch, Prop, Model } from 'vue-property-decorator'
-import EscMask from '@@/mask-layer/index.vue'
+import EscMask from '../../mask-layer/index'
 import context from './context'
 // Types
 import { VNode } from 'vue/types'

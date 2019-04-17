@@ -1,7 +1,6 @@
 import { Component, Mixins } from 'vue-property-decorator'
-// @ts-ignore
-import Loading from './loading.tsx'
-import Popup from '@@/mixins/popup'
+import Loading from './loading'
+import Popup from '../mixins/popup'
 
 @Component({
   components: {

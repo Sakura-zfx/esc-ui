@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueDialog from './dialog'
-import { isVNode } from '@@/utils'
+import { isVNode } from '../utils'
 // Types
 import { Dialog, DialogOptions } from 'types/dialog'
 

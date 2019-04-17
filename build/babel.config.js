@@ -7,6 +7,12 @@ module.exports = {
         modules: 'commonjs'
       }
     ],
+    [
+      '@vue/babel-preset-jsx',
+      {
+        functional: false
+      }
+    ],
     '@babel/preset-typescript'
   ],
   plugins: [
@@ -19,7 +25,14 @@ module.exports = {
         useESModules: false
       }
     ],
-    // '@babel/plugin-syntax-dynamic-import',
-    '@babel/plugin-transform-object-assign'
+    '@babel/plugin-transform-object-assign',
+    '@babel/plugin-proposal-class-properties',
+    [
+      '@babel/plugin-proposal-decorators',
+      {
+        legacy: false,
+        decoratorsBeforeExport: true
+      }
+    ]
   ]
 }

@@ -1,9 +1,8 @@
 import { Component, Prop, Mixins } from 'vue-property-decorator'
-import { use } from '@@/utils'
-import popup from '@@/mixins/popup'
+import { use } from '../utils'
+import popup from '../mixins/popup'
 // 关于loading的引入，是否可以采用外部引入？以减少代码冗余
-// @ts-ignore
-import Loading from '@@/loading/loading.tsx'
+import Loading from '../loading/loading'
 // Types
 import { VNode } from 'vue/types'
 import { DialogAction } from 'types/dialog'
@@ -14,9 +13,6 @@ const [ bem ] = use('dialog')
   components: {
     'esc-loading': Loading
   }
-  // methods: {
-  //   bem
-  // }
 })
 export default class Dialog extends Mixins(popup) {
   loading = {

@@ -1,5 +1,5 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import { use } from '@@/utils'
+import { use } from '../utils'
 import { LoadingColor, LoadingSize } from 'types/loading'
 
 const [ bem ] = use('loading')
