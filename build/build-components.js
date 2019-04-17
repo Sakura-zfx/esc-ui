@@ -7,17 +7,17 @@ const babelConfig = {
 }
 
 const scriptRegExp = /\.(js|ts|tsx)$/
-// const isDir = dir => fs.lstatSync(dir).isDirectory()
+const isDir = dir => fs.lstatSync(dir).isDirectory()
 // const isCode = path => !/(demo|test|\.md)$/.test(path)
 const isScript = path => scriptRegExp.test(path)
 const srcPath = path.resolve(__dirname, '../packages')
-const libPath = path.resolve(__dirname, '../lib')
+// const libPath = path.resolve(__dirname, '../lib')
 
 function compiler(dir) {
-  const files = fs.readdirSync(path.join(srcPath, dir))
+  const files = fs.readdirSync(dir)
   files.forEach(file => {
-    const filePath = path.join(srcPath, dir, file)
-    const fileLibPath = path.join(libPath, dir, file)
+    const filePath = path.join(dir, file)
+    const fileLibPath = filePath.replace('/packages/', '/lib/')
 
     // remove unnecessary files
     // if (!isCode(file)) {
@@ -25,9 +25,9 @@ function compiler(dir) {
     // }
 
     // scan dir
-    // if (isDir(filePath)) {
-    //   return compile(filePath);
-    // }
+    if (isDir(filePath)) {
+      return compiler(filePath)
+    }
 
     // compile js or ts
     if (isScript(file)) {
@@ -39,5 +39,5 @@ function compiler(dir) {
 }
 
 components.forEach(componentDir => {
-  compiler(componentDir)
+  compiler(path.join(srcPath, componentDir))
 })

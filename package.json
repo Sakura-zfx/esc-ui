@@ -27,6 +27,8 @@
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-typescript": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
+    "clean-css": "^4.2.1",
+    "dependency-tree": "^7.0.2",
     "fs-extra": "^7.0.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
