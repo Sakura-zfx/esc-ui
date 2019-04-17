@@ -30,7 +30,7 @@ export const routerDir: PackageItemGroup[] = [
         name: 'loading'
       },
       {
-        title: 'Popup 弹层',
+        title: 'Popup 弹出层',
         name: 'popup'
       }
     ]

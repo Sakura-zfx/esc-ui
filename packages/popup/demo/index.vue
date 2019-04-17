@@ -1,14 +1,37 @@
 <template>
   <demo-wrap name="popup">
+    <p>默认弹层</p>
     <esc-button
       text="居中弹层"
-      @on-click="show = true"
+      @on-click="showPopup('center')"
+    />
+    <p>居右弹层</p>
+    <esc-button
+      type="primary"
+      text="居右弹层"
+      @on-click="showPopup('right')"
+    />
+    <p>居底弹层</p>
+    <esc-button
+      type="primary"
+      text="居底弹层"
+      plain
+      @on-click="showPopup('bottom')"
     />
     <esc-popup
+      ref="popup"
+      :position="position"
       close-on-click-layer
       v-model="show"
     >
-      <p @click="$dialog.alert('111')">button</p>
+      <esc-button
+        text="嵌套弹层"
+        @on-click="$dialog.alert('我是嵌套弹层的弹窗alert')"
+      />
+      <esc-button
+        text="手动关闭"
+        @on-click="$refs.popup.close()"
+      />
     </esc-popup>
   </demo-wrap>
 </template>
@@ -31,15 +54,20 @@ export default {
 
   data() {
     return {
-      show: false
+      show: false,
+      position: 'center'
     }
   },
 
   created() {
     Vue.use(EscDialog)
-    // setTimeout(() => {
-    //   this.show = true
-    // }, 2000)
+  },
+
+  methods: {
+    showPopup(position) {
+      this.show = true
+      this.position = position
+    }
   }
 }
 </script>
