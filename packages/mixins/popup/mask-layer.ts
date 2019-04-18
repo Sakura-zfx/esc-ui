@@ -31,8 +31,6 @@ export function updateLayer(): void {
 }
 
 export function showLayer(vm: any, config: LayerConfig): void {
-  // todo object 如何写声明？
-  // @ts-ignore
   context.stack.push({ vm, config })
   updateLayer()
 }
@@ -45,7 +43,6 @@ export function closeLayer(vm: any): void {
       stack.pop()
       updateLayer()
     } else {
-      // @ts-ignore
       context.stack = stack.filter(item => item.vm !== vm)
     }
   }
