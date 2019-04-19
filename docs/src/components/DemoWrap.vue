@@ -2,12 +2,19 @@
   <div class="esc-demo-wrap">
     <div class="esc-title">
       <div class="esc-title__back" @click="back">返回</div>
-      <div class="esc-title__content">
+      <div
+        class="esc-title__content"
+      >
         <slot name="title">{{ name[0].toUpperCase() + name.substr(1) }}</slot>
       </div>
       <div class="esc-title__right" @click="edit()">编辑</div>
     </div>
-    <div class="esc-demo-content">
+    <div
+      class="esc-demo-content"
+      :class="{
+        'esc-demo-pd': !noPadding
+      }"
+    >
       <slot />
     </div>
   </div>
@@ -18,7 +25,8 @@ export default {
   name: 'Title',
 
   props: {
-    name: String
+    name: String,
+    noPadding: Boolean
   },
 
   methods: {
@@ -40,9 +48,11 @@ export default {
   &-wrap
     padding-top 45px
   &-content
-    padding 10px
+    // padding 10px
     & .esc-button
       margin-right 10px
+  &-pd
+    padding 10px
 .esc-title
   position fixed
   top 0
