@@ -1,6 +1,6 @@
 {
   "name": "esc-ui",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "private": false,
   "scripts": {
     "docs": "vue-cli-service serve",
@@ -19,7 +19,6 @@
   "style": "lib/index.css",
   "types": "types/index.d.ts",
   "dependencies": {
-    "core-js": "^2.6.5",
     "vue": "^2.6.6",
     "vue-class-component": "^6.0.0",
     "vue-property-decorator": "^8.0.0",
