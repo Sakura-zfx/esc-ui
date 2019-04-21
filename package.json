@@ -1,15 +1,23 @@
 {
-  "name": "ts",
-  "version": "0.1.0",
+  "name": "esc-ui",
+  "version": "0.1.4",
   "private": false,
   "scripts": {
-    "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
-    "build:js": "node build/build-components.js && node build/extract-decorator.js",
+    "docs": "vue-cli-service serve",
+    "build:docs": "vue-cli-service build",
+    "build:js": "node build/build-components.js",
     "build:css": "node build/build-style.js",
     "build:css-entry": "node build/build-style-entry.js",
-    "build:release": "npm run build:js && npm run build:css && npm run build:css-entry"
+    "build": "npm run build:js && npm run build:css && npm run build:css-entry"
   },
+  "files": [
+    "lib",
+    "packages",
+    "types"
+  ],
+  "main": "lib/index.js",
+  "style": "lib/index.css",
+  "types": "types/index.d.ts",
   "dependencies": {
     "core-js": "^2.6.5",
     "vue": "^2.6.6",
@@ -31,6 +39,7 @@
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-typescript": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
+    "babel-plugin-import": "^1.11.0",
     "clean-css": "^4.2.1",
     "dependency-tree": "^7.0.2",
     "fs-extra": "^7.0.1",

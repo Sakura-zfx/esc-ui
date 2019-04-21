@@ -79,7 +79,7 @@ export default class EscButton extends Vue implements EscButtonProps {
    return (
      <div class={bem('loading', false)}>
        <esc-loading size="small" value={this.loading} />
-       {this.loadingText && <span>{this.loadingText}</span>}
+       {this.loadingText && <span class={bem('text', false)}>{this.loadingText}</span>}
      </div>
    )
   }
@@ -91,7 +91,11 @@ export default class EscButton extends Vue implements EscButtonProps {
         style={this.hackButtonStyle}
         onClick={this.onClick}
       >
-        {this.loading ? this.renderLoading() : <span>{this.text}</span>}
+        {
+          this.loading
+            ? this.renderLoading()
+            : <span class={bem('text', false)}>{this.text}</span>
+        }
       </button>
     )
   }

@@ -10,6 +10,8 @@
   border-radius 2px
   border-width 1px
   border-style solid
+  font-size 0
+
   &:focus
     outline none
   &::before
@@ -40,25 +42,29 @@
       color button-primary-background-color
 
   &__large
-    font-size 16px
     height 50px
     line-height 48px
     padding 0 20px
+    & ^[0]__text
+      font-size 16px
   &__normal
-    font-size 14px
     height 44px
     line-height 42px
     padding 0 15px
+    & ^[0]__text
+      font-size 14px
   &__small
-    font-size 12px
     height 30px
     line-height 28px
     padding 0 8px
+    & ^[0]__text
+      font-size 12px
   &__mini
     min-width 50px
-    font-size 10px
     height 22px
     line-height 20px
+    & ^[0]__text
+      font-size 10px
 
   &__plain
     background-color button-plain-background-color
@@ -76,7 +82,8 @@
       display inline-block
       vertical-align middle
       font-size 0
+    & ^[0]__text
+      margin-left 5px
   span
-    margin-left 5px
     display inline-block
     vertical-align middle

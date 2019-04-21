@@ -25,13 +25,18 @@ module.exports = {
         useESModules: false
       }
     ],
-    '@babel/plugin-transform-object-assign',
-    '@babel/plugin-proposal-class-properties',
+    // '@babel/plugin-transform-object-assign',
     [
       '@babel/plugin-proposal-decorators',
       {
-        legacy: false,
-        decoratorsBeforeExport: true
+        legacy: true,
+        // decoratorsBeforeExport: true
+      }
+    ],
+    [
+      '@babel/plugin-proposal-class-properties',
+      {
+        loose: true
       }
     ]
   ]
