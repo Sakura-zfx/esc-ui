@@ -31,8 +31,8 @@ function compiler(dir) {
 
     // compile js or ts
     if (isScript(file)) {
+      console.log(`打包 ${filePath.replace(srcPath, '')}`)
       const { code } = babel.transformFileSync(filePath, babelConfig)
-      // fs.removeSync(filePath);
       fs.outputFileSync(fileLibPath.replace(scriptRegExp, '.js'), code)
     }
   })

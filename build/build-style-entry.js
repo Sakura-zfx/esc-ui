@@ -12,7 +12,7 @@ function getComponentNameFromPath(file) {
 }
 
 function getDependence(component) {
-  const result = []
+  const result = [component]
   const checkList = whiteList.concat(components)
   const directory = path.resolve(__dirname, '../lib')
   const filename = path.join(directory, component, 'index.js')
@@ -42,6 +42,7 @@ function writeStyle(component, styleArr) {
   const expression = styleArr.map(x =>
     `require("${component === x ? '../index.css' : `../../${x}/index.css`}")`
   ).join('\n')
+  console.log(`组件 ${component} 注入依赖样式 ${styleArr.join('/')}`)
   fs.outputFileSync(componentPath, expression)
 }
 

@@ -4,7 +4,11 @@
   "private": false,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build"
+    "build": "vue-cli-service build",
+    "build:js": "node build/build-components.js && node build/extract-decorator.js",
+    "build:css": "node build/build-style.js",
+    "build:css-entry": "node build/build-style-entry.js",
+    "build:release": "npm run build:js && npm run build:css && npm run build:css-entry"
   },
   "dependencies": {
     "core-js": "^2.6.5",

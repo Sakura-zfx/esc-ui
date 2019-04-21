@@ -20,6 +20,7 @@ function compiler(name) {
     .include(path.join(srcPath, 'style'))
     .render(function(err, css){
       if (err) throw err
+      console.log(`编译 ${name}/index.styl`)
       fs.outputFileSync(path.join(libPath, name, 'index.css'), new CleanCSS().minify(css).styles)
     })
 }
