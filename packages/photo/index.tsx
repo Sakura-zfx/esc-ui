@@ -35,32 +35,65 @@ export default class EscPhoto extends Vue {
     return `${this.vw ? num / 3.75 : num}${this.vw ? 'vw' : 'px'}`
   }
 
-  renderImg() {
-    const imgProps: PhotoProps = {
-      class: bem('img', false)
+  // 通过 img 标签实现居中
+  // 相比 通过 background 设置麻烦了些
+  // renderImg() {
+  //   const imgProps: PhotoProps = {
+  //     class: bem('img', false)
+  //   }
+  //   if (this.isLazy) {
+  //     imgProps.attrs = {
+  //       'data-src': this.src,
+  //       'data-error': this.defaultImgSrc,
+  //       'data-loading': this.defaultImgSrc
+  //     }
+  //   } else {
+  //     imgProps.attrs = {
+  //       src: this.src
+  //     }
+  //     imgProps.on = {
+  //       load: () => this.load = true
+  //     }
+  //   }
+  //   return <img {...imgProps} />
+  // }
+
+  renderDivBg() {
+    const divProps: PhotoProps = {
+      class: bem('div-bg', false)
     }
     if (this.isLazy) {
-      imgProps.attrs = {
-        'data-src': this.src,
-        'data-error': this.defaultImgSrc,
-        'data-loading': this.defaultImgSrc
-      }
+      divProps.directives = [
+        {
+          name: 'lazy',
+          arg: 'background-image',
+          value: {
+            src: this.src,
+            error: this.defaultImgSrc,
+            loading: this.defaultImgSrc
+          }
+        }
+      ]
     } else {
-      imgProps.attrs = {
-        src: this.src
+      let img: HTMLImageElement | null = new Image()
+      img.src = this.src
+      img.onload = () => {
+        this.load = true
+        img = null
       }
-      imgProps.on = {
-        load: () => this.load = true
+      divProps.style = {
+        backgroundImage: `url(${this.src})`
       }
     }
-    return <img {...imgProps} />
+    return <div {...divProps}/>
   }
 
   renderProStatus() {
     const pro: PhotoProps = {
       class: bem(['proStatus', 'img'], false),
       attrs: {
-        [this.isLazy ? 'data-src' : 'src']: proStatusLayer[this.proStatus]
+        // [this.isLazy ? 'data-src' : 'src']: proStatusLayer[this.proStatus]
+        src: proStatusLayer[this.proStatus]
       }
     }
     return <img {...pro} />
@@ -69,7 +102,7 @@ export default class EscPhoto extends Vue {
   render() {
     const fillStyle: FillType = this.cover ? 'cover' : 'contain'
     const photoProps: PhotoProps = {
-      class: bem([ `bg-${fillStyle}`, fillStyle ]),
+      class: bem(fillStyle),
       style: this.isLazy ? null : { backgroundImage: this.load ? void 0 : `url(${this.defaultImgSrc})` }
     }
 
@@ -83,15 +116,15 @@ export default class EscPhoto extends Vue {
       photoProps.style.width = this.size(this.width)
     }
 
-    if (this.isLazy) {
-      photoProps.directives = [{
-        name: 'lazy-container'
-      }]
-    }
+    // if (this.isLazy) {
+    //   photoProps.directives = [{
+    //     name: 'lazy-container'
+    //   }]
+    // }
 
     return (
       <div {...photoProps}>
-        {this.renderImg()}
+        {this.renderDivBg()}
         {!!this.proStatus && this.renderProStatus()}
       </div>
     )
