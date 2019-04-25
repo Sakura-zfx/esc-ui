@@ -3,6 +3,7 @@ import Button from '@@/button/README.md'
 import Loading from '@@/loading/README.md'
 import Popup from '@@/popup/README.md'
 import Field from '@@/field/README.md'
+import Photo from '@@/photo/README.md'
 
 export interface PackageItem {
   title: string,
@@ -37,6 +38,10 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'Field 字段输入',
         name: 'field'
+      },
+      {
+        title: 'Photo 图片',
+        name: 'photo'
       }
     ]
   }
@@ -47,5 +52,6 @@ export const markdown = {
   Button,
   Loading,
   Popup,
-  Field
+  Field,
+  Photo
 }

@@ -1,0 +1,26 @@
+.esc-photo
+  position relative
+  background-position center
+  background-repeat no-repeat
+  &__bg-contain
+    background-size contain
+  &__bg-cover
+    background-size cover
+  &__img
+    position relative
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+  &__contain
+    & ^[0]__img:not(^[0]__proStatus)
+      max-width 100%
+      max-height 100%
+  &__cover
+    overflow hidden
+    & ^[0]__img:not(^[0]__proStatus)
+      min-width 100%
+      min-height 100%
+  &__proStatus
+    position absolute
+    max-width 100%
+    max-height 100%

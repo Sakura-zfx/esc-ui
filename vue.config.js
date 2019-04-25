@@ -45,5 +45,9 @@ module.exports = {
       .rule('md')
       .use('marked2')
         .loader('@vant/markdown-loader')
+  },
+
+  devServer: {
+    disableHostCheck: true
   }
 }

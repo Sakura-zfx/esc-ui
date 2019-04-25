@@ -45,6 +45,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "typescript": "^3.2.1",
+    "vue-lazyload": "^1.2.6",
     "vue-template-compiler": "^2.5.21"
   }
 }
