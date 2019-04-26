@@ -1,11 +1,27 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
 import { use } from '../utils'
 
+// types
+import { Mods } from '../utils/bem'
+import { VueLazyloadImage } from 'vue-lazyload/types/lazyload'
 type FillType = 'cover' | 'contain'
-interface PhotoProps {
-  [x: string]: any
-}
 type Height = () => number | number
+interface PhotoStyle {
+  backgroundImage?: string | void
+  width?: string
+  height?: string
+}
+interface DirectiveJsx {
+  name: string
+  arg: string
+  value: VueLazyloadImage
+}
+interface PhotoProps {
+  class: Mods
+  directives?: DirectiveJsx[]
+  style?: PhotoStyle | void
+  attrs?: VueLazyloadImage
+}
 
 const [ bem ] = use('photo')
 const defaultImg = 'https://global.uban360.com/sfs/file?digest=fid69dd774de8bd1d63012d8ad3846e213d&fileType=2'
@@ -92,7 +108,6 @@ export default class EscPhoto extends Vue {
     const pro: PhotoProps = {
       class: bem(['proStatus', 'img'], false),
       attrs: {
-        // [this.isLazy ? 'data-src' : 'src']: proStatusLayer[this.proStatus]
         src: proStatusLayer[this.proStatus]
       }
     }
@@ -103,10 +118,14 @@ export default class EscPhoto extends Vue {
     const fillStyle: FillType = this.cover ? 'cover' : 'contain'
     const photoProps: PhotoProps = {
       class: bem(fillStyle),
-      style: this.isLazy ? null : { backgroundImage: this.load ? void 0 : `url(${this.defaultImgSrc})` }
+      style: this.isLazy
+        ? void 0
+        : { backgroundImage: this.load ? void 0 : `url(${this.defaultImgSrc})` }
     }
 
-    photoProps.style = photoProps.style || {}
+    if (!photoProps.style) {
+      photoProps.style = {}
+    }
     if (typeof this.height === 'function') {
       photoProps.style.height = this.size(this.height())
     } else if (this.height) {

@@ -1,5 +1,5 @@
-type Mod = string | { [index: string]: boolean }
-type Mods = Mod | Mod[]
+export type Mod = string | { [index: string]: boolean }
+export type Mods = Mod | Mod[]
 type PrefixFn = {
   (key?: string): string
 }
