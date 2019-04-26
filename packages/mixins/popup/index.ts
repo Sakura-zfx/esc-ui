@@ -16,19 +16,19 @@ export default class Popup extends Vue {
   //   this.openSelfAndLayer()
   // }
   @Watch('show')
-  onVisibleChange(val: boolean): void {
+  onVisibleChange (val: boolean): void {
     if (val) {
       this.openSelfAndLayer()
     }
   }
 
-  mounted() {
+  mounted () {
     if (this.show) {
       this.openSelfAndLayer()
     }
   }
 
-  initContainer() {
+  initContainer () {
     if (this.container) {
       this.containerElement = document.querySelector(this.container)
     } else if (this.$parent) {
@@ -38,24 +38,24 @@ export default class Popup extends Vue {
     }
   }
 
-  openSelfAndLayer() {
+  openSelfAndLayer () {
     this.initContainer()
     showLayer(this, {
       zIndex: context.index++,
       isTransparent: this.isLayerTransparent,
-      containerElement: <Node>this.containerElement
+      containerElement: <Node> this.containerElement
     })
     this.showSelf()
   }
 
-  close() {
+  close () {
     this.$emit('input', false)
     closeLayer(this)
   }
 
-  showSelf() {
+  showSelf () {
     // @ts-ignore
     this.$el.style.zIndex = context.index++
-    (<Node>this.containerElement).appendChild(this.$el)
+    (<Node> this.containerElement).appendChild(this.$el)
   }
 }

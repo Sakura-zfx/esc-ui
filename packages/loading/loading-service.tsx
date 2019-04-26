@@ -8,11 +8,11 @@ import Popup from '../mixins/popup'
   }
 })
 export default class LoadingService extends Mixins(Popup) {
-  open() {
+  open () {
     this.$emit('input', true)
   }
 
-  render() {
+  render () {
     return (
       <div vShow={this.show} class='esc-loading__service'>
         <esc-loading value={true} color="white" />

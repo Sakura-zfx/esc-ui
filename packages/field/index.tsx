@@ -28,14 +28,14 @@ export default class EscField extends Vue {
   inputValueLocal: string = ''
   inputElem: any = null
 
-  get formatFixed() {
+  get formatFixed () {
     if (isDef(this.fixed)) {
       return this.fixed <= 2 && this.fixed >= 0 ? this.fixed : undefined
     }
     return undefined
   }
 
-  get reg(): RegExp | null {
+  get reg (): RegExp | null {
     let reg: RegExp | null = null
     if (this.isInput && this.formatFixed === 0) {
       reg = /^\d+$/
@@ -43,37 +43,37 @@ export default class EscField extends Vue {
       this.isInput &&
       this.formatFixed !== undefined &&
       this.formatFixed > 0
-    ){
+    ) {
       reg = new RegExp(`^\\d+(\\.{0,1}\\d{0,${this.formatFixed}})$`)
     }
     return reg
   }
 
-  get isInput() {
+  get isInput () {
     return this.type === 'input'
   }
 
-  get isTextArea() {
+  get isTextArea () {
     return this.type === 'textarea'
   }
 
-  get isInputNumberTool() {
+  get isInputNumberTool () {
     return this.isInputNumber && this.isNumber
   }
 
-  get isNumber() {
+  get isNumber () {
     return this.isInput && isDef(this.formatFixed)
   }
 
-  get isValueText() {
+  get isValueText () {
     return this.isTextArea || (this.isInput && !this.isNumber)
   }
 
-  get inputValue() {
+  get inputValue () {
     return this.inputValueLocal
   }
 
-  set inputValue(val: string) {
+  set inputValue (val: string) {
     if (this.isValueText) {
       this.emit(val)
 
@@ -107,22 +107,22 @@ export default class EscField extends Vue {
   }
 
   @Watch('value')
-  onValueChange(val: string) {
+  onValueChange (val: string) {
     this.inputValue = val
   }
 
-  created() {
+  created () {
     if (isDef(this.value)) {
       this.inputValueLocal = String(this.value)
       this.blurValue()
     }
   }
 
-  mounted() {
+  mounted () {
     this.inputElem = this.$refs.input
   }
 
-  blurValue() {
+  blurValue () {
     if (
       !this.readonly &&
       this.isNumber &&
@@ -133,12 +133,12 @@ export default class EscField extends Vue {
     }
   }
 
-  emit(val: string) {
+  emit (val: string) {
     this.$emit('input', val)
     this.inputValueLocal = val
   }
 
-  handleAutoHeight() {
+  handleAutoHeight () {
     this.inputElem.style.height = 'auto'
     let height = this.inputElem.scrollHeight
     if (this.maxHeight) {
@@ -150,18 +150,18 @@ export default class EscField extends Vue {
     this.inputElem.style.height = height + 'px'
   }
 
-  addSubTool(isAdd: boolean) {
+  addSubTool (isAdd: boolean) {
     const step = 1 / Math.pow(10, this.formatFixed as FieldNumberFixed)
     const val = this.inputValueLocal ? Number(this.inputValueLocal) : 0
     this.inputValue = formatNumber(val + (isAdd ? step : -step), this.formatFixed as FieldNumberFixed)
   }
 
-  renderTextArea() {
+  renderTextArea () {
     return (
       <div class={bem('input-wrap', false)}>
         <textarea
           ref="input"
-          style={{minHeight: this.minHeight + 'px'}}
+          style={{ minHeight: this.minHeight + 'px' }}
           vModel_trim={this.inputValue}
           placeholder={this.placeholder}
           readonly={this.readonly}
@@ -170,7 +170,7 @@ export default class EscField extends Vue {
     )
   }
 
-  renderInput() {
+  renderInput () {
     const isTel = this.isInput && this.formatFixed === 0
     const cls = bem(['input-wrap'], false)
     return (
@@ -187,7 +187,7 @@ export default class EscField extends Vue {
     )
   }
 
-  renderInputNumberTool(child: () => JSX.Element) {
+  renderInputNumberTool (child: () => JSX.Element) {
     return (
       <div class={bem({ 'input-number-tool': this.isInputNumberTool }, false)}>
         <div
@@ -215,7 +215,7 @@ export default class EscField extends Vue {
     )
   }
 
-  renderLabel() {
+  renderLabel () {
     const { label } = this.$slots
     if (label) {
       return label
@@ -229,7 +229,7 @@ export default class EscField extends Vue {
     return null
   }
 
-  render() {
+  render () {
     const cls = bem({
       [this.inputAlign]: !!this.inputAlign && !this.isTextArea,
       'flex-start': this.isTextArea,

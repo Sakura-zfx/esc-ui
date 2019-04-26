@@ -121,7 +121,7 @@ import '../../loading/index.styl'
 import DemoWrap from '@/components/DemoWrap.vue'
 
 export default {
-  name: 'index',
+  name: 'Index',
 
   components: {
     EscButton,

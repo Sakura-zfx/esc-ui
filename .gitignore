@@ -22,3 +22,5 @@ yarn-error.log*
 
 /lib
 /test
+
+output.js

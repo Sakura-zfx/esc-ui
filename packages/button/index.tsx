@@ -35,7 +35,7 @@ export default class EscButton extends Vue implements EscButtonProps {
   @Prop(String) readonly color!: string
   @Prop(String) readonly url!: string
 
-  get buttonClass() {
+  get buttonClass () {
     return bem([
       this.type,
       this.size,
@@ -49,7 +49,7 @@ export default class EscButton extends Vue implements EscButtonProps {
     ])
   }
 
-  get hackButtonStyle() {
+  get hackButtonStyle () {
     const color: string[] = [this.color, '#fff']
     const getColor = (isColor?: boolean): string => color[isColor ? Number(!this.plain) : Number(this.plain)]
     return {
@@ -60,14 +60,14 @@ export default class EscButton extends Vue implements EscButtonProps {
     }
   }
 
-  onClick(): void {
+  onClick (): void {
     if (!this.loading && !this.disabled) {
       this.$emit('on-click')
       this.routeRedirect()
     }
   }
 
-  routeRedirect() {
+  routeRedirect () {
     if (/^https?/.test(this.url)) {
       this.replace ? location.replace(this.url) : (location.href = this.url)
     } else if (/^\/[a-z]*/.test(this.url)) {
@@ -75,16 +75,16 @@ export default class EscButton extends Vue implements EscButtonProps {
     }
   }
 
-  renderLoading() {
-   return (
-     <div class={bem('loading', false)}>
-       <esc-loading size="small" value={this.loading} />
-       {this.loadingText && <span class={bem('text', false)}>{this.loadingText}</span>}
-     </div>
-   )
+  renderLoading () {
+    return (
+      <div class={bem('loading', false)}>
+        <esc-loading size="small" value={this.loading} />
+        {this.loadingText && <span class={bem('text', false)}>{this.loadingText}</span>}
+      </div>
+    )
   }
 
-  render() {
+  render () {
     return (
       <button
         class={this.buttonClass}

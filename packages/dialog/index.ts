@@ -54,4 +54,3 @@ DialogClass.install = () => {
 }
 
 export default DialogClass
-

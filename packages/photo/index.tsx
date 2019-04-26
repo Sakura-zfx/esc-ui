@@ -47,7 +47,7 @@ export default class EscPhoto extends Vue {
 
   load: boolean = false
 
-  size(num: number): string {
+  size (num: number): string {
     return `${this.vw ? num / 3.75 : num}${this.vw ? 'vw' : 'px'}`
   }
 
@@ -74,7 +74,7 @@ export default class EscPhoto extends Vue {
   //   return <img {...imgProps} />
   // }
 
-  renderDivBg() {
+  renderDivBg () {
     const divProps: PhotoProps = {
       class: bem('div-bg', false)
     }
@@ -104,7 +104,7 @@ export default class EscPhoto extends Vue {
     return <div {...divProps}/>
   }
 
-  renderProStatus() {
+  renderProStatus () {
     const pro: PhotoProps = {
       class: bem(['proStatus', 'img'], false),
       attrs: {
@@ -114,7 +114,7 @@ export default class EscPhoto extends Vue {
     return <img {...pro} />
   }
 
-  render() {
+  render () {
     const fillStyle: FillType = this.cover ? 'cover' : 'contain'
     const photoProps: PhotoProps = {
       class: bem(fillStyle),

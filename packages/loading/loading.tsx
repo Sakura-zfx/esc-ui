@@ -10,13 +10,13 @@ export default class Loading extends Vue {
   @Prop({ default: 'default', type: String }) readonly size!: LoadingSize
   @Prop({ default: 'black', type: String }) readonly color!: LoadingColor
 
-  get isWhiteLoading() {
+  get isWhiteLoading () {
     return this.color === 'white'
   }
 
-  render() {
+  render () {
     return (
-      <div vShow={this.value} class={bem([ this.size, { white: this.isWhiteLoading }])}>
+      <div vShow={this.value} class={bem([this.size, { white: this.isWhiteLoading }])}>
         <svg class={bem('circular', false)} viewBox="25 25 50 50">
           <circle
             class={bem('path', { white: this.isWhiteLoading, black: !this.isWhiteLoading })}

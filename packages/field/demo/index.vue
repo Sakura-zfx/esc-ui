@@ -1,37 +1,52 @@
 <template>
-  <demo-wrap no-padding name="field">
-    <p class="filed-demo-label">单行输入</p>
+  <demo-wrap
+    no-padding
+    name="field"
+  >
+    <p class="filed-demo-label">
+      单行输入
+    </p>
     <esc-field
       label="姓名"
       v-model="name"
     />
-    <p class="filed-demo-label">多行输入高度自增</p>
+    <p class="filed-demo-label">
+      多行输入高度自增
+    </p>
     <esc-field
       label="详细地址"
       v-model="address"
       type="textarea"
       auto-size
     />
-    <p class="filed-demo-label">数字输入框 - 精确到2位</p>
+    <p class="filed-demo-label">
+      数字输入框 - 精确到2位
+    </p>
     <esc-field
       v-model="money"
       label="金额"
       :fixed="2"
     />
-    <p class="filed-demo-label">数字输入框 - 电话号码</p>
+    <p class="filed-demo-label">
+      数字输入框 - 电话号码
+    </p>
     <esc-field
       v-model="phone"
       label="电话号码"
       :fixed="0"
     />
-    <p class="filed-demo-label">数字加减器 - 精确度1位</p>
+    <p class="filed-demo-label">
+      数字加减器 - 精确度1位
+    </p>
     <esc-field
       v-model="val"
       label="购买数量"
       :fixed="1"
       is-input-number
     />
-    <p class="filed-demo-label">输入框组合</p>
+    <p class="filed-demo-label">
+      输入框组合
+    </p>
     <esc-cell-group>
       <esc-field
         v-model="phone"
@@ -45,7 +60,9 @@
         is-input-number
       />
     </esc-cell-group>
-    <p class="filed-demo-label">11</p>
+    <p class="filed-demo-label">
+      11
+    </p>
   </demo-wrap>
 </template>
 
@@ -55,7 +72,7 @@ import EscCellGroup from '../../cell-group/index'
 import DemoWrap from '@/components/DemoWrap.vue'
 
 export default {
-  name: 'input-number',
+  name: 'InputNumber',
 
   components: {
     EscField,
@@ -63,7 +80,7 @@ export default {
     EscCellGroup
   },
 
-  data() {
+  data () {
     return {
       name: '大头的赞美',
       address: '杭州市西湖区',
@@ -74,7 +91,7 @@ export default {
   },
 
   watch: {
-    val(v) {
+    val (v) {
       console.log(v)
     }
   }

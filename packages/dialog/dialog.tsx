@@ -30,12 +30,12 @@ export default class Dialog extends Mixins(popup) {
   @Prop(Boolean) readonly showCancelButton!: boolean
   @Prop(Function) readonly beforeClose!: (action: DialogAction, done: (close?: boolean) => void) => void
 
-  callback(action: string) {
+  callback (action: string) {
     // @ts-ignore
     this[action === 'confirm' ? 'resolve' : 'reject'](action)
   }
 
-  handleAction(action: DialogAction) {
+  handleAction (action: DialogAction) {
     if (this.beforeClose) {
       this.loading[action] = true
       this.beforeClose(action, (close?: boolean) => {
@@ -49,14 +49,14 @@ export default class Dialog extends Mixins(popup) {
     }
   }
 
-  onClose(action: DialogAction) {
+  onClose (action: DialogAction) {
     this.close()
     if (this.callback) {
       this.callback(action)
     }
   }
 
-  renderBtnItem(type: DialogAction) {
+  renderBtnItem (type: DialogAction) {
     return (
       <div
         class={bem('btn-item', false)}
@@ -71,7 +71,7 @@ export default class Dialog extends Mixins(popup) {
     )
   }
 
-  render() {
+  render () {
     const Title = this.title && <div class={bem('header', false)}>{this.title}</div>
     const Content = <div class={bem('content', false)}>{this.message}</div>
     const Btn = (this.showCancelButton || this.showConfirmButton) && (

@@ -21,15 +21,15 @@ export default class Home extends Vue {
   current: string = ''
 
   @Watch('$route.path')
-  onPathChange(val: string) {
+  onPathChange (val: string) {
     this.pathChange(val.substring(1))
   }
 
-  created() {
+  created () {
     this.pathChange()
   }
 
-  pathChange(name: string = this.$route.path.substring(1)) {
+  pathChange (name: string = this.$route.path.substring(1)) {
     this.current = name[0].toUpperCase() + name.substring(1)
   }
 }

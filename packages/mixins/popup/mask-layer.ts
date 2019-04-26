@@ -6,7 +6,7 @@ import { VNode } from 'vue/types'
 import { LayerConfig } from './decalare'
 let layerInstance: Vue & VNode & { visible: boolean }
 
-export function updateLayer(): void {
+export function updateLayer (): void {
   if (!layerInstance) {
     const MaskConstructor = Vue.extend(EscMask)
     layerInstance = new MaskConstructor({
@@ -30,12 +30,12 @@ export function updateLayer(): void {
   }
 }
 
-export function showLayer(vm: any, config: LayerConfig): void {
+export function showLayer (vm: any, config: LayerConfig): void {
   context.stack.push({ vm, config })
   updateLayer()
 }
 
-export function closeLayer(vm: any): void {
+export function closeLayer (vm: any): void {
   const { stack } = context
 
   if (stack.length) {

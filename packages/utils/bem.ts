@@ -8,14 +8,14 @@ const APP_PREFIX = 'esc-'
 const MODULE = '__'
 const MODIFIER = '--'
 
-function addSymbol(name: string) {
+function addSymbol (name: string) {
   const isModule = new RegExp(MODULE).test(name)
   return (subName?: string) => !isModule
     ? APP_PREFIX + name + (subName ? MODULE + subName : '')
     : name + (subName ? MODIFIER + subName : '')
 }
 
-function join(
+function join (
   prefix: PrefixFn,
   cls: Mods,
   autoAddParent: boolean = true
@@ -28,7 +28,7 @@ function join(
 
   if (typeof cls === 'string') {
     ret.add(prefix(cls))
-  }  else if (Array.isArray(cls)) {
+  } else if (Array.isArray(cls)) {
     let arr: Mod[] = []
     cls.forEach((item: Mod): void => {
       arr = arr.concat(join(prefix, item, autoAddParent))

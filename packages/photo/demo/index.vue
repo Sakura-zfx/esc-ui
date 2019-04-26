@@ -54,7 +54,7 @@ import Photo from '../'
 import DemoWrap from '@/components/DemoWrap.vue'
 
 export default {
-  name: 'index',
+  name: 'Index',
 
   components: {
     Photo,

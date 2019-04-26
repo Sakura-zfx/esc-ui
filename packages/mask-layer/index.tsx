@@ -7,14 +7,14 @@ export default class EscMask extends Vue {
   @Prop(Boolean) readonly visible!: boolean
   @Prop({ default: false, type: Boolean }) readonly isTransparent!: boolean
 
-  render() {
+  render () {
     const [ bem ] = use('mask')
 
     return (
       <transition name="esc-fade">
         <div
           vShow={this.visible}
-          style={{zIndex: this.zIndex}}
+          style={{ zIndex: this.zIndex }}
           class={bem({ transparent: this.isTransparent })}
           onClick={() => this.$emit('on-close')}
         />

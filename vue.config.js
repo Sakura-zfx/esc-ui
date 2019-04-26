@@ -1,6 +1,3 @@
-// const marked = require('marked')
-// const renderer = new marked.Renderer()
-
 module.exports = {
   pages: {
     index: {
@@ -21,30 +18,49 @@ module.exports = {
   chainWebpack: config => {
     // https://github.com/neutrinojs/webpack-chain/tree/v4
     config
-      // .entry('app')
-      // .clear()
-      // .add('./docs/src/main.ts')
-      // .end()
       .resolve.alias
-        .set('@', `${__dirname}/docs/src`)
-        .set('@@', `${__dirname}/packages`)
-        .end()
+      .set('@', `${__dirname}/docs/src`)
+      .set('@@', `${__dirname}/packages`)
+      .end()
       .extensions
-        .add('.md')
-        .prepend('.ts')
-        .prepend('.tsx')
-        .end()
+      .add('.md')
+      .prepend('.ts')
+      .prepend('.tsx')
+      .end()
 
     config.module
       .rule('md')
       .test(/\.md$/)
       .use('marked')
-        .loader('vue-loader')
+      .loader('vue-loader')
 
     config.module
       .rule('md')
       .use('marked2')
-        .loader('@vant/markdown-loader')
+      .loader('@vant/markdown-loader')
+
+    config.module
+      .rule('eslint')
+      .test(/\.(vue|(j|t)sx?)$/)
+      .pre()
+      .exclude
+      .add(/node_modules/)
+      .add(/build/)
+      .add(/lib/)
+      .add(/docs/)
+      .add(/README/)
+      .end()
+      .use('eslint')
+      .loader('eslint-loader')
+      .options({
+        extensions: [
+          '.js',
+          '.jsx',
+          '.vue',
+          '.ts',
+          '.tsx'
+        ]
+      })
   },
 
   devServer: {

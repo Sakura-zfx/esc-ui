@@ -38,65 +38,65 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator'
-  import Layout from '@/components/Layout.vue'
-  import DemoWrap from '@/components/DemoWrap.vue'
-  import Dialog from '@@/dialog/index.ts'
-  import EscButton from '@@/button/index.tsx'
-  // Types
-  import { VNode } from 'vue/types'
-  import { DialogAction, DialogBeforeClose } from 'types/dialog'
+import { Component, Vue } from 'vue-property-decorator'
+import Layout from '@/components/Layout.vue'
+import DemoWrap from '@/components/DemoWrap.vue'
+import Dialog from '@@/dialog/index.ts'
+import EscButton from '@@/button/index.tsx'
+// Types
+import { VNode } from 'vue/types'
+import { DialogAction, DialogBeforeClose } from 'types/dialog'
 
-  @Component({
-    components: {
-      Layout,
-      EscButton,
-      DemoWrap
-    }
-  })
-  export default class Home extends Vue {
-    created() {
-      // dialog.alert({
-      //   title: '没有背景',
-      //   isLayerTransparent: true
-      // })
-      Vue.use(Dialog)
-    }
-
-    handleClick (type: number) {
-      const options: {
-        title: string,
-        message: string | VNode,
-        showCancelButton: boolean,
-        beforeClose: undefined | DialogBeforeClose
-      } = {
-        title: '',
-        message: '代码是写出来给人看的，附带能在机器上运行代码是写出来给人看的',
-        showCancelButton: false,
-        beforeClose: undefined
-      }
-      if (type === 1) {
-        options.title = '标题呢'
-      } else if (type === 2) {
-        options.title = '确认'
-        options.showCancelButton = true
-      } else if (type === 3) {
-        options.title = '异步2s关闭'
-        options.showCancelButton = true
-        options.beforeClose = (action: DialogAction, done: () => void) => {
-          setTimeout(() => {
-            done()
-          }, 2000)
-        }
-      } else if (type === 4) {
-        options.title = 'VNode'
-        options.message = this.$createElement('p', undefined, '我是VNode')
-      }
-      this.$dialog.alert(options).then(action => {
-        console.log(action)
-      })
-    }
+@Component({
+  components: {
+    Layout,
+    EscButton,
+    DemoWrap
   }
+})
+export default class Home extends Vue {
+  created () {
+    // dialog.alert({
+    //   title: '没有背景',
+    //   isLayerTransparent: true
+    // })
+    Vue.use(Dialog)
+  }
+
+  handleClick (type: number) {
+    const options: {
+      title: string,
+      message: string | VNode,
+      showCancelButton: boolean,
+      beforeClose: undefined | DialogBeforeClose
+    } = {
+      title: '',
+      message: '代码是写出来给人看的，附带能在机器上运行代码是写出来给人看的',
+      showCancelButton: false,
+      beforeClose: undefined
+    }
+    if (type === 1) {
+      options.title = '标题呢'
+    } else if (type === 2) {
+      options.title = '确认'
+      options.showCancelButton = true
+    } else if (type === 3) {
+      options.title = '异步2s关闭'
+      options.showCancelButton = true
+      options.beforeClose = (action: DialogAction, done: () => void) => {
+        setTimeout(() => {
+          done()
+        }, 2000)
+      }
+    } else if (type === 4) {
+      options.title = 'VNode'
+      options.message = this.$createElement('p', undefined, '我是VNode')
+    }
+    this.$dialog.alert(options).then(action => {
+      console.log(action)
+    })
+  }
+}
 </script>
 
 <style lang="stylus">

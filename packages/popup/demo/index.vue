@@ -44,7 +44,7 @@ import EscButton from '../../button'
 import EscDialog from '../../dialog'
 
 export default {
-  name: 'index',
+  name: 'Index',
 
   components: {
     DemoWrap,
@@ -52,19 +52,19 @@ export default {
     EscButton
   },
 
-  data() {
+  data () {
     return {
       show: false,
       position: 'center'
     }
   },
 
-  created() {
+  created () {
     Vue.use(EscDialog)
   },
 
   methods: {
-    showPopup(position) {
+    showPopup (position) {
       this.show = true
       this.position = position
     }

@@ -8,7 +8,8 @@
     "build:js": "node build/build-components.js",
     "build:css": "node build/build-style.js",
     "build:css-entry": "node build/build-style-entry.js",
-    "build": "npm run build:js && npm run build:css && npm run build:css-entry"
+    "build": "npm run build:js && npm run build:css && npm run build:css-entry",
+    "lint": "vue-cli-service lint"
   },
   "files": [
     "lib",
@@ -18,14 +19,8 @@
   "main": "lib/index.js",
   "style": "lib/index.css",
   "types": "types/index.d.ts",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "vue": "^2.6.6",
-    "vue-router": "^3.0.1",
-    "vuex": "^3.0.1",
-    "vue-class-component": "^6.0.0",
-    "vue-property-decorator": "^8.0.0",
     "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/plugin-proposal-decorators": "^7.4.0",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
@@ -38,14 +33,26 @@
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-typescript": "^3.5.0",
     "@vue/cli-service": "^3.5.0",
+    "@vue/eslint-config-standard": "^4.0.0",
+    "@vue/eslint-config-typescript": "^4.0.0",
+    "babel-eslint": "^10.0.1",
     "babel-plugin-import": "^1.11.0",
     "clean-css": "^4.2.1",
+    "core-js": "^2.6.5",
     "dependency-tree": "^7.0.2",
+    "eslint": "^5.16.0",
+    "eslint-loader": "^2.1.2",
+    "eslint-plugin-vue": "^5.2.2",
     "fs-extra": "^7.0.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
     "typescript": "^3.2.1",
+    "vue": "^2.6.6",
+    "vue-class-component": "^6.0.0",
     "vue-lazyload": "^1.2.6",
-    "vue-template-compiler": "^2.5.21"
+    "vue-property-decorator": "^8.0.0",
+    "vue-router": "^3.0.1",
+    "vue-template-compiler": "^2.5.21",
+    "vuex": "^3.0.1"
   }
 }

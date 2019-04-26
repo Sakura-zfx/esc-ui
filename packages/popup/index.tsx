@@ -10,11 +10,11 @@ type Position = 'center' | 'bottom' | 'right'
 export default class EscPopup extends Mixins(popup) {
   @Prop({ type: String, default: 'center' }) readonly position!: Position
 
-  get isCenter() {
+  get isCenter () {
     return this.position === 'center'
   }
 
-  render() {
+  render () {
     let transitionName = 'esc-dialog'
     if (!this.isCenter) {
       transitionName = `esc-fade-${this.position}`

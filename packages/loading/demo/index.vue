@@ -2,7 +2,10 @@
   <demo-wrap name="loading">
     <p>组件 loading</p>
     <esc-loading v-model="showLoading" />
-    <esc-loading v-model="showLoading" color="white" />
+    <esc-loading
+      v-model="showLoading"
+      color="white"
+    />
     <p>api 调用 - 透明背景</p>
     <esc-button
       type="primary"
@@ -21,25 +24,25 @@ import '../index.styl'
 import '../../button/index.styl'
 
 export default {
-  name: 'index',
+  name: 'Index',
 
   components: {
     EscButton,
     DemoWrap
   },
 
-  data() {
+  data () {
     return {
       showLoading: true
     }
   },
 
-  created() {
+  created () {
     Vue.use(Loading)
   },
 
   methods: {
-    open() {
+    open () {
       this.$loading.open()
       setTimeout(() => {
         this.$loading.close()
