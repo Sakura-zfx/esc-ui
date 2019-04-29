@@ -1,0 +1,31 @@
+#!/bin/sh
+
+STAGE_FILES=$(git diff --cached --name-only --diff-filter=ACM | grep "^packages\|^docs\|^types")
+
+if [[ "$STAGE_FILES" = "" ]]; then
+  exit 0
+fi
+
+PASS=true
+
+echo "\n Eslint stage ...\n"
+
+for FILE in $STAGE_FILES
+do
+  npx eslint $FILE
+  if [[ "$?" == 0 ]]
+    then
+      echo "\t\033[32mESLint 校验通过: $FILE \033[0m"
+    else
+      echo "\t\033[41mESLint 校验不通过: $FILE \033[0m"
+      PASS=false
+  fi
+done
+
+if ! $PASS; then
+  exit 1
+else
+  exit 0
+fi
+
+exit $?
