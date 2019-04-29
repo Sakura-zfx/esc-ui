@@ -4,13 +4,13 @@
     <esc-button
       plain
       color="#07c160"
-      text="提示弹窗"
+      text="提示弹窗(无标题)"
       @on-click="handleClick(0)"
     />
     <esc-button
       plain
       color="#07c160"
-      text="提示弹窗(无标题)"
+      text="提示弹窗"
       @on-click="handleClick(1)"
     />
     <p>确认弹窗</p>
@@ -103,5 +103,6 @@ export default class Home extends Vue {
   @import '../../style/base.styl'
   @import '../index.styl'
   @import '../../button/index.styl'
+  @import '../../loading/index.styl'
   @import '../../mask-layer/index.styl'
 </style>

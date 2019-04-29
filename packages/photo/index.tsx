@@ -20,7 +20,8 @@ interface PhotoProps {
   class: Mods
   directives?: DirectiveJsx[]
   style?: PhotoStyle | void
-  attrs?: VueLazyloadImage
+  attrs?: VueLazyloadImage,
+  on?: any
 }
 
 const [ bem ] = use('photo')
@@ -109,6 +110,13 @@ export default class EscPhoto extends Vue {
       class: bem(['proStatus', 'img'], false),
       attrs: {
         src: proStatusLayer[this.proStatus]
+      },
+      on: {
+        error: (e: Event) => {
+          if (e && e.target) {
+            (e.target as Element).remove()
+          }
+        }
       }
     }
     return <img {...pro} />
