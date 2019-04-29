@@ -4,6 +4,7 @@ import Loading from '@@/loading/README.md'
 import Popup from '@@/popup/README.md'
 import Field from '@@/field/README.md'
 import Photo from '@@/photo/README.md'
+import InfiniteScroll from '@@/infinite-scroll/README.md'
 
 export interface PackageItem {
   title: string,
@@ -42,6 +43,10 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'Photo 图片',
         name: 'photo'
+      },
+      {
+        title: 'InfiniteScroll 列表',
+        name: 'infinite-scroll'
       }
     ]
   }
@@ -53,5 +58,6 @@ export const markdown = {
   Loading,
   Popup,
   Field,
-  Photo
+  Photo,
+  InfiniteScroll
 }
