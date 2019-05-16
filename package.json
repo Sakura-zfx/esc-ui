@@ -64,10 +64,10 @@
     }
   },
   "lint-staged": {
-    "linters": {
-      "{packages,docs}/**/*.{ts,tsx,vue}": [
-        "eslint --fix"
-      ]
-    }
+    "*": "mmp -h",
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
