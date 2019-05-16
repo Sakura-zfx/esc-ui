@@ -1,7 +1,5 @@
 import { isIOS, online, isDef, cookieGet } from './index'
 
-var a=""
-
 interface Options {
   moduleId?: string
   eventId?: string

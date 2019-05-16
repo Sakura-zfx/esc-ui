@@ -64,6 +64,9 @@
     }
   },
   "lint-staged": {
-    "packages/**/*.ts": "eslint"
+    "{packages,docs}/**/*.{ts,tsx,vue}": [
+      "eslint --fix",
+      "git add"
+    ]
   }
 }
