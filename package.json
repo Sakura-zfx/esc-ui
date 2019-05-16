@@ -60,14 +60,10 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "mmp -h"
+      "pre-commit": "lint-staged"
     }
   },
   "lint-staged": {
-    "*": "mmp -h",
-    "*.js": [
-      "eslint --fix",
-      "git add"
-    ]
+    "*": "mmp -h"
   }
 }
