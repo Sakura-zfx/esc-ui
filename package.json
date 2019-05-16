@@ -64,6 +64,6 @@
     }
   },
   "lint-staged": {
-    "*": "mmp -h"
+    "packages/**/*.ts": "eslint"
   }
 }
