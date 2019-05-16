@@ -21,6 +21,8 @@ yarn-error.log*
 *.sw*
 
 /lib
+/lib-global
 /test
 
 output.js
+/.rpt2_cache
