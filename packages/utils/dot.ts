@@ -17,7 +17,7 @@ const defaultOptions: Options = {
 }
 
 export default class Dot {
-  options: Options = {}
+  options: Options = {};
 
   constructor (options?: Options) {
     if (options && typeof options !== 'object') {
