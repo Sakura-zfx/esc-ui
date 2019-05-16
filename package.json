@@ -60,7 +60,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "mmp -h"
+      "pre-commit": "eslint packages/**/*.ts"
     }
   },
   "lint-staged": {
