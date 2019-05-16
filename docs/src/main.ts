@@ -4,6 +4,7 @@ import router from './router'
 import store from './store'
 import './assets/markdown.css'
 Vue.config.productionTip = false
+var a = ''
 
 new Vue({
   router,
