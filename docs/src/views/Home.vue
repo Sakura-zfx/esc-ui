@@ -1,8 +1,11 @@
 <template>
   <div class="home">
     <Layout>
-      <div class="home__page-center" slot="center">
-        <p>esc-ui</p> 
+      <div
+        class="home__page-center"
+        slot="center"
+      >
+        <p>esc-ui</p>
         <p>企业服务移动端业务Vue组件库</p>
       </div>
     </Layout>
@@ -10,16 +13,16 @@
 </template>
 
 <script lang="ts">
-  import { Component, Vue } from 'vue-property-decorator'
-  import Layout from '../components/Layout.vue'
+import { Component, Vue } from 'vue-property-decorator'
+import Layout from '../components/Layout.vue'
 
-  @Component({
-    components: {
-      Layout
-    }
-  })
-  export default class Home extends Vue {
+@Component({
+  components: {
+    Layout
   }
+})
+export default class Home extends Vue {
+}
 </script>
 
 <style lang="stylus">
@@ -29,9 +32,9 @@
     height 100%
   &__page-center
     padding 15px 40px
-    p 
+    p
       margin-top 20px
       font-size 30px
-      &:last-child 
+      &:last-child
         font-size 14px
 </style>
