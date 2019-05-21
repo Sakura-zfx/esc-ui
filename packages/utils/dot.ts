@@ -1,14 +1,8 @@
 import { isIOS, online, isDef, cookieGet } from './index'
 
-interface Options {
-  moduleId?: string
-  eventId?: string
-  orgId?: string
-  userId?: string
-  platform?: 'iOS' | 'android'
-}
+import { DotOptions, Dot as EscDot } from 'types/dot'
 
-const defaultOptions: Options = {
+const defaultOptions: DotOptions = {
   moduleId: undefined,
   eventId: undefined,
   orgId: cookieGet('orgId'),
@@ -16,10 +10,10 @@ const defaultOptions: Options = {
   platform: isIOS ? 'iOS' : 'android'
 }
 
-export default class Dot {
-  options: Options = {}
+export default class Dot implements EscDot {
+  options: DotOptions = {}
 
-  constructor (options?: Options) {
+  constructor (options?: DotOptions) {
     if (options && typeof options !== 'object') {
       throw new Error('Dot constructor options is a object.')
     } else if (!isDef(options)) {
