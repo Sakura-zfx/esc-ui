@@ -5,7 +5,7 @@
 组件引入
 
 ```js
-import EscDot, { dot } from 'esc-ui/lib/utils/dot'
+import EscDot, { hit } from 'esc-ui/lib/utils/dot'
 ```
 
 CDN 引入
@@ -28,7 +28,7 @@ Vue.prototype.$dot.hit('4405.1')
 // dot 为实例
 const dot = new window.EscDot.default(options: DotOptions)
 // 或
-const dot = window.EscDot.dot
+const hit = window.EscDot.hit
 ```
 
 ### DotOptions
@@ -39,7 +39,7 @@ eventId|`string`|-|打点id
 orgId|`string`|-|企业id
 userId|`string`|-|用户id
 platform|`string`|-|平台统计，默认：移动端 `iOS` `Android`，pc `undefined`
-base|`string`|`jituancaiyun`|打点的接口地址，默认到彩云
+base|`string`|`${domain}/dot-log/logExt.json`|打点的接口地址，默认到彩云
 
 ### API
 方法名|参数|描述
