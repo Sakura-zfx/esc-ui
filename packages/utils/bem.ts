@@ -8,10 +8,10 @@ const APP_PREFIX = 'esc-'
 const MODULE = '__'
 const MODIFIER = '--'
 
-function addSymbol (name: string) {
+function addSymbol (name: string, app?: string) {
   const isModule = new RegExp(MODULE).test(name)
   return (subName?: string) => !isModule
-    ? APP_PREFIX + name + (subName ? MODULE + subName : '')
+    ? (app ? `${app}-` : APP_PREFIX) + name + (subName ? MODULE + subName : '')
     : name + (subName ? MODIFIER + subName : '')
 }
 
@@ -61,7 +61,7 @@ function join (
  *      - bem('primary', 'text') => ['esc-button__primary', 'esc-button__primary--text'] 自动添加了父级 class
  *      - bem('primary', ['text', { loading: true }], false) => ['esc-button__primary--text', { 'esc-button__primary--loading': true }]
  */
-export default (name: string) => (
+export default (name: string, app?: string) => (
   module?: Mods,
   modifiers?: Mods | boolean,
   autoAddParent?: boolean
@@ -71,11 +71,11 @@ export default (name: string) => (
     modifiers = undefined
   }
 
-  const prefix: PrefixFn = addSymbol(name)
+  const prefix: PrefixFn = addSymbol(name, app)
   if (!module) {
     return prefix()
   } else if (typeof module === 'string' && modifiers) {
-    return join(addSymbol(prefix(module)), modifiers, autoAddParent)
+    return join(addSymbol(prefix(module), app), modifiers, autoAddParent)
   }
   return join(prefix, module, autoAddParent)
 }

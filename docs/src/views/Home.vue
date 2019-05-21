@@ -15,6 +15,11 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Layout from '../components/Layout.vue'
+// import Bem from '@@/utils/bem'
+// const bem = Bem('cart', 'jd')
+// console.log(bem())
+// console.log(bem('goods', false))
+// console.log(bem('goods', ['img', { normal: true }]))
 
 @Component({
   components: {

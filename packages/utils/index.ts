@@ -1,9 +1,9 @@
 import bem from './bem'
 import { VNode } from 'vue/types'
 
-export function use (name: string) {
+export function use (name: string, app?: string) {
   return [
-    bem(name)
+    bem(name, app)
   ]
 }
 
