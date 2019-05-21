@@ -5,20 +5,24 @@ import Popup from '@@/popup/README.md'
 import Field from '@@/field/README.md'
 import Photo from '@@/photo/README.md'
 import InfiniteScroll from '@@/infinite-scroll/README.md'
+import Sentry from '@/views/utils-md/sentry.md'
+import Dot from '@/views/utils-md/dot.md'
+import Bem from '@/views/utils-md/bem.md'
 
 export interface PackageItem {
-  title: string,
+  title: string
   name: string
+  noDemo?: boolean
 }
 
 export interface PackageItemGroup {
-  items: PackageItem[],
+  items: PackageItem[]
   title: string
 }
 
 export const routerDir: PackageItemGroup[] = [
   {
-    title: '基础组件',
+    title: '基础通用组件',
     items: [
       {
         title: 'Dialog 弹出框',
@@ -39,7 +43,12 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'Field 字段输入',
         name: 'field'
-      },
+      }
+    ]
+  },
+  {
+    title: '基础业务组件',
+    items: [
       {
         title: 'Photo 图片',
         name: 'photo'
@@ -47,6 +56,26 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'InfiniteScroll 列表',
         name: 'infinite-scroll'
+      }
+    ]
+  },
+  {
+    title: '工具函数',
+    items: [
+      {
+        title: 'Bem 样式函数',
+        noDemo: true,
+        name: 'bem'
+      },
+      {
+        title: 'Sentry 错误捕获',
+        noDemo: true,
+        name: 'sentry'
+      },
+      {
+        title: 'Dot 打点',
+        noDemo: true,
+        name: 'dot'
       }
     ]
   }
@@ -59,5 +88,8 @@ export const markdown = {
   Popup,
   Field,
   Photo,
-  InfiniteScroll
+  InfiniteScroll,
+  Sentry,
+  Dot,
+  Bem
 }

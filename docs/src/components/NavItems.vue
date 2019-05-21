@@ -1,50 +1,49 @@
 <script lang="tsx">
-  import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
-  import Bem from '../../../packages/utils/bem'
-  import { PackageItemGroup, PackageItem } from '../constant'
+import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
+import Bem from '../../../packages/utils/bem'
+import { PackageItemGroup, PackageItem } from '../constant'
 
+@Component({})
+export default class NavItems extends Vue {
+  @Prop() readonly list!: PackageItemGroup[]
 
-  @Component({})
-  export default class NavItems extends Vue {
-    @Prop() readonly list!: PackageItemGroup[]
-
-    created () {
-    }
-
-    @Emit('change')
-    redirect (nav: PackageItem): PackageItem {
-      this.$router.push(`/${nav.name}`)
-      return nav
-    }
-
-    isActive(nav: PackageItem): boolean {
-      return this.$route.path.substring(1) === nav.name
-    }
-
-    render() {
-      const bem = Bem('nav')
-
-      return (
-        <div class={bem('wrap')}>{
-          this.list.map(group => (
-            <div class={bem('group', false)}>
-              <div class={bem('group', 'title', false)}>{ group.title }</div>
-              {
-                group.items.map(nav => (
-                  <div
-                    class={bem(['item', { active: this.isActive(nav) }], false)}
-                    onClick={this.redirect.bind(this, nav)}
-                  >
-                    { nav.title }
-                  </div>
-                ))
-              }
-            </div>
-          ))
-        }</div>
-      )
-    }
+  created () {
   }
+
+  @Emit('change')
+  redirect (nav: PackageItem): PackageItem {
+    this.$router.push(`/${nav.name}`)
+    return nav
+  }
+
+  isActive (nav: PackageItem): boolean {
+    return this.$route.path.substring(1) === nav.name
+  }
+
+  render () {
+    const bem = Bem('nav')
+
+    return (
+      <div class={bem('wrap')}>{
+        this.list.map(group => (
+          <div class={bem('group', false)}>
+            <div class={bem('group', 'title', false)}>{ group.title }</div>
+            {
+              group.items.map(nav => (
+                <div
+                  class={bem(['item', { active: this.isActive(nav) }], false)}
+                  onClick={this.redirect.bind(this, nav)}
+                >
+                  { nav.title }
+                </div>
+              ))
+            }
+          </div>
+        ))
+      }</div>
+    )
+  }
+}
 </script>
 
 <style lang="stylus">

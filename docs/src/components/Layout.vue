@@ -19,31 +19,33 @@ export default class Layout extends Vue {
   demoSrc: string = ''
   docScrollTop: number = 0
 
-  get isScrollOut(): boolean {
+  get isScrollOut (): boolean {
     return this.docScrollTop > 40
   }
 
   @Watch('$route.path')
-  onRouteChange(val: string) {
+  onRouteChange (val: string) {
     this.changeIframe(val.substr(1))
   }
 
-  created() {
+  created () {
     this.changeIframe(this.$route.path.substr(1))
   }
 
-  mounted() {
+  mounted () {
     window.onscroll = () => {
       this.docScrollTop = document.documentElement.scrollTop
     }
   }
 
-  navChange(nav: PackageItem) {
+  navChange (nav: PackageItem) {
     this.changeIframe(nav.name)
   }
 
-  changeIframe(pathName: string) {
-    this.demoSrc = `./demo.html#/${pathName}`
+  changeIframe (pathName: string) {
+    this.demoSrc = routerDir.some(obj => obj.items.some(x => pathName === x.name && x.noDemo === true))
+      ? ''
+      : `./demo.html#/${pathName}`
   }
 
   render () {
@@ -69,9 +71,13 @@ export default class Layout extends Vue {
         <div class={bem('center', false)}>
           <div class="van-doc-content">{this.$slots.center}</div>
         </div>
-        <div class={(this.isScrollOut ? bem('right', 'sticky') : bem('right', false))}>
-          <iframe slot="right" src={this.demoSrc} frameBorder="0" />
-        </div>
+        {
+          this.demoSrc ? (
+            <div class={(this.isScrollOut ? bem('right', 'sticky') : bem('right', false))}>
+              <iframe slot="right" src={this.demoSrc} frameBorder="0"/>
+            </div>
+          ) : null
+        }
       </div>
     )
   }
@@ -129,6 +135,7 @@ export default class Layout extends Vue {
       padding-left 240px
       padding-right 360px
       margin 0 auto
+      min-height calc(100vh - 60px)
       @media (min-width 1440px)
         width 1440px
         padding-right 400px

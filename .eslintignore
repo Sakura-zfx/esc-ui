@@ -1,5 +1,5 @@
-/test/**
-/lib/**
+/test/**/*
+/lib/**/*
 /node_modules/**
 /build/**
 /packages/*/README.md
