@@ -3,7 +3,8 @@ export interface DotOptions {
   eventId?: string
   orgId?: string
   userId?: string
-  platform?: 'iOS' | 'android'
+  platform?: 'iOS' | 'android',
+  base?: string
 }
 
 export interface Dot {

@@ -11,7 +11,8 @@ import { EscSentryOption, EscSentry as EscSentryType } from 'types/sentry'
 const defaultOptions: EscSentryOption = {
   dsn: 'https://cc415d712650488a936395f97869ecf1@sentry.io/212146', // shinemo/esc
   open: online,
-  release: undefined
+  release: undefined,
+  preventRejection: true
 }
 
 export default class EscSentry implements EscSentryType {
@@ -25,6 +26,13 @@ export default class EscSentry implements EscSentryType {
     this.options = {
       ...defaultOptions,
       ...options
+    }
+
+    if (this.options.preventRejection) {
+      window.addEventListener('unhandledrejection', e => {
+        e.preventDefault()
+        return true
+      })
     }
 
     this.init()
@@ -68,4 +76,6 @@ export default class EscSentry implements EscSentryType {
   }
 }
 
-export const instance = new EscSentry()
+// export const instance = new EscSentry({
+//   preventRejection: false
+// })

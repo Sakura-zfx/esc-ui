@@ -22,6 +22,8 @@ export function formatNumber (val: number, fixed: number): string {
   return (Math.round(pow * val) / pow).toFixed(fixed)
 }
 
+export const isMobile = /Mobile/i.test(navigator.userAgent)
+
 export const isIOS = /iPhone/i.test(navigator.userAgent)
 
 export const online = /\.com/.test(location.origin)

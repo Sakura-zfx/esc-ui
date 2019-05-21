@@ -1,4 +1,4 @@
-import { isIOS, online, isDef, cookieGet } from './index'
+import { isMobile, isIOS, online, isDef, cookieGet } from './index'
 
 import { DotOptions, Dot as EscDot } from 'types/dot'
 
@@ -7,7 +7,8 @@ const defaultOptions: DotOptions = {
   eventId: undefined,
   orgId: cookieGet('orgId'),
   userId: cookieGet('userId'),
-  platform: isIOS ? 'iOS' : 'android'
+  platform: isMobile ? isIOS ? 'iOS' : 'android' : undefined,
+  base: `${online ? 'https://admin.jituancaiyun.com' : 'http://admin.jituancaiyun.net'}/dot-log/logExt.json`
 }
 
 export default class Dot implements EscDot {
@@ -26,14 +27,13 @@ export default class Dot implements EscDot {
   }
 
   getUrl (didArr: string[] | void): string {
-    let { platform, moduleId, eventId, userId, orgId } = this.options
+    let { platform, moduleId, eventId, userId, orgId, base } = this.options
     if (didArr) {
       const [ ,, mid, eid ] = didArr
       moduleId = mid || moduleId
       eventId = eid || eventId
     }
-    const base = online ? 'https://admin.jituancaiyun.com' : 'http://admin.jituancaiyun.net'
-    return `${base}/dot-log/logExt.json?platform=${platform}&mid=${moduleId}&eid=${eventId}&uid=${userId || 1}${orgId ? `&orgId=${orgId}` : ''}`
+    return `${base}?platform=${platform}&mid=${moduleId}&eid=${eventId}&uid=${userId || 1}${orgId ? `&orgId=${orgId}` : ''}`
   }
 
   /**

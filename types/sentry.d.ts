@@ -1,7 +1,8 @@
 export interface EscSentryOption {
   dsn?: string
   open?: boolean
-  release?: undefined | string
+  release?: undefined | string,
+  preventRejection?: boolean
 }
 
 export interface EscSentry {
