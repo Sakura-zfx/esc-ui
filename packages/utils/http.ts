@@ -25,9 +25,6 @@ const defaultOptions: EscHttpOptions = {
     open: () => console.log('open loading'),
     close: () => console.log('close loading')
   },
-  beforeRequest (data) {
-    return data
-  },
   successRequestAssert (serverResponse) {
     return serverResponse.success
   }
@@ -121,16 +118,13 @@ export default class Http implements EscHttp {
     if (beforeRequest && typeof beforeRequest === 'function') {
       mergeConfig = beforeRequest(mergeConfig, attaches)
     }
-
     return (<AxiosInstance> this.instance).get(path, mergeConfig)
       .then((res: AxiosResponse): EscHttpResponse | Promise<EscHttpResponse> => {
         if (beforeThen && typeof beforeThen === 'function') {
           res = beforeThen(res, attaches)
         }
-
         // loading
         loading.pop(attaches)
-
         if (
           successRequestAssert &&
           typeof successRequestAssert === 'function' &&
@@ -157,24 +151,21 @@ export default class Http implements EscHttp {
           request: error.request,
           response: (<EscHttpResponse> error),
           attaches
-        } : error
+        } : {
+          ...error,
+          attaches
+        }
 
         if (beforeCatch && typeof beforeCatch === 'function') {
           error = beforeCatch(finalError, attaches)
         }
-
         if (isResponseReject) {
           return Promise.reject(finalError)
         }
         if (axios.isCancel(error)) {
           console.log('Request canceled', (error as EscHttpError).message)
         }
-
-        // eslint-disable-next-line
-        return Promise.reject({
-          ...error,
-          attaches
-        })
+        return Promise.reject(finalError)
       })
   }
 }
