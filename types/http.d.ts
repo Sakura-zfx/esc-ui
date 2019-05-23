@@ -56,3 +56,13 @@ export interface EscHttpResponse extends AxiosResponse {
 export interface EscHttpError extends AxiosError {
   attaches?: UniversalMap
 }
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $http: EscHttp
+    $http2: EscHttp
+    $http3: EscHttp
+  }
+}
+
+export const EscHttp: EscHttp
