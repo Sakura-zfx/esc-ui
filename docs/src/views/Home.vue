@@ -20,6 +20,22 @@ import Layout from '../components/Layout.vue'
 // console.log(bem())
 // console.log(bem('goods', false))
 // console.log(bem('goods', ['img', { normal: true }]))
+// import Http from '@@/utils/http'
+// const http = new Http({
+//   baseUrl: 'http://youli.uban360.net',
+//   urlMap: {
+//     user: 'gift-front/user/me'
+//   }
+// })
+// const ins = http.get('user', { siteId: undefined }, { mock: true }, {
+//   params: { siteType: 3 }
+// })
+// ins.then(res => {
+//   console.log(res)
+// }).catch(err => {
+//   console.log('err', err)
+// })
+// console.log(Http)
 
 @Component({
   components: {
