@@ -65,4 +65,4 @@ declare module 'vue/types/vue' {
   }
 }
 
-export const EscHttp: EscHttp
+export const Http: EscHttp

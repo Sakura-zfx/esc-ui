@@ -9,7 +9,7 @@ export interface bem {
   ): Mods
 }
 
-export interface Bem {
+export interface EscBem {
   (name: string, app?: string): bem
 }
 
@@ -19,4 +19,4 @@ declare module 'vue/type/vue' {
   }
 }
 
-export const EscBem: Bem
+export const Bem: EscBem

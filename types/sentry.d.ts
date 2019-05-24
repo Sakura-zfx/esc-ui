@@ -20,4 +20,4 @@ declare module 'vue/types/vue' {
   }
 }
 
-export const EscSentry: EscSentry
+export const Sentry: EscSentry
