@@ -48,7 +48,9 @@ const DialogClass: Dialog = options => new Promise((resolve, reject) => {
 
 DialogClass.alert = DialogClass
 DialogClass.confirm = options => DialogClass(options)
-DialogClass.close = () => null
+DialogClass.close = () => {
+  instance.show = false
+}
 DialogClass.install = () => {
   Vue.prototype.$dialog = DialogClass
 }
