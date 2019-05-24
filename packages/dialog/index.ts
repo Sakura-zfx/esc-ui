@@ -49,7 +49,7 @@ const DialogClass: Dialog = options => new Promise((resolve, reject) => {
 DialogClass.alert = DialogClass
 DialogClass.confirm = options => DialogClass(options)
 DialogClass.close = () => {
-  instance.close()
+  instance && instance.close()
 }
 DialogClass.install = () => {
   Vue.prototype.$dialog = DialogClass
