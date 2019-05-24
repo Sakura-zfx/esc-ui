@@ -8,10 +8,13 @@ export interface EscSentryOption {
 export interface EscSentry {
   options: EscSentryOption
   sentryInstance: any
-  // new (options?: EscSentryOption): void
   init (): void
   captureException (err: Error): void
   captureMessage (msg: string, level?: string): void
+}
+
+export interface EscSentryInstance extends EscSentry {
+  new (options?: EscSentryOption): EscSentry
 }
 
 declare module 'vue/types/vue' {
@@ -20,4 +23,4 @@ declare module 'vue/types/vue' {
   }
 }
 
-export const Sentry: EscSentry
+export const Sentry: EscSentryInstance

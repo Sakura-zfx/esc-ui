@@ -49,6 +49,10 @@ export interface EscHttp {
   get: (urlName: string, data?: any, config?: AxiosRequestConfig, attaches?: any) => Promise<EscHttpResponse | EscHttpError>
 }
 
+export interface EscHttpInstance extends EscHttp {
+  new(options: EscHttpOptions): EscHttp
+}
+
 export interface EscHttpResponse extends AxiosResponse {
   attaches?: UniversalMap
 }
@@ -65,4 +69,4 @@ declare module 'vue/types/vue' {
   }
 }
 
-export const Http: EscHttp
+export const Http: EscHttpInstance

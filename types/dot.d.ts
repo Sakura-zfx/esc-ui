@@ -13,10 +13,14 @@ export interface Dot {
   hit (did?: string): void
 }
 
+export interface DotInstance extends Dot {
+  new (options: DotOptions): Dot
+}
+
 declare module 'vue/types/vue' {
   interface Vue {
     $dot: Dot
   }
 }
 
-export const EscDot: Dot
+export const EscDot: DotInstance
