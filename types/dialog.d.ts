@@ -22,7 +22,7 @@ export interface Dialog {
   (options: string | DialogOptions): Promise<DialogAction>
   alert(options: string | DialogOptions): Promise<DialogAction>
   confirm(options: string | DialogOptions): Promise<DialogAction>
-  close(): void,
+  close?: () => void,
   install(): void
 }
 
