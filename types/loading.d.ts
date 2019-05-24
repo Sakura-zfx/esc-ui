@@ -7,8 +7,8 @@ export type LoadingType = Vue & Loading & { show: boolean }
 export interface Loading {
   instance: LoadingType
   component: Component
-  open(text?: string): void
-  close(): void,
+  // open(text?: string): void
+  // close(): void,
   install(): void
 }
 

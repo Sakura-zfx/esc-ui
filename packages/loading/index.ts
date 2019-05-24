@@ -17,8 +17,6 @@ instance.$on('input', (value: boolean): void => {
 const LoadingClass: Loading = {
   instance,
   component: VueLoading,
-  open: () => null,
-  close: () => null,
   install: () => {
     Vue.prototype.$loading = Object.assign(instance, {
       show: false,

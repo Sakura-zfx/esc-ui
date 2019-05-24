@@ -8,7 +8,10 @@ import Popup from '../mixins/popup'
   }
 })
 export default class LoadingService extends Mixins(Popup) {
-  open () {
+  isLayerTransparent = true
+
+  open (isTransparent: boolean = true) {
+    this.isLayerTransparent = isTransparent
     this.$emit('input', true)
   }
 

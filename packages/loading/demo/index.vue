@@ -53,4 +53,5 @@ export default {
 </script>
 
 <style lang="stylus">
+@import '../../mask-layer/index.styl'
 </style>
