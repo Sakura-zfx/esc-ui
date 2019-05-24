@@ -1,4 +1,4 @@
-import { isMobile, isIOS, online, isDef, cookieGet } from '@@/utils'
+import { isMobile, isIOS, online, isDef, cookieGet } from '../utils'
 
 import { DotOptions, Dot as EscDot } from 'types/dot'
 

@@ -1,4 +1,4 @@
-import bem from '@@/bem'
+import bem from '../bem'
 import { VNode } from 'vue/types'
 
 export function use (name: string, app?: string) {
