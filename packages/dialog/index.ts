@@ -4,7 +4,7 @@ import { isVNode } from '../utils'
 // Types
 import { Dialog, DialogOptions } from 'types/dialog'
 
-let instance: Vue & DialogOptions & { show?: boolean }
+let instance: Vue & DialogOptions & { show?: boolean, close(): void }
 
 const DialogDefaultOptions = {
   title: '提示',
@@ -48,9 +48,9 @@ const DialogClass: Dialog = options => new Promise((resolve, reject) => {
 
 DialogClass.alert = DialogClass
 DialogClass.confirm = options => DialogClass(options)
-// DialogClass.close = () => {
-//   instance.show = false
-// }
+DialogClass.close = () => {
+  instance.close()
+}
 DialogClass.install = () => {
   Vue.prototype.$dialog = DialogClass
 }
