@@ -1,5 +1,6 @@
 const path = require('path')
 const fs = require('fs-extra')
+// const { writeFileSync, readFileSync } = require('fs')
 const babel = require('@babel/core')
 const components = require('./get-component')()
 const babelConfig = {
@@ -11,7 +12,7 @@ const isDir = dir => fs.lstatSync(dir).isDirectory()
 // const isCode = path => !/(demo|test|\.md)$/.test(path)
 const isScript = path => scriptRegExp.test(path)
 const srcPath = path.resolve(__dirname, '../packages')
-// const libPath = path.resolve(__dirname, '../lib')
+const libPath = path.resolve(__dirname, '../lib')
 
 function compiler(dir) {
   const files = fs.readdirSync(dir)
@@ -41,3 +42,17 @@ function compiler(dir) {
 components.forEach(componentDir => {
   compiler(path.join(srcPath, componentDir))
 })
+
+// 添加一份 utils 组件格式
+// function transferUtils (dir) {
+//   const files = fs.readdirSync(dir)
+//   files.forEach(file => {
+//     const name = file.replace('.js', '')
+//     if (name !== 'index') {
+//       const target = path.join(dir.replace('/utils', ''), name, 'index.js')
+//       fs.ensureFileSync(target)
+//       writeFileSync(target, readFileSync(path.join(dir, file), 'utf8'), 'utf8')
+//     }
+//   })
+// }
+// transferUtils(path.join(libPath, 'utils'))

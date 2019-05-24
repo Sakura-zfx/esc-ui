@@ -4,7 +4,7 @@
 import Vue from 'vue'
 import * as Sentry from '@sentry/browser'
 import * as Integrations from '@sentry/integrations'
-import { online } from './index'
+import { online } from '@@/utils'
 
 import { EscSentryOption, EscSentry as EscSentryType } from 'types/sentry'
 

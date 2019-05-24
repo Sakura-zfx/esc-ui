@@ -5,9 +5,10 @@ import Popup from '@@/popup/README.md'
 import Field from '@@/field/README.md'
 import Photo from '@@/photo/README.md'
 import InfiniteScroll from '@@/infinite-scroll/README.md'
-import Sentry from '@/views/utils-md/sentry.md'
-import Dot from '@/views/utils-md/dot.md'
-import Bem from '@/views/utils-md/bem.md'
+import Sentry from '@@/sentry/README.md'
+import Dot from '@@/dot/README.md'
+import Http from '@@/http/README.md'
+import Bem from '@@/bem/README.md'
 
 export interface PackageItem {
   title: string
@@ -91,5 +92,6 @@ export const markdown = {
   InfiniteScroll,
   Sentry,
   Dot,
-  Bem
+  Bem,
+  Http
 }

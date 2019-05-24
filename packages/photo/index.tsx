@@ -2,7 +2,7 @@ import { Vue, Component, Prop } from 'vue-property-decorator'
 import { use } from '../utils'
 
 // types
-import { Mods } from '../utils/bem'
+import { Mods } from 'types/bem'
 import { VueLazyloadImage } from 'vue-lazyload/types/lazyload'
 type FillType = 'cover' | 'contain'
 type Height = () => number | number

@@ -3,6 +3,12 @@ const path = require('path')
 const fs = require('fs-extra')
 const components = require('./get-component')('style')
 const whiteList = ['popup']
+const emptyStyleComponents = [
+  'bem',
+  'http',
+  'dot',
+  'sentry'
+]
 
 function getComponentNameFromPath(file) {
   let last = file.lastIndexOf('/')
@@ -39,11 +45,15 @@ function getDependence(component) {
 
 function writeStyle(component, styleArr) {
   const componentPath = path.resolve(__dirname, '../lib', component, 'style/index.js')
-  const expression = styleArr.map(x =>
-    `require("${component === x ? '../index.css' : `../../${x}/index.css`}")`
-  ).join('\n')
-  console.log(`组件 ${component} 注入依赖样式 ${styleArr.join('/')}`)
-  fs.outputFileSync(componentPath, expression)
+  if (emptyStyleComponents.some(x => x === component)) {
+    fs.ensureFileSync(componentPath)
+  } else {
+    const expression = styleArr.map(x =>
+      `require("${component === x ? '../index.css' : `../../${x}/index.css`}")`
+    ).join('\n')
+    console.log(`组件 ${component} 注入依赖样式 ${styleArr.join('/')}`)
+    fs.outputFileSync(componentPath, expression)
+  }
 }
 
 components.forEach(name => {

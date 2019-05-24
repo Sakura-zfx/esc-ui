@@ -1,6 +1,6 @@
 <script lang="tsx">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
-import Bem from '../../../packages/utils/bem'
+import Bem from '@@/bem'
 import { PackageItemGroup, PackageItem } from '../constant'
 
 @Component({})

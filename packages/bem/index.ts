@@ -1,5 +1,5 @@
-export type Mod = string | { [index: string]: boolean }
-export type Mods = Mod | Mod[]
+import { Mod, Mods } from 'types/bem'
+
 type PrefixFn = {
   (key?: string): string
 }
