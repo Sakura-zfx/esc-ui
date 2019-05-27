@@ -16,10 +16,12 @@ this.$http.get(
   data?: any, 
   attaches?: { [key: string]: any },
   config?: AxiosRequestConfig
-).then((res: EscHttpResponse)).catch((error: EscHttpError))
-
-// 仅支持 get / post
+)
+.then((res: EscHttpResponse) => {})
+.catch((error: EscHttpError) => {})
 ```
+
+> 仅支持 get 和 post
 
 ### EscHttpOptions
 
@@ -41,4 +43,4 @@ beforeRequest|`(data?: AxiosRequestConfig, attaches?: UniversalMap) => AxiosRequ
 beforeThen|`(res: AxiosResponse, attaches?: UniversalMap) => AxiosResponse`|-|-
 beforeCatch|`(res: EscHttpError, attaches?: UniversalMap) => EscHttpError`|-|-
 
-其中 `UniversalMap` 为 `{ [key: string]: any }`
+> 其中 UniversalMap 为 { [key: string]: any }

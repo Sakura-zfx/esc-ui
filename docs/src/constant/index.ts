@@ -64,6 +64,11 @@ export const routerDir: PackageItemGroup[] = [
     title: '工具函数',
     items: [
       {
+        title: 'Http',
+        noDemo: true,
+        name: 'http'
+      },
+      {
         title: 'Bem 样式函数',
         noDemo: true,
         name: 'bem'
