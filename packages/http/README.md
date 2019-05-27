@@ -19,9 +19,27 @@ this.$http.get(
 )
 .then((res: EscHttpResponse) => {})
 .catch((error: EscHttpError) => {})
+
+// 实例
+this.$http.get(
+  'getList', 
+  { siteId: 1 }, 
+  { loading: false, notify: false }, 
+  { params: { siteType: 2 } }
+)
 ```
 
 > 仅支持 get 和 post
+
+### attaches
+
+可选的指定字段
+
+属性名|类型|默认值|说明
+---|-----|----|----
+loading|`boolean`|`true`| 是否打开loading
+notify|`boolean`|`true`| 是否打开提示
+codeCallback|`{ [code: string]: (error: EscHttpError, message) => any }`|-|接口指定的某种code下的特定行为
 
 ### EscHttpOptions
 
@@ -44,3 +62,13 @@ beforeThen|`(res: AxiosResponse, attaches?: UniversalMap) => AxiosResponse`|-|-
 beforeCatch|`(res: EscHttpError, attaches?: UniversalMap) => EscHttpError`|-|-
 
 > 其中 UniversalMap 为 { [key: string]: any }
+
+### EscHttpError
+
+属性名|类型|默认值|说明
+---|-----|----|----
+config|`AxiosRequestConfig`|-|
+response|`EscHttpResponse`|-|
+attaches|`attaches`|-|
+
+> EscHttpResponse 为 axios 的 response，接口返回的字段是 response.data

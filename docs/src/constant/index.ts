@@ -64,7 +64,7 @@ export const routerDir: PackageItemGroup[] = [
     title: '工具函数',
     items: [
       {
-        title: 'Http',
+        title: 'Http 请求库',
         noDemo: true,
         name: 'http'
       },

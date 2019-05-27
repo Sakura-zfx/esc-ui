@@ -2,7 +2,7 @@
 import axios from 'axios'
 
 // Types
-import { EscHttp, EscHttpOptions, UniversalMap, EscHttpResponse, EscHttpError, LoadingObject } from 'types/http'
+import { EscHttp, EscHttpOptions, UniversalMap, EscHttpResponse, EscHttpError, LoadingObject, Attaches } from 'types/http'
 // eslint-disable-next-line
 import { AxiosResponse, AxiosInstance, AxiosError, AxiosRequestConfig } from 'axios'
 
@@ -48,7 +48,7 @@ const loading: LoadingStack = {
       return
     }
     const last = this.stack.pop()
-    if (this.stack.length === 0) {
+    if (this.stack.length === 0 && last) {
       (<LoadingObject> last).close()
     }
   }
@@ -82,22 +82,10 @@ export default class Http implements EscHttp {
     })
   }
 
-  get (
-    urlName: string,
+  private mergeConfig (
     data?: UniversalMap,
-    attaches?: UniversalMap,
     config?: AxiosRequestConfig
-  ) {
-    const {
-      beforeRequest,
-      beforeThen,
-      beforeCatch,
-      urlMap,
-      loadingMethods,
-      successRequestAssert
-    } = this.options
-
-    let path: string = urlMap[urlName]
+  ): AxiosRequestConfig | undefined {
     let mergeConfig: AxiosRequestConfig | undefined
     if (config && typeof config === 'object') {
       mergeConfig = { ...config }
@@ -111,61 +99,135 @@ export default class Http implements EscHttp {
         ...data
       }
     }
+    return mergeConfig
+  }
 
-    // loading
-    loading.add(loadingMethods, attaches)
-
+  private handle (
+    method: string,
+    urlName: string,
+    data?: UniversalMap,
+    attaches?: UniversalMap,
+    config?: AxiosRequestConfig
+  ) {
+    let mergeConfig = this.mergeConfig(data, config)
+    const { beforeRequest, urlMap, loadingMethods } = this.options
     if (beforeRequest && typeof beforeRequest === 'function') {
       mergeConfig = beforeRequest(mergeConfig, attaches)
     }
-    return (<AxiosInstance> this.instance).get(path, mergeConfig)
-      .then((res: AxiosResponse): EscHttpResponse | Promise<EscHttpResponse> => {
-        if (beforeThen && typeof beforeThen === 'function') {
-          res = beforeThen(res, attaches)
-        }
-        // loading
-        loading.pop(attaches)
-        if (
-          successRequestAssert &&
-          typeof successRequestAssert === 'function' &&
-          successRequestAssert(res.data)
-        ) {
-          return {
-            ...res,
-            attaches
-          }
-        }
-        // eslint-disable-next-line
-        return Promise.reject({
-          ...res,
-          attaches
-        })
-      })
-      .catch((error: EscHttpResponse | EscHttpError): EscHttpError | Promise<EscHttpError> => {
-        let finalError: EscHttpError
-        const isResponseReject = (<EscHttpResponse> error).status && (<EscHttpResponse> error).headers
-        // @ts-ignore
-        finalError = isResponseReject ? {
-          config: error.config,
-          // code: (<EscHttpResponse> error).status,
-          request: error.request,
-          response: (<EscHttpResponse> error),
-          attaches
-        } : {
-          ...error,
-          attaches
-        }
+    loading.add(loadingMethods, attaches)
+    // @ts-ignore 除了 get 和 post，也可以使用 put 或 delete，此处缺少索引
+    return (<AxiosInstance> this.instance)[method](urlMap[urlName], mergeConfig)
+  }
 
-        if (beforeCatch && typeof beforeCatch === 'function') {
-          error = beforeCatch(finalError, attaches)
-        }
-        if (isResponseReject) {
-          return Promise.reject(finalError)
-        }
-        if (axios.isCancel(error)) {
-          console.log('Request canceled', (error as EscHttpError).message)
-        }
-        return Promise.reject(finalError)
-      })
+  private commonThen (
+    res: AxiosResponse,
+    attaches?: UniversalMap
+  ): EscHttpResponse | Promise<EscHttpResponse> {
+    const { beforeThen, successRequestAssert } = this.options
+    if (beforeThen && typeof beforeThen === 'function') {
+      res = beforeThen(res, attaches)
+    }
+    // loading
+    loading.pop(attaches)
+
+    if (!res || (res && typeof res !== 'object')) {
+      throw new Error('beforeThen 返回的结果不合法')
+    }
+
+    if (
+      successRequestAssert &&
+      typeof successRequestAssert === 'function' &&
+      successRequestAssert(res.data)
+    ) {
+      return {
+        ...res,
+        attaches
+      }
+    }
+    // eslint-disable-next-line
+    return Promise.reject({
+      ...res,
+      attaches
+    })
+  }
+
+  private commonCatch (
+    error: EscHttpResponse | EscHttpError,
+    attaches?: UniversalMap
+  ): EscHttpError | Promise<EscHttpError> {
+    let finalError: EscHttpError
+    const isResponseReject = (<EscHttpResponse> error).status && (<EscHttpResponse> error).headers
+    // @ts-ignore
+    finalError = isResponseReject ? {
+      config: error.config,
+      // code: (<EscHttpResponse> error).status,
+      request: error.request,
+      response: (<EscHttpResponse> error),
+      attaches
+    } : {
+      ...error,
+      attaches
+    }
+
+    const { beforeCatch } = this.options
+    if (beforeCatch && typeof beforeCatch === 'function') {
+      finalError = beforeCatch(finalError, attaches)
+    }
+    if (!finalError || (finalError && typeof finalError !== 'object')) {
+      throw new Error('beforeCatch 返回的结果不合法')
+    }
+    // loading
+    loading.pop(attaches)
+    // notify
+    this.notify(finalError, attaches)
+    if (isResponseReject) {
+      return Promise.reject(finalError)
+    }
+    if (axios.isCancel(error)) {
+      console.log('Request canceled', (error as EscHttpError).message)
+    }
+    return Promise.reject(finalError)
+  }
+
+  private notify (finalError: EscHttpError, attaches?: UniversalMap) {
+    // let responseMessage
+    const { notify } = this.options
+    const hasNotify = attaches && attaches.notify !== false
+    const codeCallback = attaches && attaches.codeCallback
+
+    if (finalError.response && finalError.response.data) {
+      const { msg, code } = finalError.response.data
+      // responseMessage = msg
+      if (codeCallback && codeCallback[code]) {
+        // const { message, handle } = codeCallback[code]
+        codeCallback[code](finalError, msg)
+      } else if (notify && hasNotify) {
+        notify(msg)
+      }
+    } else if (notify && hasNotify) {
+      notify(finalError.message || '服务异常')
+    }
+  }
+
+  get (
+    urlName: string,
+    data?: UniversalMap,
+    attaches?: Attaches,
+    config?: AxiosRequestConfig
+  ) {
+    return this.handle('get', urlName, data, attaches, config)
+      .then((res: AxiosResponse) => this.commonThen(res, attaches))
+      .catch((error: EscHttpResponse | EscHttpError) => this.commonCatch(error, attaches))
+  }
+
+  post (
+    urlName: string,
+    data?: UniversalMap,
+    attaches?: Attaches,
+    config?: AxiosRequestConfig
+  ) {
+    return this.handle('post', urlName, data, attaches, config)
+      .then((res: AxiosResponse) => this.commonThen(res, attaches))
+      .catch((error: EscHttpResponse | EscHttpError) => this.commonCatch(error, attaches))
   }
 }

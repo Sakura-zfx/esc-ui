@@ -11,6 +11,14 @@ export type LoadingObject = {
 export type UniversalMap = {
   [key: string]: any
 }
+export type Attaches = {
+  loading: boolean
+  notify: boolean
+  codeCallback: {
+    [name: number]: (error: EscHttpError, msg: string) => any
+  }
+  [key: string]: any
+}
 export type ContentType = 'application/x-www-form-urlencoded' | 'application/json' | 'application/octet-stream'
 export type ArrayFormat = 'repeat' | 'indices' | 'brackets' | 'comma'
 // { a: ['b', 'c'] }
@@ -46,7 +54,18 @@ export interface EscHttpOptions {
 export interface EscHttp {
   instance?: AxiosInstance
   options: EscHttpOptions
-  get: (urlName: string, data?: any, attaches?: any, config?: AxiosRequestConfig) => Promise<EscHttpResponse | EscHttpError>
+  get: (
+    urlName: string,
+    data?: any,
+    attaches?: any,
+    config?: AxiosRequestConfig
+  ) => Promise<EscHttpResponse | EscHttpError>
+  post: (
+    urlName: string,
+    data?: any,
+    attaches?: any,
+    config?: AxiosRequestConfig
+  ) => Promise<EscHttpResponse | EscHttpError>
 }
 
 export interface EscHttpInstance extends EscHttp {
