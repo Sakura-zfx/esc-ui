@@ -5,6 +5,7 @@ export interface DotOptions {
   userId?: string
   platform?: 'iOS' | 'android',
   base?: string
+  // bizType?: number
 }
 
 export interface Dot {
