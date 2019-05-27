@@ -2,9 +2,18 @@
 import axios from 'axios'
 
 // Types
-import { EscHttp, EscHttpOptions, UniversalMap, EscHttpResponse, EscHttpError, LoadingObject, Attaches } from 'types/http'
+import {
+  EscHttp,
+  EscHttpOptions,
+  UniversalMap,
+  EscHttpResponse,
+  EscHttpError,
+  LoadingObject,
+  Attaches,
+  StringMap
+} from 'types/http'
 // eslint-disable-next-line
-import { AxiosResponse, AxiosInstance, AxiosError, AxiosRequestConfig } from 'axios'
+import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios'
 
 interface LoadingStack {
   stack: Array<LoadingObject>
@@ -109,14 +118,20 @@ export default class Http implements EscHttp {
     attaches?: UniversalMap,
     config?: AxiosRequestConfig
   ) {
-    let mergeConfig = this.mergeConfig(data, config)
     const { beforeRequest, urlMap, loadingMethods } = this.options
+    const pathArr: Array<string> = urlName.split('/')
+    let path = urlMap[urlName]
+    if (pathArr.length === 2 && typeof urlMap[pathArr[0]] === 'object') {
+      path = (<StringMap> urlMap[pathArr[0]])[pathArr[1]]
+    }
+
+    let mergeConfig = this.mergeConfig(data, config)
     if (beforeRequest && typeof beforeRequest === 'function') {
       mergeConfig = beforeRequest(mergeConfig, attaches)
     }
     loading.add(loadingMethods, attaches)
     // @ts-ignore 除了 get 和 post，也可以使用 put 或 delete，此处缺少索引
-    return (<AxiosInstance> this.instance)[method](urlMap[urlName], mergeConfig)
+    return (<AxiosInstance> this.instance)[method](path, mergeConfig)
   }
 
   private commonThen (

@@ -29,6 +29,28 @@ this.$http.get(
 )
 ```
 
+初始化 urlMap 支持传递命名空间，例如
+
+```js
+// 定义
+new Http({
+  urlMap: {
+    order: {
+      list: '/path/order/list'
+    },
+    cart: {
+      list: '/path/cart/list'
+    },
+    list: '/path/index/list' 
+  }
+})
+
+// 使用
+this.$http.get('order/list')
+this.$http.get('cart/list')
+this.$http.get('list')
+```
+
 > 仅支持 get 和 post
 
 ### attaches

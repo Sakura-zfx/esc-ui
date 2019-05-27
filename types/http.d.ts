@@ -4,6 +4,9 @@ import { AxiosResponse, AxiosInstance, AxiosError, AxiosRequestConfig } from 'ax
 export interface StringMap {
   [name: string]: string
 }
+export interface UrlMap {
+  [name: string]: string | StringMap
+}
 export type LoadingObject = {
   open: () => void
   close: () => void
@@ -34,7 +37,7 @@ export type ArrayFormat = 'repeat' | 'indices' | 'brackets' | 'comma'
 
 export interface EscHttpOptions {
   baseUrl?: string
-  urlMap: StringMap
+  urlMap: UrlMap
   timeout?: number
   notify?: (message: string) => void
   loadingMethods?: LoadingObject

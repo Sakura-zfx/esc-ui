@@ -27,6 +27,7 @@ import Layout from '../components/Layout.vue'
 //     user: 'gift-front/user/me'
 //   }
 // })
+// console.log(http)
 // const ins = http.post('user',
 //   { siteId: undefined },
 //   {
