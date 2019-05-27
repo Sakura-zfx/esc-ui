@@ -46,7 +46,7 @@ export interface EscHttpOptions {
 export interface EscHttp {
   instance?: AxiosInstance
   options: EscHttpOptions
-  get: (urlName: string, data?: any, config?: AxiosRequestConfig, attaches?: any) => Promise<EscHttpResponse | EscHttpError>
+  get: (urlName: string, data?: any, attaches?: any, config?: AxiosRequestConfig) => Promise<EscHttpResponse | EscHttpError>
 }
 
 export interface EscHttpInstance extends EscHttp {
