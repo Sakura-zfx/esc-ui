@@ -15,7 +15,7 @@ export default class EscPopup extends Mixins(popup) {
   }
 
   render () {
-    let transitionName = 'esc-esc-dialog'
+    let transitionName = 'esc-dialog'
     if (!this.isCenter) {
       transitionName = `esc-fade-${this.position}`
     }

@@ -1,4 +1,4 @@
-import Dialog from '@@/esc-dialog/README.md'
+import Dialog from '@@/dialog/README.md'
 import Button from '@@/button/README.md'
 import Loading from '@@/loading/README.md'
 import Popup from '@@/popup/README.md'

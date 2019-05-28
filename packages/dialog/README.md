@@ -7,26 +7,27 @@
 引入
 
 ```js
-import { EscDialog } from 'esc-ui'
+import { Dialog } from 'esc-ui'
 ```
 
 代码演示
 
 ```js
+Vue.use(Dialog)
 // 传入字符串
-this.$dialog.alert('我是内容')
+this.$box.alert('我是内容')
 
 // 带标题
-this.$dialog.confirm({
+this.$box.confirm({
   title: '标题',
   message: '我是内容'
 })
 
 // 传入 VNode
-this.$dialog.alert(this.$createElement('p', undefined, '我是VNode'))
+this.$box.alert(this.$createElement('p', undefined, '我是VNode'))
 
 // 异步关闭
-this.$dialog.confirm({
+this.$box.confirm({
   title: '标题',
   message: '我是内容',
   beforeClose(action, done) {
