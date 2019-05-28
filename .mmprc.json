@@ -8,5 +8,6 @@
     "master",
     "develop"
   ],
-  "lastCheckTs": 1559025930073
+  "lastCheckTs": 1559025930073,
+  "master": "npm version patch && npm run build && npm publish"
 }
