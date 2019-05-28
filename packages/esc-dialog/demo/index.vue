@@ -41,7 +41,7 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Layout from '@/components/Layout.vue'
 import DemoWrap from '@/components/DemoWrap.vue'
-import Dialog from '@@/dialog/index.ts'
+import Dialog from '@@/esc-dialog/index.ts'
 import EscButton from '@@/button/index.tsx'
 // Types
 import { VNode } from 'vue/types'
@@ -56,7 +56,7 @@ import { DialogAction, DialogBeforeClose } from 'types/dialog'
 })
 export default class Home extends Vue {
   created () {
-    // dialog.alert({
+    // esc-dialog.alert({
     //   title: '没有背景',
     //   isLayerTransparent: true
     // })

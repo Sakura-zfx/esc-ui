@@ -44,6 +44,7 @@ export default {
   methods: {
     open () {
       this.$loading.open()
+      this.$loading.open()
       setTimeout(() => {
         this.$loading.close()
       }, 2000)

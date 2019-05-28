@@ -7,7 +7,7 @@
 引入
 
 ```js
-import { Dialog } from 'esc-ui'
+import { EscDialog } from 'esc-ui'
 ```
 
 代码演示

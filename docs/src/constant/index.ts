@@ -1,4 +1,4 @@
-import Dialog from '@@/dialog/README.md'
+import Dialog from '@@/esc-dialog/README.md'
 import Button from '@@/button/README.md'
 import Loading from '@@/loading/README.md'
 import Popup from '@@/popup/README.md'
@@ -22,6 +22,31 @@ export interface PackageItemGroup {
 }
 
 export const routerDir: PackageItemGroup[] = [
+  {
+    title: '工具函数',
+    items: [
+      {
+        title: 'Http 请求库',
+        noDemo: true,
+        name: 'http'
+      },
+      {
+        title: 'Bem 样式函数',
+        noDemo: true,
+        name: 'bem'
+      },
+      {
+        title: 'Sentry 错误捕获',
+        noDemo: true,
+        name: 'sentry'
+      },
+      {
+        title: 'Dot 打点',
+        noDemo: true,
+        name: 'dot'
+      }
+    ]
+  },
   {
     title: '基础通用组件',
     items: [
@@ -57,31 +82,6 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'InfiniteScroll 列表',
         name: 'infinite-scroll'
-      }
-    ]
-  },
-  {
-    title: '工具函数',
-    items: [
-      {
-        title: 'Http 请求库',
-        noDemo: true,
-        name: 'http'
-      },
-      {
-        title: 'Bem 样式函数',
-        noDemo: true,
-        name: 'bem'
-      },
-      {
-        title: 'Sentry 错误捕获',
-        noDemo: true,
-        name: 'sentry'
-      },
-      {
-        title: 'Dot 打点',
-        noDemo: true,
-        name: 'dot'
       }
     ]
   }

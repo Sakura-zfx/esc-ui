@@ -18,7 +18,7 @@ export interface DialogOptions {
   isLayerTransparent?: boolean
 }
 
-export interface Dialog {
+export interface EscDialog {
   (options: string | DialogOptions): Promise<DialogAction>
   alert(options: string | DialogOptions): Promise<DialogAction>
   confirm(options: string | DialogOptions): Promise<DialogAction>
@@ -28,8 +28,8 @@ export interface Dialog {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $dialog: Dialog
+    $dialog: EscDialog
   }
 }
 
-export const Dialog: Dialog
+// export const Dialog: Dialog

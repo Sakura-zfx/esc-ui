@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueDialog from './dialog'
 import { isVNode } from '../utils'
 // Types
-import { Dialog, DialogOptions } from 'types/dialog'
+import { EscDialog, DialogOptions } from 'types/dialog'
 
 let instance: Vue & DialogOptions & { show?: boolean, close(): void }
 
@@ -19,7 +19,7 @@ const DialogDefaultOptions = {
   container: 'body'
 }
 
-const DialogClass: Dialog = options => new Promise((resolve, reject) => {
+const DialogClass: EscDialog = options => new Promise((resolve, reject) => {
   const multiTypeOptions = typeof options === 'string'
     ? { message: options }
     : options

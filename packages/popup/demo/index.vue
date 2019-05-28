@@ -41,7 +41,7 @@ import Vue from 'vue'
 import DemoWrap from '@/components/DemoWrap.vue'
 import EscPopup from '../index'
 import EscButton from '../../button'
-import EscDialog from '../../dialog'
+import EscDialog from '../../esc-dialog'
 
 export default {
   name: 'Index',
