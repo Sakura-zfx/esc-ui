@@ -92,6 +92,7 @@ export default class Http implements EscHttp {
   }
 
   private mergeConfig (
+    isBodyData: boolean,
     data?: UniversalMap,
     config?: AxiosRequestConfig
   ): AxiosRequestConfig | undefined {
@@ -103,9 +104,16 @@ export default class Http implements EscHttp {
       if (!mergeConfig) {
         mergeConfig = {}
       }
-      mergeConfig.params = {
-        ...(mergeConfig.params || {}),
-        ...data
+      if (isBodyData) {
+        mergeConfig.data = {
+          ...(mergeConfig.data || {}),
+          ...data
+        }
+      } else {
+        mergeConfig.params = {
+          ...(mergeConfig.params || {}),
+          ...data
+        }
       }
     }
     return mergeConfig
@@ -125,7 +133,7 @@ export default class Http implements EscHttp {
       path = (<StringMap> urlMap[pathArr[0]])[pathArr[1]]
     }
 
-    let mergeConfig = this.mergeConfig(data, config)
+    let mergeConfig = this.mergeConfig(method === 'post', data, config)
     if (beforeRequest && typeof beforeRequest === 'function') {
       mergeConfig = beforeRequest(mergeConfig, attaches)
     }

@@ -15,19 +15,21 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Layout from '../components/Layout.vue'
-import { Http } from 'esc-ui'
-
-const http = new Http({
-  baseUrl: 'http://youli.uban360.net',
-  urlMap: {
-    user: 'gift-front/user/me'
-  }
-})
-http.get('user').then(res => {
-  console.log(res.data)
-}).catch(err => {
-  console.log(err)
-})
+// import { Loading } from 'esc-ui'
+// Vue.use(Loading)
+// Vue.prototype.$escLoading.open()
+// console.log()
+// const http = new Http({
+//   baseUrl: 'http://youli.uban360.net',
+//   urlMap: {
+//     user: 'gift-front/user/me'
+//   }
+// })
+// http.get('user').then(res => {
+//   console.log(res.data)
+// }).catch(err => {
+//   console.log(err)
+// })
 // import Bem from '@@/utils/bem'
 // const bem = Bem('cart', 'jd')
 // console.log(bem())
