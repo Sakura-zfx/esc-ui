@@ -15,7 +15,7 @@ Vue.use(Loading)
 Vue.component('my-loading', Loading.component)
 
 // 手动挂载
-Vue.prototype.$loading = Loading.instance
+Vue.prototype.$escLoading = Loading.instance
 ```
 
 代码演示
@@ -31,8 +31,8 @@ export default {
   created() {
     Vue.use(Loading)
     // api 调用
-    this.$loading.open()
-    this.$loading.close()
+    this.$escLoading.open()
+    this.$escLoading.close()
   }
 }  
 </script>

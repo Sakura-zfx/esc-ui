@@ -26,14 +26,6 @@ export type ContentType = 'application/x-www-form-urlencoded' | 'application/jso
 export type ArrayFormat = 'repeat' | 'indices' | 'brackets' | 'comma'
 // { a: ['b', 'c'] }
 // 1. a=b&a=c  2. a[0]=b&a[1]=c  3. a[]=b&a[]=c   4. a=b,c
-// export type Header = {
-//   [name: string]: string
-// }
-// export type BodyDataStringifyType = 'qs'
-// export type BeforeRequestReturn<T, U> = {
-//   beforeData: T
-//   beforeAttaches: U
-// }
 
 export interface EscHttpOptions {
   baseUrl?: string
@@ -62,13 +54,13 @@ export interface EscHttp {
     data?: any,
     attaches?: any,
     config?: AxiosRequestConfig
-  ) => Promise<EscHttpResponse | EscHttpError>
+  ) => Promise<EscHttpResponse>
   post: (
     urlName: string,
     data?: any,
     attaches?: any,
     config?: AxiosRequestConfig
-  ) => Promise<EscHttpResponse | EscHttpError>
+  ) => Promise<EscHttpResponse>
 }
 
 export interface EscHttpInstance extends EscHttp {

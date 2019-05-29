@@ -92,7 +92,7 @@ export default class Home extends Vue {
       options.title = 'VNode'
       options.message = this.$createElement('p', undefined, '我是VNode')
     }
-    this.$dialog.alert(options).then(action => {
+    this.$escDialog.alert(options).then((action: DialogAction) => {
       console.log(action)
     })
   }

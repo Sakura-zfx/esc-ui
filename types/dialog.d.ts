@@ -28,7 +28,7 @@ export interface EscDialog {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $box: EscDialog
+    $escDialog: EscDialog
   }
 }
 

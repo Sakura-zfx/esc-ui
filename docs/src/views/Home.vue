@@ -15,13 +15,26 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Layout from '../components/Layout.vue'
+import { Http } from 'esc-ui'
+
+const http = new Http({
+  baseUrl: 'http://youli.uban360.net',
+  urlMap: {
+    user: 'gift-front/user/me'
+  }
+})
+http.get('user').then(res => {
+  console.log(res.data)
+}).catch(err => {
+  console.log(err)
+})
 // import Bem from '@@/utils/bem'
 // const bem = Bem('cart', 'jd')
 // console.log(bem())
 // console.log(bem('goods', false))
 // console.log(bem('goods', ['img', { normal: true }]))
-// import Http from '@@/http'
-// const http = new Http({
+// import H from '@@/http'
+// const http: Http = new H({
 //   baseUrl: 'http://youli.uban360.net',
 //   urlMap: {
 //     user: 'gift-front/user/me'
@@ -41,8 +54,8 @@ import Layout from '../components/Layout.vue'
 //   },
 //   { params: { siteType: 3 }
 //   })
-// ins.then(res => {
-//   console.log(res)
+// http.get('user').then(res => {
+//   console.log(res.data)
 // }).catch(err => {
 //   console.log('err', err)
 // })

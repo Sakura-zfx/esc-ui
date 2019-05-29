@@ -14,7 +14,7 @@ export interface Loading {
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $loading: Loading
+    $escLoading: Loading
   }
 }
 

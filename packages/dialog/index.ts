@@ -52,7 +52,7 @@ DialogClass.close = () => {
   instance && instance.close()
 }
 DialogClass.install = () => {
-  Vue.prototype.$box = DialogClass
+  Vue.prototype.$escDialog = DialogClass
 }
 
 export default DialogClass

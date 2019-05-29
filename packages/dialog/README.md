@@ -15,19 +15,19 @@ import { Dialog } from 'esc-ui'
 ```js
 Vue.use(Dialog)
 // 传入字符串
-this.$box.alert('我是内容')
+this.$escDialog.alert('我是内容')
 
 // 带标题
-this.$box.confirm({
+this.$escDialog.confirm({
   title: '标题',
   message: '我是内容'
 })
 
 // 传入 VNode
-this.$box.alert(this.$createElement('p', undefined, '我是VNode'))
+this.$escDialog.alert(this.$createElement('p', undefined, '我是VNode'))
 
 // 异步关闭
-this.$box.confirm({
+this.$escDialog.confirm({
   title: '标题',
   message: '我是内容',
   beforeClose(action, done) {
