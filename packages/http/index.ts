@@ -133,13 +133,20 @@ export default class Http implements EscHttp {
       path = (<StringMap> urlMap[pathArr[0]])[pathArr[1]]
     }
 
-    let mergeConfig = this.mergeConfig(method === 'post', data, config)
+    const isBodyData = method === 'post'
+    let mergeConfig = this.mergeConfig(isBodyData, data, config)
     if (beforeRequest && typeof beforeRequest === 'function') {
       mergeConfig = beforeRequest(mergeConfig, attaches)
     }
     loading.add(loadingMethods, attaches)
     // @ts-ignore 除了 get 和 post，也可以使用 put 或 delete，此处缺少索引
-    return (<AxiosInstance> this.instance)[method](path, mergeConfig)
+    return (<AxiosInstance> this.instance)[method](
+      path,
+      isBodyData && mergeConfig ? mergeConfig.data : mergeConfig,
+      isBodyData ? mergeConfig : undefined
+    )
+    // get(url[, config])
+    // post(url, data[, config])
   }
 
   private commonThen (
