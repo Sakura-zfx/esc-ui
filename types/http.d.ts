@@ -1,4 +1,4 @@
-import { EscSentry } from './sentry'
+import { EscSentryInstance } from './sentry'
 import { AxiosResponse, AxiosInstance, AxiosError, AxiosRequestConfig } from 'axios'
 
 export interface StringMap {
@@ -38,12 +38,13 @@ export interface EscHttpOptions {
   headers?: StringMap
   // postDataStringifyType?: BodyDataStringifyType
   useQsStringifyBody?: boolean
-  bindSentry?: EscSentry
-  beforeRequest?: (data?: AxiosRequestConfig, attaches?: UniversalMap) => AxiosRequestConfig | undefined
+  bindSentry?: EscSentryInstance
+  beforeRequest?: (data?: UniversalMap, config?: AxiosRequestConfig, attaches?: UniversalMap) => { data?: UniversalMap, config?: AxiosRequestConfig }
   beforeThen?: (res: AxiosResponse, attaches?: UniversalMap) => AxiosResponse
   beforeCatch?: (res: EscHttpError, attaches?: UniversalMap) => EscHttpError
   withCredentials?: boolean,
   successRequestAssert?: (serverResponse: any) => boolean
+  captureAssert?: (serverResponse: any) => boolean
 }
 
 export interface EscHttp {
@@ -61,6 +62,7 @@ export interface EscHttp {
     attaches?: any,
     config?: AxiosRequestConfig
   ) => Promise<EscHttpResponse>
+  cancel (all?: boolean, name?: string, message?: string): void
 }
 
 export interface EscHttpInstance extends EscHttp {

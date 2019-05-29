@@ -49,6 +49,12 @@ new Http({
 this.$http.get('order/list')
 this.$http.get('cart/list')
 this.$http.get('list')
+
+// 取消全部请求
+this.$http.cancel(true)
+
+// 取消某个请求
+this.$http.cancel(false, 'order/list', 'cancel from me !')
 ```
 
 > 仅支持 get 和 post
@@ -82,6 +88,7 @@ successRequestAssert|`(serverResponse: any) => boolean`|`res => res.success`|如
 beforeRequest|`(data?: AxiosRequestConfig, attaches?: UniversalMap) => AxiosRequestConfig`|-|-
 beforeThen|`(res: AxiosResponse, attaches?: UniversalMap) => AxiosResponse`|-|-
 beforeCatch|`(res: EscHttpError, attaches?: UniversalMap) => EscHttpError`|-|-
+captureAssert|`(serverResponse: any) => boolean`|`res => res.code > 300`|当后端返回的 code > 300 时才捕获错误
 
 > 其中 UniversalMap 为 { [key: string]: any }
 

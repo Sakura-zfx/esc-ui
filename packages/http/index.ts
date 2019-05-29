@@ -13,7 +13,7 @@ import {
   StringMap
 } from 'types/http'
 // eslint-disable-next-line
-import { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios'
+import { AxiosResponse, AxiosInstance, AxiosRequestConfig, CancelTokenSource } from 'axios'
 
 interface LoadingStack {
   stack: Array<LoadingObject>
@@ -36,6 +36,9 @@ const defaultOptions: EscHttpOptions = {
   },
   successRequestAssert (serverResponse) {
     return serverResponse.success
+  },
+  captureAssert (serverResponse) {
+    return serverResponse.code > 300
   }
 }
 
@@ -60,6 +63,33 @@ const loading: LoadingStack = {
     if (this.stack.length === 0 && last) {
       (<LoadingObject> last).close()
     }
+  }
+}
+
+type CancelList = {
+  list: {
+    [key: string]: (msg?: string) => void
+  }
+  add: (name: string, source: CancelTokenSource) => void
+  cancel: (name: string, msg?: string) => void
+  cancelAll(message?: string): void
+}
+const cancelQueen: CancelList = {
+  list: {},
+  add (name, source) {
+    this.list[name] = msg => {
+      source.cancel(msg)
+    }
+  },
+  cancel (name, msg) {
+    if (this.list[name]) {
+      this.list[name](msg)
+    }
+  },
+  cancelAll (message) {
+    Object.keys(this.list).forEach((key: string) => {
+      this.list[key](message)
+    })
   }
 }
 
@@ -136,17 +166,34 @@ export default class Http implements EscHttp {
     const isBodyData = method === 'post'
     let mergeConfig = this.mergeConfig(isBodyData, data, config)
     if (beforeRequest && typeof beforeRequest === 'function') {
-      mergeConfig = beforeRequest(mergeConfig, attaches)
+      const reqData = mergeConfig ? isBodyData ? mergeConfig.data : mergeConfig.params : undefined
+      const reqResult = beforeRequest(reqData, mergeConfig, attaches)
+      // 将 { data, config } 中的data合并到config
+      if (reqResult && reqResult.config) {
+        isBodyData
+          ? reqResult.config.data = { ...(reqResult.config.data || {}), ...(reqResult.data || {}) }
+          : reqResult.config.params = { ...(reqResult.config.params || {}), ...(reqResult.data || {}) }
+        mergeConfig = reqResult.config
+      }
     }
+    // add cancel token
+    const CancelToken = axios.CancelToken
+    const source = CancelToken.source()
+    if (!mergeConfig) {
+      mergeConfig = {}
+    }
+    mergeConfig.cancelToken = source.token
+    cancelQueen.add(urlName, source)
+
     loading.add(loadingMethods, attaches)
     // @ts-ignore 除了 get 和 post，也可以使用 put 或 delete，此处缺少索引
     return (<AxiosInstance> this.instance)[method](
       path,
-      isBodyData && mergeConfig ? mergeConfig.data : mergeConfig,
+      // get(url[, config])
+      // post(url, data[, config])
+      isBodyData ? mergeConfig.data : mergeConfig,
       isBodyData ? mergeConfig : undefined
     )
-    // get(url[, config])
-    // post(url, data[, config])
   }
 
   private commonThen (
@@ -199,7 +246,7 @@ export default class Http implements EscHttp {
       attaches
     }
 
-    const { beforeCatch } = this.options
+    const { beforeCatch, captureAssert } = this.options
     if (beforeCatch && typeof beforeCatch === 'function') {
       finalError = beforeCatch(finalError, attaches)
     }
@@ -211,12 +258,26 @@ export default class Http implements EscHttp {
     // notify
     this.notify(finalError, attaches)
     if (isResponseReject) {
+      if (captureAssert && captureAssert((finalError.response as EscHttpResponse).data)) {
+        this.capture(JSON.stringify((finalError.response as EscHttpResponse).data))
+      }
       return Promise.reject(finalError)
     }
     if (axios.isCancel(error)) {
       console.log('Request canceled', (error as EscHttpError).message)
     }
+    this.capture(finalError)
     return Promise.reject(finalError)
+  }
+
+  private capture (obj: string | EscHttpError) {
+    if (this.options.bindSentry) {
+      this.options.bindSentry.captureException(
+        obj instanceof Error
+          ? obj
+          : new Error(typeof obj === 'string' ? obj : JSON.stringify(obj))
+      )
+    }
   }
 
   private notify (finalError: EscHttpError, attaches?: UniversalMap) {
@@ -259,5 +320,13 @@ export default class Http implements EscHttp {
     return this.handle('post', urlName, data, attaches, config)
       .then((res: AxiosResponse) => this.commonThen(res, attaches))
       .catch((error: EscHttpResponse | EscHttpError) => this.commonCatch(error, attaches))
+  }
+
+  cancel (all?: boolean, name?: string, message?: string) {
+    if (all) {
+      cancelQueen.cancelAll(message)
+    } else if (name) {
+      cancelQueen.cancel(name, message)
+    }
   }
 }
