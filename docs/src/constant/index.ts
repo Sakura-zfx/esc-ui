@@ -91,6 +91,7 @@ export const routerDir: PackageItemGroup[] = [
     items: [
       {
         title: '工具库',
+        noDemo: true,
         name: 'saas-utils'
       }
     ]
