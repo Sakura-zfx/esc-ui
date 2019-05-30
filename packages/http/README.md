@@ -18,7 +18,7 @@ this.$http.get(
   config?: AxiosRequestConfig
 )
 .then((res: EscHttpResponse) => {})
-.catch((error: EscHttpError) => {})
+.catch((error: EscHttpResponse | AxiosError) => {})
 
 // 实例
 this.$http.get(
@@ -67,7 +67,7 @@ this.$http.cancel(false, 'order/list', 'cancel from me !')
 ---|-----|----|----
 loading|`boolean`|`true`| 是否打开loading
 notify|`boolean`|`true`| 是否打开提示
-codeCallback|`{ [code: string]: (error: EscHttpError, message) => any }`|-|接口指定的某种code下的特定行为
+codeCallback|`{ [code: string]: (error: EscHttpResponse, message) => any }`|-|接口指定的某种code下的特定行为
 
 ### EscHttpOptions
 
@@ -84,20 +84,22 @@ headers|`{ [name: string]: string }`|-|-
 useQsStringifyBody|`boolean`|`true`|使用 qs stringify post body
 bindSentry|`EscSentry`|-|将 sentry 绑定使用，会捕获 http 非 200 的错误
 withCredentials|`boolean`|`true`|-
-successRequestAssert|`(serverResponse: any) => boolean`|`res => res.success`|如何认为接口返回了正常结果 
+successRequestAssert|`(serverResponse: EscHttpResponse) => boolean`|`res => res.success`|如何认为接口返回了正常结果 
 beforeRequest|`(data?: AxiosRequestConfig, attaches?: UniversalMap) => AxiosRequestConfig`|-|-
-beforeThen|`(res: AxiosResponse, attaches?: UniversalMap) => AxiosResponse`|-|-
-beforeCatch|`(res: EscHttpError, attaches?: UniversalMap) => EscHttpError`|-|-
-captureAssert|`(serverResponse: any) => boolean`|`res => res.code > 300`|当后端返回的 code > 300 时才捕获错误
+beforeThen|`(res: EscHttpResponse, attaches?: UniversalMap) => EscHttpResponse`|-|-
+beforeCatch|`(res: EscHttpResponse, attaches?: UniversalMap) => EscHttpResponse`|-|-
+captureAssert|`(serverResponse: EscHttpResponse) => boolean`|`res => res.code > 300`|当后端返回的 code > 300 时才捕获错误
 
 > 其中 UniversalMap 为 { [key: string]: any }
 
-### EscHttpError
+### EscHttpResponse
 
 属性名|类型|默认值|说明
 ---|-----|----|----
-config|`AxiosRequestConfig`|-|
-response|`EscHttpResponse`|-|
+data|`any`|-|当前接口需要的字段
+success|`boolean`|-|
 attaches|`attaches`|-|
+code|`number`|-|
+msg|`string`|-|接口返回的msg或error.message
+error|`AxiosError`|-|Error类型或axios返回的AxiosError
 
-> EscHttpResponse 为 axios 的 response，接口返回的字段是 response.data
