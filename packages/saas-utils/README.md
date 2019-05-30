@@ -2,6 +2,12 @@
 
 saas 业务通用工具函数
 
+引入
+
+```js
+import { SaasUtils } from 'esc-ui'
+```
+
 ### 价格类
 > 钱的单位都是分
 
