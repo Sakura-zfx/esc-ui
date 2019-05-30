@@ -16,7 +16,8 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Layout from '../components/Layout.vue'
 // import Http from '@@/http'
-// import { Loading } from 'esc-ui'
+// import { InfiniteScroll } from 'esc-ui'
+// import InfiniteScroll from '@@/infinite-scroll'
 // Vue.use(Loading)
 // Vue.prototype.$escLoading.open()
 // const http = new Http({
