@@ -71,6 +71,9 @@ import Layout from '../components/Layout.vue'
   }
 })
 export default class Home extends Vue {
+  created () {
+    // console.log(this._isVue)
+  }
 }
 </script>
 

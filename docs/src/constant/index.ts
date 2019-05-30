@@ -9,6 +9,7 @@ import Sentry from '@@/sentry/README.md'
 import Dot from '@@/dot/README.md'
 import Http from '@@/http/README.md'
 import Bem from '@@/bem/README.md'
+import SaasUtils from '@@/saas-utils/README.md'
 
 export interface PackageItem {
   title: string
@@ -84,6 +85,15 @@ export const routerDir: PackageItemGroup[] = [
         name: 'infinite-scroll'
       }
     ]
+  },
+  {
+    title: 'Saas业务组件',
+    items: [
+      {
+        title: '工具库',
+        name: 'saas-utils'
+      }
+    ]
   }
 ]
 
@@ -98,5 +108,6 @@ export const markdown = {
   Sentry,
   Dot,
   Bem,
-  Http
+  Http,
+  SaasUtils
 }

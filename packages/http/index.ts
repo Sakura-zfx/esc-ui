@@ -7,13 +7,12 @@ import {
   EscHttpOptions,
   UniversalMap,
   EscHttpResponse,
-  EscHttpError,
   LoadingObject,
   Attaches,
   StringMap
 } from 'types/http'
 // eslint-disable-next-line
-import { AxiosResponse, AxiosInstance, AxiosRequestConfig, CancelTokenSource } from 'axios'
+import { AxiosResponse, AxiosInstance, AxiosRequestConfig, CancelTokenSource, AxiosError } from 'axios'
 
 interface LoadingStack {
   stack: Array<LoadingObject>
@@ -34,10 +33,12 @@ const defaultOptions: EscHttpOptions = {
     open: () => console.log('open loading'),
     close: () => console.log('close loading')
   },
+  // @ts-ignore
   successRequestAssert (serverResponse) {
     return serverResponse.success
   },
   captureAssert (serverResponse) {
+    // @ts-ignore
     return serverResponse.code > 300
   }
 }
@@ -196,54 +197,52 @@ export default class Http implements EscHttp {
     )
   }
 
-  private commonThen (
+  private commonThen<T> (
     res: AxiosResponse,
     attaches?: UniversalMap
   ): EscHttpResponse | Promise<EscHttpResponse> {
+    let result = res.data
     const { beforeThen, successRequestAssert } = this.options
     if (beforeThen && typeof beforeThen === 'function') {
-      res = beforeThen(res, attaches)
+      result = beforeThen(result, attaches)
     }
     // loading
     loading.pop(attaches)
 
-    if (!res || (res && typeof res !== 'object')) {
+    if (!result || (result && typeof result !== 'object')) {
       throw new Error('beforeThen 返回的结果不合法')
     }
 
     if (
       successRequestAssert &&
       typeof successRequestAssert === 'function' &&
-      successRequestAssert(res.data)
+      successRequestAssert(result)
     ) {
       return {
-        ...res,
+        ...result,
         attaches
       }
     }
     // eslint-disable-next-line
     return Promise.reject({
-      ...res,
+      ...result,
       attaches
     })
   }
 
   private commonCatch (
-    error: EscHttpResponse | EscHttpError,
+    error: EscHttpResponse | AxiosError,
     attaches?: UniversalMap
-  ): EscHttpError | Promise<EscHttpError> {
-    let finalError: EscHttpError
-    const isResponseReject = (<EscHttpResponse> error).status && (<EscHttpResponse> error).headers
+  ): Promise<EscHttpResponse> {
+    let finalError: EscHttpResponse
+    const isResponseReject = (<EscHttpResponse> error).success !== undefined
     // @ts-ignore
-    finalError = isResponseReject ? {
-      config: error.config,
-      // code: (<EscHttpResponse> error).status,
-      request: error.request,
-      response: (<EscHttpResponse> error),
-      attaches
-    } : {
-      ...error,
-      attaches
+    finalError = isResponseReject ? error : {
+      attaches,
+      error,
+      msg: (error as AxiosError).message,
+      success: false,
+      code: (error as AxiosError).code
     }
 
     const { beforeCatch, captureAssert } = this.options
@@ -258,19 +257,19 @@ export default class Http implements EscHttp {
     // notify
     this.notify(finalError, attaches)
     if (isResponseReject) {
-      if (captureAssert && captureAssert((finalError.response as EscHttpResponse).data)) {
-        this.capture(JSON.stringify((finalError.response as EscHttpResponse).data))
+      if (captureAssert && captureAssert(finalError)) {
+        this.capture(JSON.stringify(finalError))
       }
       return Promise.reject(finalError)
     }
     if (axios.isCancel(error)) {
-      console.log('Request canceled', (error as EscHttpError).message)
+      console.log('Request canceled')
     }
     this.capture(finalError)
     return Promise.reject(finalError)
   }
 
-  private capture (obj: string | EscHttpError) {
+  private capture (obj: string | EscHttpResponse) {
     if (this.options.bindSentry) {
       this.options.bindSentry.captureException(
         obj instanceof Error
@@ -280,23 +279,20 @@ export default class Http implements EscHttp {
     }
   }
 
-  private notify (finalError: EscHttpError, attaches?: UniversalMap) {
-    // let responseMessage
+  private notify (finalError: EscHttpResponse, attaches?: UniversalMap) {
     const { notify } = this.options
     const hasNotify = attaches && attaches.notify !== false
     const codeCallback = attaches && attaches.codeCallback
 
-    if (finalError.response && finalError.response.data) {
-      const { msg, code } = finalError.response.data
-      // responseMessage = msg
-      if (codeCallback && codeCallback[code]) {
-        // const { message, handle } = codeCallback[code]
+    if (finalError.success !== undefined) {
+      const { msg, code } = finalError
+      if (codeCallback && code && codeCallback[code]) {
         codeCallback[code](finalError, msg)
       } else if (notify && hasNotify) {
-        notify(msg)
+        notify(msg || '服务异常')
       }
     } else if (notify && hasNotify) {
-      notify(finalError.message || '服务异常')
+      notify(finalError.msg || '服务异常')
     }
   }
 
@@ -308,7 +304,7 @@ export default class Http implements EscHttp {
   ) {
     return this.handle('get', urlName, data, attaches, config)
       .then((res: AxiosResponse) => this.commonThen(res, attaches))
-      .catch((error: EscHttpResponse | EscHttpError) => this.commonCatch(error, attaches))
+      .catch((error: EscHttpResponse | AxiosError) => this.commonCatch(error, attaches))
   }
 
   post (
@@ -319,7 +315,7 @@ export default class Http implements EscHttp {
   ) {
     return this.handle('post', urlName, data, attaches, config)
       .then((res: AxiosResponse) => this.commonThen(res, attaches))
-      .catch((error: EscHttpResponse | EscHttpError) => this.commonCatch(error, attaches))
+      .catch((error: EscHttpResponse | AxiosError) => this.commonCatch(error, attaches))
   }
 
   cancel (all?: boolean, name?: string, message?: string) {

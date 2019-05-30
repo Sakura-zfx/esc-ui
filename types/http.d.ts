@@ -18,7 +18,7 @@ export type Attaches = {
   loading: boolean
   notify: boolean
   codeCallback: {
-    [name: number]: (error: EscHttpError, msg: string) => any
+    [name: number]: (error: EscHttpResponse, msg: string) => any
   }
   [key: string]: any
 }
@@ -41,10 +41,10 @@ export interface EscHttpOptions {
   bindSentry?: EscSentryInstance
   beforeRequest?: (data?: UniversalMap, config?: AxiosRequestConfig, attaches?: UniversalMap) => { data?: UniversalMap, config?: AxiosRequestConfig }
   beforeThen?: (res: AxiosResponse, attaches?: UniversalMap) => AxiosResponse
-  beforeCatch?: (res: EscHttpError, attaches?: UniversalMap) => EscHttpError
+  beforeCatch?: (res: EscHttpResponse, attaches?: UniversalMap) => EscHttpResponse
   withCredentials?: boolean,
-  successRequestAssert?: (serverResponse: any) => boolean
-  captureAssert?: (serverResponse: any) => boolean
+  successRequestAssert?: (serverResponse: EscHttpResponse) => boolean
+  captureAssert?: (serverResponse: EscHttpResponse) => boolean
 }
 
 export interface EscHttp {
@@ -69,13 +69,22 @@ export interface EscHttpInstance extends EscHttp {
   new(options: EscHttpOptions): EscHttp
 }
 
-export interface EscHttpResponse extends AxiosResponse {
+// export interface EscAxiosResponse extends AxiosResponse {
+//   attaches?: UniversalMap
+// }
+
+export interface EscHttpResponse {
   attaches?: UniversalMap
+  success?: boolean
+  data?: any
+  code?: number
+  msg?: string,
+  error?: AxiosError
 }
 
-export interface EscHttpError extends AxiosError {
-  attaches?: UniversalMap
-}
+// export interface EscHttpError extends AxiosError {
+//   attaches?: UniversalMap
+// }
 
 declare module 'vue/types/vue' {
   interface Vue {

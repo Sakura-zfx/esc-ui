@@ -4,6 +4,7 @@ import { Sentry } from './sentry'
 import { Dot } from './dot'
 import { Http } from './http'
 import { Bem } from './bem'
+import { SaasUtils } from './saas-utils'
 import { EscComponent } from './component'
 
 export class InfiniteScroll extends EscComponent {}
@@ -19,5 +20,6 @@ export {
   Sentry,
   Dot,
   Http,
-  Bem
+  Bem,
+  SaasUtils
 }
