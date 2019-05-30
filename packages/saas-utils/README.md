@@ -2,10 +2,12 @@
 
 saas 业务通用工具函数
 
-引入
+使用
 
 ```js
 import { SaasUtils } from 'esc-ui'
+
+const { pricePlay } = SaasUtils
 ```
 
 ### 价格类
