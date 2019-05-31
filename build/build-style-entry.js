@@ -7,7 +7,8 @@ const emptyStyleComponents = [
   'bem',
   'http',
   'dot',
-  'sentry'
+  'sentry',
+  'saas-utils'
 ]
 
 function getComponentNameFromPath(file) {
