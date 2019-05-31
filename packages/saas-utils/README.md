@@ -30,8 +30,8 @@ pricePlayTag|`(rmb: number, { showPriceWay, integralName, integralRate }: PriceP
 
 名称|类型|默认值|说明
 ---|-----|----|----
-toOrderList|`(type, siteId, isRouter?: boolean, isReplace?: boolean): string`|-|订单跳转
-toOrderDetail|`(appType: BizType, orderId: string, siteId: number): string`|-|订单详情跳转
+toOrderList|`(type, siteId, isRouter?: boolean, isReplace?: boolean): void`|-|订单跳转
+toOrderDetail|`(appType: BizType, orderId: string, siteId: number, isRouter?: boolean, isReplace?: boolean): void`|-|订单详情跳转
 getUrl|`(appType: BizType, siteId: number, base?: string)`|-|获取应用url
 getBase|`(isLocal: boolean, origin?: string): string`|-|获取origin
 

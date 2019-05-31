@@ -7,7 +7,7 @@ export type OrderType = 1 | 2 | 3 | 4 | 5 | 6
 export type OrderTypeText = '采购' | '用车' | '飞机' | '火车' | '酒店' | '餐饮'
 
 export type BizType = 3 | 132 | 175 | 139
-export type BizName = 'dd' | 'mt' | 'malls'
+export type BizName = 'dd' | 'mt' | 'malls' | 'fj' | 'hc' | 'jd'
 
 export namespace SaasUtils {
   export const defaultRate: number
@@ -25,12 +25,14 @@ export namespace SaasUtils {
     siteId: number | string,
     isRouter?: boolean,
     isReplace?: boolean
-  ): string
+  ): void
   export function toOrderDetail(
     appType: BizType | BizName,
     orderId: string,
-    siteId: number | string
-  ): string
+    siteId: number | string,
+    isRouter?: boolean,
+    isReplace?: boolean
+  ): void
   export function getUrl(
     appType: BizType | BizName,
     siteId: number | string,

@@ -9,26 +9,28 @@ export function toOrderList (
   if (typeof type !== 'number') {
     throw new Error('type 需要传 number 类型，OrderTypeText 只做提示用！')
   }
-  let url = location.origin
+  let url = getUrl((orderTypeAppMap[(type as OrderType)] as BizName), siteId)
   if (type === 1) {
-    url += '/h5'
+    url += '#/h5'
   } else {
-    url += '/common'
+    url += '#/common'
   }
   url += `/index.html?siteId=${siteId}#/order-list/${type === 1 ? 0 : type}`
-
-  if (isRouter) {
-    // @ts-ignore
-    this.$router[isReplace ? 'replace' : 'push'](url)
-  } else {
-    location[isReplace ? 'replace' : 'href'] = url
-  }
+  redirect(url, isRouter, isReplace)
 }
 
 export function getBase (isLocal: boolean, origin?: string): string {
   return origin || (isLocal ? 'http://youli.uban360.net' : location.origin)
 }
 
+const orderTypeAppMap = {
+  1: 'malls',
+  2: 'dd',
+  3: 'fj',
+  4: 'hc',
+  5: 'jd',
+  6: 'mt'
+}
 const bizTypeMap = {
   22: 'malls',
   139: 'malls',
@@ -53,11 +55,26 @@ export function getUrl (appType: BizType | BizName, siteId: number | string, bas
   return `${base || getBase(false)}${appPathMap[bizName]}?siteId=${siteId}`
 }
 
-export function toOrderDetail (appType: BizType | BizName, orderId: string, siteId: number | string) {
+export function toOrderDetail (
+  appType: BizType | BizName,
+  orderId: string,
+  siteId: number | string,
+  isRouter?: boolean,
+  isReplace?: boolean
+) {
   let url = `#/order-detail/${orderId}`
   const bizName = typeof appType === 'string' ? appType : bizTypeMap[appType]
   if (bizName === 'dd') {
     url = `#/process/${orderId}/200`
   }
-  return getUrl(appType, siteId) + url
+  redirect(getUrl(appType, siteId) + url, isRouter, isReplace)
+}
+
+function redirect (url: string, isRouter?: boolean, isReplace?: boolean) {
+  if (isRouter) {
+    // @ts-ignore
+    this.$router[isReplace ? 'replace' : 'push'](url.split('#')[1])
+  } else {
+    isReplace ? location.replace(url) : (location.href = url)
+  }
 }
