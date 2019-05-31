@@ -31,8 +31,19 @@ pricePlayTag|`(rmb: number, { showPriceWay, integralName, integralRate }: PriceP
 名称|类型|默认值|说明
 ---|-----|----|----
 toOrderList|`(type, siteId, isRouter?: boolean, isReplace?: boolean): string`|-|订单跳转
+toOrderDetail|`(appType: BizType, orderId: string, siteId: number): string`|-|订单详情跳转
+getUrl|`(appType: BizType, siteId: number, base?: string)`|-|获取应用url
+getBase|`(isLocal: boolean, origin?: string): string`|-|获取origin
 
 ```js
 export type OrderType = 1 | 2 | 3 | 4 | 5 | 6
 export type OrderTypeText = '采购' | '用车' | '飞机' | '火车' | '酒店' | '餐饮'
+
+const bizTypeMap = {
+  22: 'malls',
+  139: 'malls',
+  175: 'malls',
+  132: 'mt',
+  3: 'dd'
+}
 ```
