@@ -15,9 +15,10 @@ export type UniversalMap = {
   [key: string]: any
 }
 export type Attaches = {
-  loading: boolean
-  notify: boolean
-  codeCallback: {
+  loading?: boolean
+  notify?: boolean
+  successNotifyMessage?: string
+  codeCallback?: {
     [name: number]: (error: EscHttpResponse, msg: string) => any
   }
   [key: string]: any
@@ -36,7 +37,6 @@ export interface EscHttpOptions {
   contentType?: ContentType
   arrayFormat?: ArrayFormat
   headers?: StringMap
-  // postDataStringifyType?: BodyDataStringifyType
   useQsStringifyBody?: boolean
   bindSentry?: EscSentryInstance
   beforeRequest?: (data?: UniversalMap, config?: AxiosRequestConfig, attaches?: UniversalMap) => { data?: UniversalMap, config?: AxiosRequestConfig }
@@ -45,6 +45,7 @@ export interface EscHttpOptions {
   withCredentials?: boolean,
   successRequestAssert?: (serverResponse: EscHttpResponse) => boolean
   captureAssert?: (serverResponse: EscHttpResponse) => boolean
+  defaultErrorNotifyMessage?: string
 }
 
 export interface EscHttp {

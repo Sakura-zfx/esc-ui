@@ -29,6 +29,7 @@ const defaultOptions: EscHttpOptions = {
   useQsStringifyBody: true,
   withCredentials: true,
   notify: console.log,
+  defaultErrorNotifyMessage: '服务异常，请稍后再试',
   loadingMethods: {
     open: () => console.log('open loading'),
     close: () => console.log('close loading')
@@ -213,21 +214,19 @@ export default class Http implements EscHttp {
       throw new Error('beforeThen 返回的结果不合法')
     }
 
+    const finalResponse = {
+      ...result,
+      attaches
+    }
     if (
       successRequestAssert &&
       typeof successRequestAssert === 'function' &&
       successRequestAssert(result)
     ) {
-      return {
-        ...result,
-        attaches
-      }
+      this.notify(finalResponse, attaches, true)
+      return finalResponse
     }
-    // eslint-disable-next-line
-    return Promise.reject({
-      ...result,
-      attaches
-    })
+    return Promise.reject(finalResponse)
   }
 
   private commonCatch (
@@ -279,20 +278,28 @@ export default class Http implements EscHttp {
     }
   }
 
-  private notify (finalError: EscHttpResponse, attaches?: UniversalMap) {
-    const { notify } = this.options
+  private notify (
+    res: EscHttpResponse,
+    attaches?: UniversalMap,
+    isSuccess?: boolean
+  ) {
+    const { notify, defaultErrorNotifyMessage } = this.options
     const hasNotify = attaches && attaches.notify !== false
     const codeCallback = attaches && attaches.codeCallback
-
-    if (finalError.success !== undefined) {
-      const { msg, code } = finalError
-      if (codeCallback && code && codeCallback[code]) {
-        codeCallback[code](finalError, msg)
-      } else if (notify && hasNotify) {
-        notify(msg || '服务异常')
+    const successNotifyMessage = attaches && attaches.successNotifyMessage
+    const _n = (msg?: string) => {
+      if (notify && hasNotify) {
+        notify(msg || (defaultErrorNotifyMessage as string))
       }
-    } else if (notify && hasNotify) {
-      notify(finalError.msg || '服务异常')
+    }
+
+    const { msg, code } = res
+    if (isSuccess && successNotifyMessage) {
+      _n(successNotifyMessage)
+    } else if (!isSuccess && codeCallback && code && codeCallback[code]) {
+      codeCallback[code](res, msg)
+    } else if (!isSuccess) {
+      _n(msg)
     }
   }
 

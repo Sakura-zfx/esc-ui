@@ -67,6 +67,7 @@ this.$http.cancel(false, 'order/list', 'cancel from me !')
 ---|-----|----|----
 loading|`boolean`|`true`| 是否打开loading
 notify|`boolean`|`true`| 是否打开提示
+successNotifyMessage|`string`|-|接口操作成功的提示文案
 codeCallback|`{ [code: string]: (error: EscHttpResponse, message) => any }`|-|接口指定的某种code下的特定行为
 
 ### EscHttpOptions
@@ -89,6 +90,7 @@ beforeRequest|`(data?: AxiosRequestConfig, attaches?: UniversalMap) => AxiosRequ
 beforeThen|`(res: EscHttpResponse, attaches?: UniversalMap) => EscHttpResponse`|-|-
 beforeCatch|`(res: EscHttpResponse, attaches?: UniversalMap) => EscHttpResponse`|-|-
 captureAssert|`(serverResponse: EscHttpResponse) => boolean`|`res => res.code > 300`|当后端返回的 code > 300 时才捕获错误
+defaultErrorNotifyMessage|`string`|'服务异常，请稍后再试'|默认的错误提示文案
 
 > 其中 UniversalMap 为 { [key: string]: any }
 
