@@ -37,7 +37,7 @@ export interface EscHttpOptions {
   baseUrl?: string
   urlMap: UrlMap
   timeout?: number
-  notify?: Notify | NotifyObject
+  notify?: NotifyObject | Notify
   loadingMethods?: LoadingObject
   contentType?: ContentType
   arrayFormat?: ArrayFormat
@@ -59,13 +59,13 @@ export interface EscHttp {
   get: (
     urlName: string,
     data?: any,
-    attaches?: any,
+    attaches?: Attaches,
     config?: AxiosRequestConfig
   ) => Promise<EscHttpResponse>
   post: (
     urlName: string,
     data?: any,
-    attaches?: any,
+    attaches?: Attaches,
     config?: AxiosRequestConfig
   ) => Promise<EscHttpResponse>
   cancel (all?: boolean, name?: string, message?: string): void
