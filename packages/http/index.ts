@@ -9,7 +9,9 @@ import {
   EscHttpResponse,
   LoadingObject,
   Attaches,
-  StringMap
+  StringMap,
+  Notify,
+  NotifyObject
 } from 'types/http'
 // eslint-disable-next-line
 import { AxiosResponse, AxiosInstance, AxiosRequestConfig, CancelTokenSource, AxiosError } from 'axios'
@@ -283,23 +285,27 @@ export default class Http implements EscHttp {
     attaches?: UniversalMap,
     isSuccess?: boolean
   ) {
-    const { notify, defaultErrorNotifyMessage } = this.options
-    const hasNotify = attaches && attaches.notify !== false
-    const codeCallback = attaches && attaches.codeCallback
-    const successNotifyMessage = attaches && attaches.successNotifyMessage
-    const _n = (msg?: string) => {
-      if (notify && hasNotify) {
-        notify(msg || (defaultErrorNotifyMessage as string))
+    let { notify, defaultErrorNotifyMessage } = this.options
+    if (notify instanceof Function) {
+      notify = {
+        error: notify
       }
     }
 
+    const hasNotify = !attaches || (attaches && attaches.notify !== false)
+    const codeCallback = attaches && attaches.codeCallback
+    const successMessage = attaches && attaches.successMessage
+    const _notify = (msg: string, cb?: Notify) => {
+      hasNotify && cb && cb(msg)
+    }
+
     const { msg, code } = res
-    if (isSuccess && successNotifyMessage) {
-      _n(successNotifyMessage)
-    } else if (!isSuccess && codeCallback && code && codeCallback[code]) {
+    if (isSuccess) {
+      successMessage && _notify(successMessage, (notify as NotifyObject).success)
+    } else if (codeCallback && code && codeCallback[code]) {
       codeCallback[code](res, msg)
-    } else if (!isSuccess) {
-      _n(msg)
+    } else {
+      _notify(msg || (defaultErrorNotifyMessage as string), (notify as NotifyObject).error)
     }
   }
 

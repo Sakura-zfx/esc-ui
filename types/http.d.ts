@@ -11,13 +11,18 @@ export type LoadingObject = {
   open: () => void
   close: () => void
 }
+export type Notify = (message: string) => void
+export type NotifyObject = {
+  success?: Notify
+  error: Notify
+}
 export type UniversalMap = {
   [key: string]: any
 }
 export type Attaches = {
   loading?: boolean
   notify?: boolean
-  successNotifyMessage?: string
+  successMessage?: string
   codeCallback?: {
     [name: number]: (error: EscHttpResponse, msg: string) => any
   }
@@ -32,7 +37,7 @@ export interface EscHttpOptions {
   baseUrl?: string
   urlMap: UrlMap
   timeout?: number
-  notify?: (message: string) => void
+  notify?: Notify | NotifyObject
   loadingMethods?: LoadingObject
   contentType?: ContentType
   arrayFormat?: ArrayFormat

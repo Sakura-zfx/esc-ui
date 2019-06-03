@@ -67,7 +67,7 @@ this.$http.cancel(false, 'order/list', 'cancel from me !')
 ---|-----|----|----
 loading|`boolean`|`true`| 是否打开loading
 notify|`boolean`|`true`| 是否打开提示
-successNotifyMessage|`string`|-|接口操作成功的提示文案
+successMessage|`string`|-|接口操作成功的提示文案
 codeCallback|`{ [code: string]: (error: EscHttpResponse, message) => any }`|-|接口指定的某种code下的特定行为
 
 ### EscHttpOptions
