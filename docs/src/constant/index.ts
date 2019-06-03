@@ -24,7 +24,7 @@ export interface PackageItemGroup {
 
 export const routerDir: PackageItemGroup[] = [
   {
-    title: '工具函数',
+    title: '全局工具函数',
     items: [
       {
         title: 'Http 请求库',
@@ -49,7 +49,7 @@ export const routerDir: PackageItemGroup[] = [
     ]
   },
   {
-    title: '基础通用组件',
+    title: '基础业务组件',
     items: [
       {
         title: 'Dialog 弹出框',
@@ -70,12 +70,7 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'Field 字段输入',
         name: 'field'
-      }
-    ]
-  },
-  {
-    title: '基础业务组件',
-    items: [
+      },
       {
         title: 'Photo 图片',
         name: 'photo'

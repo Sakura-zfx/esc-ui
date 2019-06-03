@@ -148,13 +148,13 @@ export default class Layout extends Vue {
       overflow: hidden
       position: absolute
       border-radius: 6px
-      background: #f2f3f5
+      background: #f7f8f9
       box-sizing: border-box
       height 640px
       width 320px
       top: 100px
       right 40px
-      box-shadow: 0 1px 4px rgba(0,0,0,.2), 0 1px 2px rgba(0,0,0,.2)
+      box-shadow 0 0 2px rgba(0,0,0,.2) //, 0 2px 2px rgba(0,0,0,.1)
       transform translate3d(0, 0, 0)
       @media (max-height 800px)
         height 500px
