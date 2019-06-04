@@ -47,3 +47,13 @@ const bizTypeMap = {
   3: 'dd'
 }
 ```
+
+### 布尔类
+
+名称|说明
+----|----
+isWx|是否是微信
+isAlipay|是否是支付宝
+isCaiyun|是否是彩云
+isAndroid|是否是安卓
+isMiniProgram|是否是小程序

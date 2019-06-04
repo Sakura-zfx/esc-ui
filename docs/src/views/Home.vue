@@ -16,16 +16,10 @@
 import { Component, Vue } from 'vue-property-decorator'
 import Layout from '../components/Layout.vue'
 // import Http from '@@/http'
-// import { InfiniteScroll } from 'esc-ui'
+// import { Http } from 'esc-ui'
 // import InfiniteScroll from '@@/infinite-scroll'
 // Vue.use(Loading)
 // Vue.prototype.$escLoading.open()
-// const http = new Http({
-//   baseUrl: 'http://youli.uban360.net',
-//   urlMap: {
-//     user: 'gift-front/user/me'
-//   }
-// })
 // http.get('user').then(res => {
 //   console.log(res.data)
 // }).catch(err => {

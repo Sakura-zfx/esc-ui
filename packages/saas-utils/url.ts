@@ -1,4 +1,5 @@
 import { OrderType, OrderTypeText, BizType, BizName } from 'types/saas-utils'
+import { isWx } from './bool'
 
 export function toOrderList (
   type: OrderType | OrderTypeText,
@@ -15,12 +16,16 @@ export function toOrderList (
   } else {
     url += '#/common'
   }
-  url += `/index.html?siteId=${siteId}#/order-list/${type === 1 ? 0 : type}`
+  url += `#/order-list/${type === 1 ? 0 : type}`
   redirect(url, isRouter, isReplace)
 }
 
 export function getBase (isLocal: boolean, origin?: string): string {
-  return origin || (isLocal ? 'http://youli.uban360.net' : location.origin)
+  const base = origin || (isLocal ? 'http://youli.uban360.net' : location.origin)
+  if (isWx) {
+    return `${base}/youli/daily`
+  }
+  return base
 }
 
 const orderTypeAppMap = {

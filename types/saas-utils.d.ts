@@ -39,4 +39,10 @@ export namespace SaasUtils {
     base?: string
   ): string
   export function getBase (isLocal: boolean, origin?: string): string
+
+  export const isWx: boolean
+  export const isAlipay: boolean
+  export const isCaiyun: boolean
+  export const isAndroid: boolean
+  export const isMiniProgram: boolean
 }
