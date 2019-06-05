@@ -10,6 +10,7 @@ import Dot from '@@/dot/README.md'
 import Http from '@@/http/README.md'
 import Bem from '@@/bem/README.md'
 import SaasUtils from '@@/saas-utils/README.md'
+import SlideDelete from '@@/slide-delete/README.md'
 
 export interface PackageItem {
   title: string
@@ -78,6 +79,10 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'InfiniteScroll 列表',
         name: 'infinite-scroll'
+      },
+      {
+        title: 'SlideDelete 左滑删除',
+        name: 'slide-delete'
       }
     ]
   },
@@ -105,5 +110,6 @@ export const markdown = {
   Dot,
   Bem,
   Http,
-  SaasUtils
+  SaasUtils,
+  SlideDelete
 }
