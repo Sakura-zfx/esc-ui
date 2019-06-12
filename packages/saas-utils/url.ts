@@ -31,7 +31,7 @@ const appPathMap: AppPath = {
 
 export function getBase (isLocal: boolean, origin?: string): string {
   const base = origin || (isLocal ? 'http://youli.uban360.net' : location.origin)
-  if (isWx) {
+  if (isWx && /developer/.test(location.hostname)) {
     return `${base}/youli/daily`
   }
   return base
