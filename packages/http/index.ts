@@ -1,5 +1,7 @@
 // eslint-disable-next-line
 import axios from 'axios'
+// @ts-ignore
+import Qs from 'qs'
 
 // Types
 import {
@@ -160,7 +162,7 @@ export default class Http implements EscHttp {
     attaches?: UniversalMap,
     config?: AxiosRequestConfig
   ) {
-    const { beforeRequest, urlMap, loadingMethods } = this.options
+    const { beforeRequest, urlMap, loadingMethods, arrayFormat } = this.options
     const pathArr: Array<string> = urlName.split('/')
     let path = urlMap[urlName]
     if (pathArr.length === 2 && typeof urlMap[pathArr[0]] === 'object') {
@@ -190,11 +192,16 @@ export default class Http implements EscHttp {
     cancelQueen.add(urlName, source)
 
     loading.add(loadingMethods, attaches)
+
+    // serializer
+    mergeConfig.params = mergeConfig.params ? Qs.stringify(mergeConfig.params, { arrayFormat }) : {}
+    if (isBodyData && mergeConfig.data) {
+      mergeConfig.data = Qs.stringify(mergeConfig.data)
+    }
+
     // @ts-ignore 除了 get 和 post，也可以使用 put 或 delete，此处缺少索引
     return (<AxiosInstance> this.instance)[method](
       path,
-      // get(url[, config])
-      // post(url, data[, config])
       isBodyData ? mergeConfig.data : mergeConfig,
       isBodyData ? mergeConfig : undefined
     )
@@ -288,6 +295,7 @@ export default class Http implements EscHttp {
     let { notify, defaultErrorNotifyMessage } = this.options
     if (notify instanceof Function) {
       notify = {
+        success: notify,
         error: notify
       }
     }

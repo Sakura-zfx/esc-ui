@@ -47,12 +47,14 @@
     "clean-css": "^4.2.1",
     "core-js": "^2.6.5",
     "dependency-tree": "^7.0.2",
+    "esc-ui": "^0.1.22",
     "eslint": "^5.16.0",
     "eslint-loader": "^2.1.2",
     "eslint-plugin-vue": "^5.2.2",
     "fs-extra": "^7.0.1",
     "husky": "^2.3.0",
     "lint-staged": "^8.1.7",
+    "qs": "^6.7.0",
     "rollup": "^1.12.1",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
@@ -62,7 +64,6 @@
     "vue-property-decorator": "^8.0.0",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.5.21",
-    "esc-ui": "^0.1.22",
     "vuex": "^3.0.1"
   },
   "peerDependencies": {

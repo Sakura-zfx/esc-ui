@@ -193,23 +193,29 @@ export default class EscField extends Vue {
         <div
           class={bem(
             'input-number-tool',
-            ['add', { disabled: Number(this.inputValue) === this.max }],
-            false
-          )}
-          onClick={() => this.addSubTool(true)}
-        >
-          +
-        </div>
-        {child()}
-        <div
-          class={bem(
-            'input-number-tool',
             ['sub', { disabled: Number(this.inputValue) === this.min }],
             false
           )}
           onClick={() => this.addSubTool(false)}
         >
-          -
+          <img
+            width="13px"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAASwAQMAAADR7yGMAAAABlBMVEVHcExaYmztzgthAAAAAXRSTlMAQObYZgAAAPVJREFUeNrtzjENADAIADCc4d8TyWaCA0iroBEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAEfmGKC0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLS0tLa2+FgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAALDYB6HXumfJU+u5AAAAAElFTkSuQmCC"
+            alt=""/>
+        </div>
+        {child()}
+        <div
+          class={bem(
+            'input-number-tool',
+            ['add', { disabled: Number(this.inputValue) === this.max }],
+            false
+          )}
+          onClick={() => this.addSubTool(true)}
+        >
+          <img
+            width="13px"
+            src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABLAAAASwAQMAAADR7yGMAAAABlBMVEVHcExaYmztzgthAAAAAXRSTlMAQObYZgAAAsVJREFUeNrt20ENACAMALE5m39PJNsPAYTHCD0FNXARkiRJkiRJkiRJkqQx1Q4LCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwvrpKwhLSwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLCwsLKx7LHcBFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhYWFhbW2yxJkiRJkiRJkiRJ+rwGnmFs5/7y4nMAAAAASUVORK5CYII="
+            alt=""/>
         </div>
       </div>
     )

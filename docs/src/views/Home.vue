@@ -15,7 +15,6 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import Layout from '../components/Layout.vue'
-// import Http from '@@/http'
 // import { Http } from 'esc-ui'
 // import InfiniteScroll from '@@/infinite-scroll'
 // Vue.use(Loading)
@@ -32,15 +31,15 @@ import Layout from '../components/Layout.vue'
 // console.log(bem('goods', false))
 // console.log(bem('goods', ['img', { normal: true }]))
 // import H from '@@/http'
-// const http: Http = new H({
+// const http = new H({
 //   baseUrl: 'http://youli.uban360.net',
 //   urlMap: {
 //     user: 'gift-front/user/me'
 //   }
 // })
-// console.log(http)
+// // console.log(http)
 // const ins = http.post('user',
-//   { siteId: undefined },
+//   { siteId: undefined, field: ['name', 'age'] },
 //   {
 //     mock: true,
 //     codeCallback: {
