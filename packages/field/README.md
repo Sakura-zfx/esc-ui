@@ -50,6 +50,8 @@ inputAlign|`string`|`left`|输入框和文本对齐方式，可选 `right`
 placeholder|`string`|请输入|
 isInputNumber|`boolean`|-|是否为数字加减器
 readonly|`boolean`|-|是否只读
+maxLength|`string`|-| -
+showLength|`boolean`|-|是否展示当前输入长度，textarea 有效
 
 ### Event
 事件	|说明|	回调参数

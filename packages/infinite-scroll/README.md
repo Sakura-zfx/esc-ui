@@ -57,3 +57,4 @@ load|手动触发获取数据函数
 ----|-----
 default|默认是作用域插槽，接受每条数据作为参数: `slot-scope="props"`
 top|当滚动为 window 时有效
+empty|列表为空时
