@@ -23,6 +23,8 @@ export default class EscField extends Vue {
   @Prop({ type: String, default: '请输入' }) readonly placeholder!: string
   @Prop(Boolean) readonly isInputNumber!: boolean
   @Prop(Boolean) readonly readonly!: boolean
+  @Prop({ type: String }) readonly maxLength!: string
+  @Prop(Boolean) readonly showLength!: boolean
 
   // readonly min: number = 0
   inputValueLocal: string = ''
@@ -165,7 +167,9 @@ export default class EscField extends Vue {
           vModel_trim={this.inputValue}
           placeholder={this.placeholder}
           readonly={this.readonly}
+          maxlength={this.maxLength}
         />
+        {this.showLength && <span class={bem('input-wrap', 'length', false)}>{this.inputValue.length}/{this.maxLength}</span>}
       </div>
     )
   }
@@ -182,6 +186,7 @@ export default class EscField extends Vue {
           onBlur={this.blurValue}
           placeholder={this.placeholder}
           readonly={this.readonly}
+          maxlength={this.maxLength}
         />
       </div>
     )

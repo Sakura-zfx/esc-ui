@@ -18,6 +18,8 @@
       v-model="address"
       type="textarea"
       auto-size
+      show-length
+      max-length="500"
     />
     <p class="filed-demo-label">
       数字输入框 - 精确到2位
