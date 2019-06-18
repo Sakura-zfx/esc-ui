@@ -42,6 +42,10 @@ export default class InfiniteScroll extends Vue {
     this.addDocumentListener()
   }
 
+  beforeDestroy () {
+    this.addDocumentListener(false)
+  }
+
   load () {
     this.loading = true
     this.loadFun().then((res: any) => {
@@ -57,9 +61,9 @@ export default class InfiniteScroll extends Vue {
     })
   }
 
-  addDocumentListener () {
+  addDocumentListener (type: boolean = true) {
     const handle = this.windowScroll ? window : (this.$refs.container as HTMLDivElement)
-    handle.addEventListener('scroll', this.scrollCallback, { passive: true })
+    handle[type ? 'addEventListener' : 'removeEventListener']('scroll', this.scrollCallback, { passive: true })
   }
 
   scrollCallback (e: Event) {
@@ -74,11 +78,15 @@ export default class InfiniteScroll extends Vue {
     }
 
     if (!this.loading && !this.noData) {
-      const wrapHeight = this.windowScroll
-        ? (this.$refs.container as HTMLDivElement).offsetHeight
-        : (this.$refs.wrap as HTMLDivElement).offsetHeight
+      const handle = this.windowScroll
+        ? (this.$refs.container as HTMLDivElement)
+        : (this.$refs.wrap as HTMLDivElement)
+      const wrapHeight = handle ? handle.offsetHeight : 0
 
-      if (this.containerHeight + top + this.bottomThrottle >= wrapHeight) {
+      if (
+        wrapHeight !== 0 &&
+        this.containerHeight + top + this.bottomThrottle >= wrapHeight
+      ) {
         this.load()
       }
     }
