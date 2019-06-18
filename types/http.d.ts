@@ -25,7 +25,8 @@ export type Attaches = {
   successMessage?: string
   codeCallback?: {
     [name: number]: (error: EscHttpResponse, msg: string) => any
-  }
+  },
+  isUpload?: boolean
   [key: string]: any
 }
 export type ContentType = 'application/x-www-form-urlencoded' | 'application/json' | 'application/octet-stream'

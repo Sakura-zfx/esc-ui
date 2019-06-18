@@ -69,6 +69,7 @@ loading|`boolean`|`true`| 是否打开loading
 notify|`boolean`|`true`| 是否打开提示
 successMessage|`string`|-|接口操作成功的提示文案
 codeCallback|`{ [code: string]: (error: EscHttpResponse, message) => any }`|-|接口指定的某种code下的特定行为
+isUpload|`boolean`|-|是否为上传文件
 
 ### EscHttpOptions
 

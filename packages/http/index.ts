@@ -1,7 +1,7 @@
 // eslint-disable-next-line
 import axios from 'axios'
 // @ts-ignore
-import Qs from 'qs'
+import qs from 'qs'
 
 // Types
 import {
@@ -182,6 +182,7 @@ export default class Http implements EscHttp {
         mergeConfig = reqResult.config
       }
     }
+
     // add cancel token
     const CancelToken = axios.CancelToken
     const source = CancelToken.source()
@@ -194,16 +195,26 @@ export default class Http implements EscHttp {
     loading.add(loadingMethods, attaches)
 
     // serializer
-    mergeConfig.params = mergeConfig.params ? Qs.stringify(mergeConfig.params, { arrayFormat }) : {}
+    mergeConfig.params = mergeConfig.params ? qs.stringify(mergeConfig.params, { arrayFormat }) : {}
     if (isBodyData && mergeConfig.data) {
-      mergeConfig.data = Qs.stringify(mergeConfig.data)
+      if (attaches && attaches.isUpload) {
+        const form = new FormData()
+        Object.keys(mergeConfig.data).forEach(key => {
+          // @ts-ignore
+          form.append(key, mergeConfig.data[key], mergeConfig.data[key].name)
+        })
+        mergeConfig.data = form
+      } else {
+        mergeConfig.data = qs.stringify(mergeConfig.data, { arrayFormat })
+      }
     }
 
     // @ts-ignore 除了 get 和 post，也可以使用 put 或 delete，此处缺少索引
     return (<AxiosInstance> this.instance)[method](
       path,
       isBodyData ? mergeConfig.data : mergeConfig,
-      isBodyData ? mergeConfig : undefined
+      // upload file 时，data必须为空，否则bug一堆
+      isBodyData ? { ...mergeConfig, data: undefined } : undefined
     )
   }
 

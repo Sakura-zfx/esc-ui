@@ -7,6 +7,7 @@
       >
         <p>esc-ui</p>
         <p>企业服务移动端业务Vue组件库</p>
+        <!--<input type="file" @change="upload">-->
       </div>
     </Layout>
   </div>
@@ -32,12 +33,14 @@ import Layout from '../components/Layout.vue'
 // console.log(bem('goods', ['img', { normal: true }]))
 // import H from '@@/http'
 // const http = new H({
-//   baseUrl: 'http://youli.uban360.net',
+//   // baseUrl: 'http://youli.uban360.net',
+//   baseUrl: 'https://filesystem.api.jituancaiyun.com',
 //   urlMap: {
-//     user: 'gift-front/user/me'
+//     user: 'gift-front/user/me',
+//     upload: '/sfs/webUpload/srvfile?fileType=2&src=cdn'
 //   }
 // })
-// // console.log(http)
+// console.log(http)
 // const ins = http.post('user',
 //   { siteId: undefined, field: ['name', 'age'] },
 //   {
@@ -67,6 +70,23 @@ export default class Home extends Vue {
   created () {
     // console.log(this._isVue)
   }
+
+  // upload (e) {
+  //   const http = new H({
+  //     // baseUrl: 'http://youli.uban360.net',
+  //     baseUrl: 'https://filesystem.api.jituancaiyun.com',
+  //     urlMap: {
+  //       upload: '/sfs/webUpload/srvfile?fileType=2&src=cdn'
+  //     }
+  //   })
+  //   http.post('upload', {
+  //     upfile: e.target.files[0]
+  //   }, { isUpload: true }, {
+  //     onUploadProgress (e) {
+  //       console.log(e)
+  //     }
+  //   })
+  // }
 }
 </script>
 
