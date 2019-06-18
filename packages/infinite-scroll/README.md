@@ -46,11 +46,13 @@ bottomThrottle|`number`|0|滚动到距离底部的阀值，开始拉取数据
 loadFirst|`boolean`|`true`|首次是否自动加载
 loadFun|`() => Promise<any[]>`|-|获取数据方法
 topHideSize|`number`|-|头部区域在向上滑动时被隐藏多少，默认是 100%，当滚动为 window 时有效
+keyName|`string`|`id`|列表循环作为 key 的字段
 
 ### Methods
 方法名|说明
 ----|----
 load|手动触发获取数据函数
+spliceList|更新数据列表，`spliceList (oldItem: any, newItem?: any) => void`
 
 ### Slots
 插槽|说明

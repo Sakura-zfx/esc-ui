@@ -20,6 +20,7 @@ export default class InfiniteScroll extends Vue {
   @Prop({ type: Number, default: 0 }) readonly bottomThrottle!: number
   @Prop({ type: Boolean, default: true }) readonly loadFirst!: boolean
   @Prop({ type: Function, required: true }) readonly loadFun!: () => Promise<any[]>
+  @Prop({ type: String, default: 'id' }) readonly keyName!: string
 
   get hasTop (): boolean {
     return this.windowScroll && !!this.$slots.top
@@ -44,6 +45,22 @@ export default class InfiniteScroll extends Vue {
 
   beforeDestroy () {
     this.addDocumentListener(false)
+  }
+
+  spliceList (
+    oldItem: any,
+    newItem?: any
+  ) {
+    if (oldItem[this.keyName] === undefined) {
+      return
+    }
+    const index = this.list.findIndex(x => x[this.keyName] === oldItem[this.keyName])
+    if (index > -1) {
+      newItem
+        // @ts-ignore
+        ? this.list.splice(index, 1, newItem)
+        : this.list.splice(index, 1)
+    }
   }
 
   load () {
@@ -111,8 +128,9 @@ export default class InfiniteScroll extends Vue {
     )
     const genEmpty = () => this.$slots.empty || <p class={bem('empty', false)}>暂无数据</p>
     const genNoData = () => <p class={bem('empty', false)}>没有更多了</p>
-    const result = this.list.map((item: any, i: number) => genItem(item.id || i, item))
+    const result = this.list.map((item: any, i: number) => genItem(item[this.keyName] || i, item))
       .concat(genLoading())
+
     if (this.showEmpty) {
       return result.concat(genEmpty())
     } else if (this.noData) {
