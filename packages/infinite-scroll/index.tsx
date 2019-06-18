@@ -13,6 +13,7 @@ export default class InfiniteScroll extends Vue {
   containerHeight: number = 0
   loading: boolean = false
   showEmpty = false
+  noData = false
 
   @Prop({ type: Boolean, default: true }) readonly windowScroll!: boolean
   @Prop({ type: Number }) readonly topHideSize!: number
@@ -48,6 +49,8 @@ export default class InfiniteScroll extends Vue {
       this.loading = false
       if (this.list.length === 0) {
         this.showEmpty = true
+      } else {
+        this.noData = res.length === 0
       }
     }).catch(() => {
       this.loading = false
@@ -70,7 +73,7 @@ export default class InfiniteScroll extends Vue {
       this.dir = diff > 0 ? 'down' : 'up'
     }
 
-    if (!this.loading) {
+    if (!this.loading && !this.noData) {
       const wrapHeight = this.windowScroll
         ? (this.$refs.container as HTMLDivElement).offsetHeight
         : (this.$refs.wrap as HTMLDivElement).offsetHeight
@@ -99,10 +102,13 @@ export default class InfiniteScroll extends Vue {
       </div>
     )
     const genEmpty = () => this.$slots.empty || <p class={bem('empty', false)}>暂无数据</p>
+    const genNoData = () => <p class={bem('empty', false)}>没有更多了</p>
     const result = this.list.map((item: any, i: number) => genItem(item.id || i, item))
       .concat(genLoading())
     if (this.showEmpty) {
       return result.concat(genEmpty())
+    } else if (this.noData) {
+      return result.concat(genNoData())
     }
     return result
   }
