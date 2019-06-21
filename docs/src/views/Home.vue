@@ -31,17 +31,17 @@ import Layout from '../components/Layout.vue'
 // console.log(bem())
 // console.log(bem('goods', false))
 // console.log(bem('goods', ['img', { normal: true }]))
-// import H from '@@/http'
+import H from '@@/http'
 // const http = new H({
-//   // baseUrl: 'http://youli.uban360.net',
-//   baseUrl: 'https://filesystem.api.jituancaiyun.com',
+//   baseUrl: 'http://youli.uban360.net',
+//   // baseUrl: 'https://filesystem.api.jituancaiyun.com',
 //   urlMap: {
 //     user: 'gift-front/user/me',
 //     upload: '/sfs/webUpload/srvfile?fileType=2&src=cdn'
-//   }
+//   },
+//   arrayFormat: 'brackets'
 // })
-// console.log(http)
-// const ins = http.post('user',
+// const ins = http.get('user',
 //   { siteId: undefined, field: ['name', 'age'] },
 //   {
 //     mock: true,
@@ -54,12 +54,6 @@ import Layout from '../components/Layout.vue'
 //   },
 //   { params: { siteType: 3 }
 //   })
-// http.get('user').then(res => {
-//   console.log(res.data)
-// }).catch(err => {
-//   console.log('err', err)
-// })
-// console.log(Http)
 
 @Component({
   components: {
@@ -71,22 +65,22 @@ export default class Home extends Vue {
     // console.log(this._isVue)
   }
 
-  // upload (e) {
-  //   const http = new H({
-  //     // baseUrl: 'http://youli.uban360.net',
-  //     baseUrl: 'https://filesystem.api.jituancaiyun.com',
-  //     urlMap: {
-  //       upload: '/sfs/webUpload/srvfile?fileType=2&src=cdn'
-  //     }
-  //   })
-  //   http.post('upload', {
-  //     upfile: e.target.files[0]
-  //   }, { isUpload: true }, {
-  //     onUploadProgress (e) {
-  //       console.log(e)
-  //     }
-  //   })
-  // }
+  upload (e: any) {
+    const http = new H({
+      // baseUrl: 'http://youli.uban360.net',
+      baseUrl: 'https://filesystem.api.jituancaiyun.com',
+      urlMap: {
+        upload: '/sfs/webUpload/srvfile?fileType=2&src=cdn'
+      }
+    })
+    http.post('upload', {
+      upfile: e.target.files[0]
+    }, { isUpload: true }, {
+      onUploadProgress (e) {
+        console.log(e)
+      }
+    })
+  }
 }
 </script>
 

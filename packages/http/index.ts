@@ -195,7 +195,7 @@ export default class Http implements EscHttp {
     loading.add(loadingMethods, attaches)
 
     // serializer
-    mergeConfig.params = mergeConfig.params ? qs.stringify(mergeConfig.params, { arrayFormat }) : {}
+    // mergeConfig.params = mergeConfig.params ? qs.stringify(mergeConfig.params, { arrayFormat }) : {}
     if (isBodyData && mergeConfig.data) {
       if (attaches && attaches.isUpload) {
         const form = new FormData()
