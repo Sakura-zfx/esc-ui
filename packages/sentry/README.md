@@ -5,14 +5,14 @@ Vue 版本错误捕获工具，原理是封装 sentry 的 `@sentry/browser^5.2.1
 引入
 
 ```js
-import EscSentry from 'esc-ui/lib/utils/sentry' 
+import { Sentry } from 'esc-ui' 
 ```
 
 代码演示
 
 ```js
 // 使用构造函数
-Vue.prototype.$sentry = new EscSentry(options?: EscOptions)
+Vue.prototype.$sentry = new Sentry(options?: EscOptions)
 ```
 
 ⚠️ 注意：初始化后，就会全局捕获错误，默认情况下，promise 的 reject 错误是被屏蔽掉的。对于 http 非 200 的异常，需要手动捕获。如果想要屏蔽全局的 error ，可以使用：

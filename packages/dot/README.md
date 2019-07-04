@@ -5,7 +5,7 @@
 组件引入
 
 ```js
-import EscDot, { hit } from 'esc-ui/lib/utils/dot'
+import EscDot, { hit } from 'esc-ui/lib/dot'
 ```
 
 CDN 引入

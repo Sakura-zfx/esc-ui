@@ -71,6 +71,7 @@ export default class EscButton extends Vue implements EscButtonProps {
     if (/^https?/.test(this.url)) {
       this.replace ? location.replace(this.url) : (location.href = this.url)
     } else if (/^\/[a-z]*/.test(this.url)) {
+      // @ts-ignore
       this.$router[this.replace ? 'replace' : 'push'](this.url)
     }
   }

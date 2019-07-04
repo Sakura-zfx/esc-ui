@@ -5,8 +5,9 @@ css BEM 命名规则生成函数，目的是优化在 `template` 或 `jsx` 中 B
 引入
 
 ```js
-import { use } from 'esc-ui/lib/utils'
+import { Utils } from 'esc-ui'
 
+const { use } = Utils
 // app 默认是 esc
 const [ bem ] = use(moduleName: string, app?: string)
 ```

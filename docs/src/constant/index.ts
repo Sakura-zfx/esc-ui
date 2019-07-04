@@ -11,6 +11,7 @@ import Http from '@@/http/README.md'
 import Bem from '@@/bem/README.md'
 import SaasUtils from '@@/saas-utils/README.md'
 import SlideDelete from '@@/slide-delete/README.md'
+import Toast from '@@/toast/README.md'
 
 export interface PackageItem {
   title: string
@@ -65,6 +66,10 @@ export const routerDir: PackageItemGroup[] = [
         name: 'loading'
       },
       {
+        title: 'Toast 提示',
+        name: 'toast'
+      },
+      {
         title: 'Popup 弹出层',
         name: 'popup'
       },
@@ -111,5 +116,6 @@ export const markdown = {
   Bem,
   Http,
   SaasUtils,
-  SlideDelete
+  SlideDelete,
+  Toast
 }
