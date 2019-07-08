@@ -1,8 +1,15 @@
 import Vue from 'vue'
 import Toast from './toast'
 
-const ToastConstructor = Vue.extend(Toast)
-let instance: any
+interface Instance extends Vue {
+  show: boolean
+  message: string,
+  isLayerTransparent?: boolean
+  close: () => void
+}
+
+const ToastConstructor = Vue.extend(Toast())
+let instance: Instance
 const getInstance = () => {
   if (!instance) {
     instance = new ToastConstructor({
