@@ -6,6 +6,7 @@ import { Http } from './http'
 import { Bem } from './bem'
 import { SaasUtils } from './saas-utils'
 import { EscComponent } from './component'
+import { Toast } from './toast'
 
 export class InfiniteScroll extends EscComponent {}
 export class Popup extends EscComponent {}
@@ -22,5 +23,6 @@ export {
   Dot,
   Http,
   Bem,
-  SaasUtils
+  SaasUtils,
+  Toast
 }

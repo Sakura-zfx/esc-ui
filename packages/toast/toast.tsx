@@ -1,5 +1,5 @@
 // import { Prop, Component, Mixins } from 'vue-property-decorator'
-import Vue, { CreateElement, ComponentOptions } from 'vue/types'
+import Vue, { ComponentOptions } from 'vue/types'
 import popup from '../mixins/popup'
 
 // @Component
