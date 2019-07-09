@@ -14,6 +14,7 @@ export class Button extends EscComponent {}
 export class CellGroup extends EscComponent {}
 export class Field extends EscComponent {}
 export class Photo extends EscComponent {}
+export class TabNav extends EscComponent {}
 export class SlideDelete extends EscComponent {}
 
 export {

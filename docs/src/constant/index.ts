@@ -12,6 +12,7 @@ import Bem from '@@/bem/README.md'
 import SaasUtils from '@@/saas-utils/README.md'
 import SlideDelete from '@@/slide-delete/README.md'
 import Toast from '@@/toast/README.md'
+import TabNav from '@@/tab-nav/README.md'
 
 export interface PackageItem {
   title: string
@@ -88,6 +89,10 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'SlideDelete 左滑删除',
         name: 'slide-delete'
+      },
+      {
+        title: 'TabNav 底部菜单',
+        name: 'tab-nav'
       }
     ]
   },
@@ -117,5 +122,6 @@ export const markdown = {
   Http,
   SaasUtils,
   SlideDelete,
-  Toast
+  Toast,
+  TabNav
 }
