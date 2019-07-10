@@ -42,6 +42,7 @@ selectedColor| string|`'red'`|选中色
   color| string|`'#5c626b'`|未选中色
   fixed| boolean|-|是否固定在底部
   border| boolean|-|是否有上边框
+  redirect|boolean|-|是否开启点击跳转到 to
   route| boolean|-|是否是路由模式
   replace| boolean|-|路由跳转用replace
 
@@ -54,3 +55,9 @@ icon | string|-|未选中的icon，支持img和iconfont
   name| string|-|名称
   info| string|-|角标
   to| string|-|跳转的地址，http链接或路由path
+
+⚠️注意，适配 iPhonex 需要在 viewport meta 标签中设置 `viewport-fit=cover`，例如：
+
+```html
+<meta name="viewport" content="width=device-width,viewport-fit=cover,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no">
+```	

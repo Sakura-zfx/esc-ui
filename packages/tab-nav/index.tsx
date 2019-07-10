@@ -16,6 +16,7 @@ type TabNavProps = {
   color: string
   fixed: boolean
   border: boolean
+  redirect: boolean
   replace: boolean
   route: boolean
 }
@@ -26,14 +27,22 @@ const getItemWidth = (num: number): string => `${((1 / num) * 100).toFixed(2)}%`
 function TabNav (): FunctionalComponentOptions<TabNavProps> {
   const renderItem = function (
     h: CreateElement,
-    { items = [], value, route, replace, selectedColor = 'red', color }: TabNavProps,
+    {
+      items = [],
+      value,
+      redirect,
+      route,
+      replace,
+      selectedColor = 'red',
+      color
+    }: TabNavProps,
     listeners: any,
     parent: any
   ) {
     const handleClick = function (e: Event, item: TabItem, index: number) {
       e.stopPropagation()
       listeners.input && listeners.input(index)
-      if (item.to) {
+      if (redirect && item.to) {
         if (route && parent.$router) {
           parent.$router[replace ? 'replace' : 'push'](item.to)
         } else {
