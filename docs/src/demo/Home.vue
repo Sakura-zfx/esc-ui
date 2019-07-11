@@ -1,7 +1,7 @@
 <template>
   <div class="demo-home">
     <p class="demo-home-title">
-      esc-ui 企业服务业务组件库
+      esc-ui Vue + ts 实践业务组件库
     </p>
     <div
       class="demo-home-list"

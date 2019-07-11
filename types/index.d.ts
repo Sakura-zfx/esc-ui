@@ -7,6 +7,7 @@ import { Bem } from './bem'
 import { SaasUtils } from './saas-utils'
 import { EscComponent } from './component'
 import { Toast } from './toast'
+import { utils } from './utils'
 
 export class InfiniteScroll extends EscComponent {}
 export class Popup extends EscComponent {}
@@ -15,6 +16,7 @@ export class CellGroup extends EscComponent {}
 export class Field extends EscComponent {}
 export class Photo extends EscComponent {}
 export class TabNav extends EscComponent {}
+export class ContentCard extends EscComponent {}
 export class SlideDelete extends EscComponent {}
 
 export {
@@ -25,5 +27,6 @@ export {
   Http,
   Bem,
   SaasUtils,
-  Toast
+  Toast,
+  utils
 }

@@ -6,7 +6,7 @@
         slot="center"
       >
         <p>esc-ui</p>
-        <p>企业服务移动端业务Vue组件库</p>
+        <p>Vue + ts 实践业务组件库</p>
         <!--<input type="file" @change="upload">-->
       </div>
     </Layout>

@@ -13,6 +13,7 @@ import SaasUtils from '@@/saas-utils/README.md'
 import SlideDelete from '@@/slide-delete/README.md'
 import Toast from '@@/toast/README.md'
 import TabNav from '@@/tab-nav/README.md'
+import ContentCard from '@@/content-card/README.md'
 
 export interface PackageItem {
   title: string
@@ -93,6 +94,10 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'TabNav 底部菜单',
         name: 'tab-nav'
+      },
+      {
+        title: 'ContentCard 内容卡片',
+        name: 'content-card'
       }
     ]
   },
@@ -123,5 +128,6 @@ export const markdown = {
   SaasUtils,
   SlideDelete,
   Toast,
-  TabNav
+  TabNav,
+  ContentCard
 }

@@ -22,6 +22,10 @@ export function formatNumber (val: number, fixed: number): string {
   return (Math.round(pow * val) / pow).toFixed(fixed)
 }
 
+export function vw (px: number): string {
+  return (px / 3.75).toFixed(2) + 'vw'
+}
+
 export const isMobile = /Mobile/i.test(navigator.userAgent)
 
 export const isIOS = /iPhone/i.test(navigator.userAgent)
