@@ -14,6 +14,7 @@ import SlideDelete from '@@/slide-delete/README.md'
 import Toast from '@@/toast/README.md'
 import TabNav from '@@/tab-nav/README.md'
 import ContentCard from '@@/content-card/README.md'
+/* inject import */
 
 export interface PackageItem {
   title: string
@@ -114,6 +115,7 @@ export const routerDir: PackageItemGroup[] = [
 ]
 
 export const markdown = {
+  /* inject export */
   Dialog,
   Button,
   Loading,
