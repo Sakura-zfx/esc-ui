@@ -17,6 +17,11 @@ build all
 npm run build
 ```
 
-links
+run demo
+```
+npm run docs
+```
+
+about ts
 
 - [Typescript 入门梳理](https://github.com/Jmingzi/blog/blob/master/post/ts.md)
