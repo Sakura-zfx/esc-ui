@@ -4,14 +4,15 @@
   "private": false,
   "scripts": {
     "docs": "vue-cli-service serve",
+    "lint": "vue-cli-service lint",
     "build:docs": "vue-cli-service build",
     "build:js": "node build/build-components.js",
     "build:css": "node build/build-style.js",
     "build:css-entry": "node build/build-style-entry.js",
     "build": "npm run build:js && npm run build:css && npm run build:css-entry",
-    "lint": "vue-cli-service lint",
     "build:global": "node build/build-global.js",
-    "create": "node build/create-one.js"
+    "create": "node build/create-one.js",
+    "build:one": "node build/build-one.js"
   },
   "files": [
     "lib",

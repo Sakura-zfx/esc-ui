@@ -1,8 +1,20 @@
-usage
+### Vue typescript component`s best practices
+
+demo entry: [esc-ui](https://competent-bose-f6b47c.netlify.com/)
+
+create one component
 ```
-git clone ...
-npm install
-npm run serve
+npm run create [component-name]
+```
+
+build one component
+```
+npm run build:one [component-name]
+```
+
+build all
+```
+npm run build
 ```
 
 links

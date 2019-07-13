@@ -57,7 +57,7 @@ export default class Layout extends Vue {
               <img src={require('../assets/logo.png')} width="40px" alt="" />
               <div>
                 <span>{'Esc-ui'}</span>
-                <span class={bem('top', 'content-small', false)}> 企业服务业务组件库</span>
+                <span class={bem('top', 'content-small', false)}> 业务组件库</span>
               </div>
             </a>
             <ul>
