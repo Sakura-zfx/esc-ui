@@ -32,14 +32,23 @@ import Layout from '../components/Layout.vue'
 // console.log(bem('goods', false))
 // console.log(bem('goods', ['img', { normal: true }]))
 import H from '@@/http'
-// const http = new H({
-//   baseUrl: 'http://youli.uban360.net',
-//   // baseUrl: 'https://filesystem.api.jituancaiyun.com',
-//   urlMap: {
-//     user: 'gift-front/user/me',
-//     upload: '/sfs/webUpload/srvfile?fileType=2&src=cdn'
-//   },
-//   arrayFormat: 'brackets'
+const http = new H({
+  baseUrl: 'http://api.jituancaiyun.net',
+  // baseUrl: 'https://filesystem.api.jituancaiyun.com',
+  urlMap: {
+    // user: 'gift-front/user/me',
+    // upload: '/sfs/webUpload/srvfile?fileType=2&src=cdn'
+    check: '/webaace/VpmnProduct/check'
+  },
+  contentType: 'application/json',
+  useQsStringifyBody: false
+  // arrayFormat: 'brackets'
+})
+// http.post('check', {
+//   vpmnRequest: {
+//     mobile: '18358185826',
+//     thirdOrgId: '83817'
+//   }
 // })
 // const ins = http.get('user',
 //   { siteId: undefined, field: ['name', 'age'] },
