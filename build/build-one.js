@@ -1,6 +1,6 @@
 const name = process.argv[2]
 const compilerJs = require('./compilerJs')
-const { compilerCss } = require('./compilerCss')
+const { compilerCss, checkComponentHasStyle } = require('./compilerCss')
 const compilerCssEntry = require('./compilerCssEntry')
 
 if (!name) {
@@ -8,5 +8,7 @@ if (!name) {
   process.exit(0)
 }
 compilerJs(name)
-compilerCss(name)
+if (checkComponentHasStyle(name)) {
+  compilerCss(name)
+}
 compilerCssEntry(name)
