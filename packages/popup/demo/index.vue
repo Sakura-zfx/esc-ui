@@ -77,7 +77,6 @@ export default {
 </script>
 
 <style lang="stylus">
-  @import '~@@/style/base.styl'
   @import '../index.styl'
   @import '~@@/button/index.styl'
   @import '~@@/mask-layer/index.styl'
