@@ -26,11 +26,15 @@
     >
       <esc-button
         text="嵌套弹层"
-        @on-click="$dialog.alert('我是嵌套弹层的弹窗alert')"
+        @on-click="$escDialog.alert('我是嵌套弹层的弹窗alert')"
       />
       <esc-button
         text="手动关闭"
         @on-click="$refs.popup.close()"
+      />
+      <esc-button
+        text="手动关闭2"
+        @on-click="show = false"
       />
     </esc-popup>
   </demo-wrap>

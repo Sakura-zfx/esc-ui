@@ -1,3 +1,5 @@
+const transferCommonStyle = require('./plugin/transferCommonStyle')
+
 module.exports = {
   presets: [
     [
@@ -38,6 +40,9 @@ module.exports = {
       {
         loose: true
       }
+    ],
+    [
+      transferCommonStyle
     ]
   ]
 }

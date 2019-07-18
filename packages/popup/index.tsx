@@ -2,6 +2,9 @@ import { Component, Prop, Mixins } from 'vue-property-decorator'
 import { use } from '../utils'
 import popup from '../mixins/popup'
 
+// 公共动画样式
+import '../style/animation.styl'
+
 const [bem] = use('popup')
 
 type Position = 'center' | 'bottom' | 'right'

@@ -19,6 +19,8 @@ export default class Popup extends Vue {
   onVisibleChange (val: boolean): void {
     if (val) {
       this.openSelfAndLayer()
+    } else {
+      closeLayer(this)
     }
   }
 
@@ -50,7 +52,6 @@ export default class Popup extends Vue {
 
   close () {
     this.$emit('input', false)
-    closeLayer(this)
   }
 
   showSelf () {
