@@ -7,7 +7,7 @@
       :custom-class="['aa']"
     >
       <template #centerTop>
-        <span>虚拟网6送6</span>
+        <span>虚拟网6送6虚拟网6送6虚拟网6送6虚拟网6送虚拟网6送6虚拟网6送66</span>
       </template>
       <template #centerBottom>
         <span>到期时间：2018/01/03</span>
