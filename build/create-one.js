@@ -10,13 +10,16 @@ if (!name) {
 }
 
 const componentPath = path.resolve(__dirname, '../', 'packages', name)
+const upCase = (str) => {
+  return str[0].toUpperCase() + str.substr(1)
+}
 
 // 创建模版文件
 // index.tsx
 // index.styl
 // README.md
 // demo/index.vue
-const fnName = camelCase(name).toUpperCase()
+const fnName = upCase(camelCase(name))
 const tsxContent = `import { FunctionalComponentOptions } from 'vue/types'
 import { use, vw, isDef } from '../utils'
 
@@ -74,9 +77,9 @@ fs.outputFileSync(resolve('demo/index.vue'), demoContent)
 const docsConstant = path.resolve(__dirname, '../docs', 'src', 'constant', 'index.ts')
 let content = f.readFileSync(docsConstant, 'utf8')
 
-if (!new RegExp(fnName).test(content)) {
-  content = content.replace('/*inject import*/', `import ${fnName} from '@@/${name}/README.md'\n/*inject import*/`)
-  content = content.replace('/*inject export*/', `${fnName},\n  /*inject export*/`)
+if (!new RegExp(`import ${fnName}`).test(content)) {
+  content = content.replace('/* inject import */', `import ${fnName} from '@@/${name}/README.md'\n/* inject import */`)
+  content = content.replace('/* inject export */', `${fnName},\n  /* inject export */`)
   f.writeFileSync(docsConstant, content, 'utf8')
 }
 
