@@ -175,11 +175,14 @@ export default class Http implements EscHttp {
       const reqData = mergeConfig ? isBodyData ? mergeConfig.data : mergeConfig.params : undefined
       const reqResult = beforeRequest(reqData, mergeConfig, attaches)
       // 将 { data, config } 中的data合并到config
-      if (reqResult && reqResult.config) {
-        isBodyData
-          ? reqResult.config.data = { ...(reqResult.config.data || {}), ...(reqResult.data || {}) }
-          : reqResult.config.params = { ...(reqResult.config.params || {}), ...(reqResult.data || {}) }
-        mergeConfig = reqResult.config
+      if (reqResult) {
+        const { data, config } = reqResult
+        mergeConfig = config || mergeConfig || { params: {}, data: {} }
+        if (isBodyData) {
+          mergeConfig.data = { ...(mergeConfig.data || {}), ...(data || {}) }
+        } else {
+          mergeConfig.params = { ...(mergeConfig.params || {}), ...(data || {}) }
+        }
       }
     }
 
