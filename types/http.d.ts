@@ -45,7 +45,7 @@ export interface EscHttpOptions {
   headers?: StringMap
   useQsStringifyBody?: boolean
   bindSentry?: EscSentryInstance
-  beforeRequest?: (data?: UniversalMap, config?: AxiosRequestConfig, attaches?: UniversalMap) => { data: UniversalMap, config?: AxiosRequestConfig }
+  beforeRequest?: (data: UniversalMap, config?: AxiosRequestConfig, attaches?: UniversalMap) => { data: UniversalMap, config?: AxiosRequestConfig }
   beforeThen?: (res: EscHttpResponse, attaches?: UniversalMap) => EscHttpResponse
   beforeCatch?: (res: EscHttpResponse, attaches?: UniversalMap) => EscHttpResponse
   withCredentials?: boolean,
