@@ -18,6 +18,7 @@ export class Photo extends EscComponent {}
 export class TabNav extends EscComponent {}
 export class ContentCard extends EscComponent {}
 export class SlideDelete extends EscComponent {}
+export class Empty extends EscComponent {}
 
 export {
   Dialog,

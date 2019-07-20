@@ -1,33 +1,40 @@
 import { FunctionalComponentOptions } from 'vue/types'
-import { use, vw, isDef } from '../utils'
+import { use, noop, aliasComponent } from '../utils'
 import Button from '../button'
+import Photo from '../photo'
 
 type Prop = {
   picture: string
   title: string
   desc: string
   buttonText: string
-  isFull: boolean
+  full: boolean | string
+  buttonColor: string,
   background: string
 }
-const [ bem ] = use('empty')
 
 function Empty (): FunctionalComponentOptions<Prop> {
+  const [ bem ] = use('empty')
+  const [ escbutton, escphoto ] = aliasComponent(Button, Photo)
+
   return {
     functional: true,
     name: 'Empty',
     render (h, { props, listeners }) {
-      const { picture, title, desc, buttonText, isFull, background } = props
+      const { picture, title, desc, buttonText, full, background, buttonColor } = props
       const { btnClick } = listeners
-      const escbutton = Button
+      const isFull = full === '' || full
       const style = isFull ? { height: '100vh', background } : { background }
       return (
         <div class={bem()} style={style}>
           {
-            Boolean.call(picture) && (
-              <img
+            picture && (
+              <escphoto
+                style="margin: 0 auto;"
                 src={picture}
-                class={bem('img')}
+                width={130}
+                height={130}
+                cover
               />
             )
           }
@@ -39,6 +46,7 @@ function Empty (): FunctionalComponentOptions<Prop> {
                 type="primary"
                 size="small"
                 text={buttonText}
+                color={buttonColor}
                 on={{ 'on-click': btnClick || noop }}
               />
             )

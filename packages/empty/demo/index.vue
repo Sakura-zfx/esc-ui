@@ -4,9 +4,9 @@
       title="主文案最多九个字"
       desc="辅助文案不超过十四个字四个字"
       button-text="按钮点击"
-      :is-full="true"
-      background="#fff"
       @btnClick="btnClick"
+      button-color="#f40"
+      picture="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzRyCZSH1cbo-KDIYwL9nMffX2hxzeWZFB97ML50FpRfMNTjdO"
     />
   </demo-wrap>
 </template>
@@ -31,6 +31,7 @@ export default {
 <style lang="stylus">
 @import '../index.styl'
 @import '../../button/index.styl'
+@import '../../photo/index.styl'
 .esc-demo-pd
   padding 0
 .esc-empty

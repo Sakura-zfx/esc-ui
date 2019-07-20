@@ -1,5 +1,5 @@
 import bem from '../bem'
-import { VNode } from 'vue/types'
+import { VNode, Component } from 'vue/types'
 
 export function use (name: string, app?: string) {
   return [
@@ -46,3 +46,10 @@ export const cookieGet = (name: string): string => {
   }
   return cookieValue
 }
+
+// 纯函数组件使用其他组件时 ts 会抛出属性类型不匹配
+// 原因在于为定义该组件的类型
+// 使用别名可以避免
+export const aliasComponent = (...args: Array<Component>) => args
+
+export function noop () {}

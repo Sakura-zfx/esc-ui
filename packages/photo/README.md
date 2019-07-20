@@ -5,8 +5,8 @@
 引入
 
 ```js
-import { Image } from 'esc-ui'
-Vue.use(Image)
+import { Photo } from 'esc-ui'
+Vue.use(Photo)
 ```
 
 代码演示
