@@ -162,7 +162,7 @@ export default class Http implements EscHttp {
     attaches?: UniversalMap,
     config?: AxiosRequestConfig
   ) {
-    const { beforeRequest, urlMap, loadingMethods, arrayFormat, useQsStringifyBody } = this.options
+    const { beforeRequest, urlMap, loadingMethods, arrayFormat, contentType } = this.options
     const pathArr: Array<string> = urlName.split('/')
     let path = urlMap[urlName]
     if (pathArr.length === 2 && typeof urlMap[pathArr[0]] === 'object') {
@@ -208,7 +208,7 @@ export default class Http implements EscHttp {
         })
         mergeConfig.data = form
       } else {
-        mergeConfig.data = useQsStringifyBody
+        mergeConfig.data = /urlencoded/.test(contentType as string)
           ? qs.stringify(mergeConfig.data, { arrayFormat })
           : JSON.stringify(mergeConfig.data)
       }
