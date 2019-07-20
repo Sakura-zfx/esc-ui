@@ -14,6 +14,7 @@ import SlideDelete from '@@/slide-delete/README.md'
 import Toast from '@@/toast/README.md'
 import TabNav from '@@/tab-nav/README.md'
 import ContentCard from '@@/content-card/README.md'
+import Empty from '@@/empty/README.md'
 /* inject import */
 
 export interface PackageItem {
@@ -99,6 +100,10 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'ContentCard 内容卡片',
         name: 'content-card'
+      },
+      {
+        title: 'Empty 空组件',
+        name: 'empty'
       }
     ]
   },
@@ -131,5 +136,6 @@ export const markdown = {
   SlideDelete,
   Toast,
   TabNav,
-  ContentCard
+  ContentCard,
+  Empty
 }
