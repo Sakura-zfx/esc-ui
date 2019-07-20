@@ -13,9 +13,11 @@ export function updateLayer (): void {
       el: document.createElement('div')
     })
     layerInstance.$on('on-close', () => {
-      const { vm } = context.top
-      if (vm.closeOnClickLayer) {
-        vm.close()
+      if (context.top) {
+        const { vm } = context.top
+        if (vm.closeOnClickLayer) {
+          vm.close()
+        }
       }
     })
   }
