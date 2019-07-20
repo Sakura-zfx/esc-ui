@@ -198,7 +198,6 @@ export default class Http implements EscHttp {
     loading.add(loadingMethods, attaches)
 
     // serializer
-    // mergeConfig.params = mergeConfig.params ? qs.stringify(mergeConfig.params, { arrayFormat }) : {}
     if (isBodyData && mergeConfig.data) {
       if (attaches && attaches.isUpload) {
         const form = new FormData()
@@ -208,10 +207,11 @@ export default class Http implements EscHttp {
         })
         mergeConfig.data = form
       } else {
-        const configContentType = (mergeConfig.headers
-          ? mergeConfig.headers['content-type'] || mergeConfig.headers['Content-Type']
-          : contentType) || contentType
-        mergeConfig.data = /urlencoded/.test(configContentType as string)
+        // 根据 conetnt-type 来判断 stringify
+        const configContentType = (mergeConfig.headers &&
+          (mergeConfig.headers['content-type'] || mergeConfig.headers['Content-Type'])) ||
+          contentType
+        mergeConfig.data = /urlencoded/.test(configContentType)
           ? qs.stringify(mergeConfig.data, { arrayFormat })
           : JSON.stringify(mergeConfig.data)
       }
