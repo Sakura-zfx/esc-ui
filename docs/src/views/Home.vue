@@ -53,6 +53,12 @@ import Layout from '../components/Layout.vue'
 //   // arrayFormat: 'brackets'
 // })
 
+// http.post('check', null, null, {
+//   headers: {
+//     'content-type': 'www'
+//   }
+// })
+
 // const ins = http.get('user',
 //   { siteId: undefined, field: ['name', 'age'] },
 //   {

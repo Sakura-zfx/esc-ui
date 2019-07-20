@@ -208,7 +208,10 @@ export default class Http implements EscHttp {
         })
         mergeConfig.data = form
       } else {
-        mergeConfig.data = /urlencoded/.test(contentType as string)
+        const configContentType = (mergeConfig.headers
+          ? mergeConfig.headers['content-type'] || mergeConfig.headers['Content-Type']
+          : contentType) || contentType
+        mergeConfig.data = /urlencoded/.test(configContentType as string)
           ? qs.stringify(mergeConfig.data, { arrayFormat })
           : JSON.stringify(mergeConfig.data)
       }
