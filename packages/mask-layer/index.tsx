@@ -6,6 +6,7 @@ export default class EscMask extends Vue {
   @Prop(Number) readonly zIndex!: number
   @Prop(Boolean) readonly visible!: boolean
   @Prop({ default: false, type: Boolean }) readonly isTransparent!: boolean
+  @Prop({ default: false, type: Boolean }) readonly pointEventsNone!: boolean
 
   render () {
     const [ bem ] = use('mask')
@@ -15,7 +16,10 @@ export default class EscMask extends Vue {
         <div
           vShow={this.visible}
           style={{ zIndex: this.zIndex }}
-          class={bem({ transparent: this.isTransparent })}
+          class={bem({
+            transparent: this.isTransparent,
+            'points-none': this.pointEventsNone
+          })}
           onClick={() => this.$emit('on-close')}
         />
       </transition>

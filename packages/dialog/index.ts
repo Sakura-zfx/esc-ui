@@ -16,6 +16,7 @@ const DialogDefaultOptions = {
   showCancelButton: false,
   beforeClose: undefined,
   isLayerTransparent: false,
+  pointEventsNone: false,
   container: 'body'
 }
 

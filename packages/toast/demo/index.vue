@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import Vue from 'vue'
+// import Vue from 'vue'
 import Toast from '../index'
 import EscButton from '../../button'
 
@@ -23,11 +23,12 @@ export default {
   },
 
   created () {
-    Vue.use(Toast)
+    // Vue.use(Toast)
   },
 
   methods: {
     toast () {
+      console.log(1)
       this.$escToast('1秒后改变文案')
       setTimeout(() => {
         Toast('反而更恶搞话题人流后加入盐计划统计和蛮好用和借款人太阳镜将')

@@ -5,6 +5,7 @@ interface Instance extends Vue {
   show: boolean
   message: string,
   isLayerTransparent?: boolean
+  pointEventsNone?: boolean
   close: () => void
 }
 
@@ -31,14 +32,17 @@ const ToastFn = (message: string) => {
 
   instance.message = message
   instance.isLayerTransparent = true
+  instance.pointEventsNone = true
   instance.show = true
   timer = setTimeout(() => {
     instance.close()
+    timer = null
   }, 3000)
 }
 
-ToastFn.install = () => {
-  Vue.prototype.$escToast = ToastFn
-}
+Vue.prototype.$escToast = ToastFn
+// ToastFn.install = () => {
+//   Vue.prototype.$escToast = ToastFn
+// }
 
 export default ToastFn
