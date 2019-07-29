@@ -21,11 +21,11 @@ const upCase = (str) => {
 // demo/index.vue
 const fnName = upCase(camelCase(name))
 const tsxContent = `import { FunctionalComponentOptions } from 'vue/types'
-import { use, vw, isDef } from '../utils'
+import { useBem, vw, isDef } from '../utils'
 
 type Prop = {
 }
-const [ bem ] = use('${name}')
+const bem = useBem('${name}')
 
 function ${fnName} (): FunctionalComponentOptions<Prop> {
   return {
