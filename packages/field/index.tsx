@@ -26,6 +26,7 @@ export default class EscField extends Vue {
   @Prop({ type: String }) readonly maxLength!: string
   @Prop(Boolean) readonly showLength!: boolean
   @Prop(Boolean) readonly block!: boolean
+  @Prop(Boolean) readonly required!: boolean
 
   // readonly min: number = 0
   inputValueLocal: string = ''
@@ -234,6 +235,7 @@ export default class EscField extends Vue {
     } else if (this.label) {
       return (
         <div class={bem('label', false) + (this.labelClass ? ` ${this.labelClass}` : '')}>
+          {this.required ? <span style="color: red">*</span> : null}
           {this.label}
         </div>
       )
