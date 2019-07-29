@@ -9,6 +9,7 @@ export default class Popup extends Vue {
   @Model('input', { type: Boolean, default: false }) readonly show!: boolean
   @Prop(String) readonly container!: string
   @Prop({ type: Boolean, default: false }) readonly isLayerTransparent!: boolean
+  @Prop({ default: false, type: Boolean }) readonly pointEventsNone!: boolean
   @Prop({ type: Boolean, default: false }) readonly closeOnClickLayer!: boolean
 
   // @Watch('container')
