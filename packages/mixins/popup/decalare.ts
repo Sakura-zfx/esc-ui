@@ -1,6 +1,7 @@
 export type LayerConfig = {
   zIndex: number,
   isTransparent: boolean,
+  pointEventsNone: boolean,
   containerElement: Node
 }
 

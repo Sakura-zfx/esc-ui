@@ -46,6 +46,7 @@ export default class Popup extends Vue {
     showLayer(this, {
       zIndex: context.index++,
       isTransparent: this.isLayerTransparent,
+      pointEventsNone: this.pointEventsNone,
       containerElement: <Node> this.containerElement
     })
     this.showSelf()
