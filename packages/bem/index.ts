@@ -4,14 +4,14 @@ type PrefixFn = {
   (key?: string): string
 }
 
-const APP_PREFIX = 'esc-'
+// const APP_PREFIX = 'esc-'
 const MODULE = '__'
 const MODIFIER = '--'
 
 function addSymbol (name: string, app?: string) {
   const isModule = new RegExp(MODULE).test(name)
   return (subName?: string) => !isModule
-    ? (app ? `${app}-` : APP_PREFIX) + name + (subName ? MODULE + subName : '')
+    ? (app ? `${app}-` : '') + name + (subName ? MODULE + subName : '')
     : name + (subName ? MODIFIER + subName : '')
 }
 

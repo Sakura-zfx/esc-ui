@@ -7,9 +7,9 @@ css BEM 命名规则生成函数，目的是优化在 `template` 或 `jsx` 中 B
 ```js
 import { utils } from 'esc-ui'
 
-const { use } = utils
+const { useBem } = utils
 // app 默认是 esc
-const [ bem ] = use(moduleName: string, app?: string)
+const bem = useBem(moduleName: string, app?: string)
 ```
 
 代码演示
@@ -17,10 +17,10 @@ const [ bem ] = use(moduleName: string, app?: string)
 ```jsx
 class Cart {
   render() {
-    const [ bem ] = use('cart', 'jd')
+    const bem = useBem('cart', 'esc')
     return (
       <div class={bem()}>
-        <div class={bem('goods', false)}>
+        <div class={bem('goods')}>
           <div class={bem('goods', ['img', { normal: true }])}>
         </div>
       </div>
@@ -29,21 +29,22 @@ class Cart {
 }
 ```
 
-上面的栗子中，class 分别为 
+Bem函数思路
+- 项目存在可选的全局唯一的命名空间，例如 `esc`
+- 遵循BEM命名规范
+- vue 支持解析 `:class` 的所有值
 
-- `jd-cart`
-- `['jd-cart__goods']`
-- `['jd-cart__goods', 'jd-cart__goods--img', {jd-cart__goods--normal: true}]`
+在实际的项目中使用时
+- 存在命名空间，可自行封装函数
+```
+// assets/js/use.ts
+export const bem = (mod: string) => useBem(mod, "你的全局命名名称")
+```
 
-### 用法举例：
- * 初始化命名空间 const bem = Bem('button') => esc-button
- * bem 接受 3 个参数，模块、修饰符、是否自动添加父级 class
- * 模块举例：
-    - `bem()` => `'esc-button'`
-    - `bem('large')` => `['esc-button', 'esc-button__large']` 自动添加了父级 class
-    - `bem('large', false)` => `['esc-button__large']`
-    - `bem({ large: true, plain: false })` => `['esc-button', 'esc-button__large']`
-    - `bem(['primary', { plain: true }])`  => `['esc-button', 'esc-button__large', 'esc-button__plain']`
- - 修饰符举例（模块只能是字符串）：
-    - `bem('primary', 'text')` => `['esc-button__primary', 'esc-button__primary--text']` 自动添加了父级 class
-    - `bem('primary', ['text', { loading: true }], false)` => `['esc-button__primary--text', { 'esc-button__primary--loading': true }]`
+- 不存在，可直接调用
+```
+const bem = useBem('cart')
+
+bem('nav')
+bem('cart', 'submit')
+```

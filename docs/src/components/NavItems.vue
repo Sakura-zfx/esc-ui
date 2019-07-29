@@ -1,7 +1,8 @@
 <script lang="tsx">
 import { Component, Vue, Prop, Emit } from 'vue-property-decorator'
-import Bem from '@@/bem'
+// import Bem from '@@/bem'
 import { PackageItemGroup, PackageItem } from '../constant'
+import { use } from '@@/utils'
 
 @Component({})
 export default class NavItems extends Vue {
@@ -21,7 +22,7 @@ export default class NavItems extends Vue {
   }
 
   render () {
-    const bem = Bem('nav')
+    const [ bem ] = use('nav')
 
     return (
       <div class={bem('wrap')}>{
