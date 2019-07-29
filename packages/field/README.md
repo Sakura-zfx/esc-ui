@@ -51,6 +51,7 @@ placeholder|`string`|请输入|
 isInputNumber|`boolean`|-|是否为数字加减器
 readonly|`boolean`|-|是否只读
 maxLength|`string`|-| -
+block|`boolean`|-| 输入框是否单独占一行
 showLength|`boolean`|-|是否展示当前输入长度，textarea 有效
 
 ### Event

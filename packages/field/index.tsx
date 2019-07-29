@@ -25,6 +25,7 @@ export default class EscField extends Vue {
   @Prop(Boolean) readonly readonly!: boolean
   @Prop({ type: String }) readonly maxLength!: string
   @Prop(Boolean) readonly showLength!: boolean
+  @Prop(Boolean) readonly block!: boolean
 
   // readonly min: number = 0
   inputValueLocal: string = ''
@@ -243,7 +244,8 @@ export default class EscField extends Vue {
   render () {
     const cls = bem({
       [this.inputAlign]: !!this.inputAlign && !this.isTextArea,
-      'flex-start': this.isTextArea,
+      'flex-start': this.isTextArea || this.block,
+      'column': this.block,
       wrap: !!(this.$slots.label || this.label) || !this.isInputNumberTool
     })
     return (

@@ -8,6 +8,7 @@
     </p>
     <esc-field
       label="姓名"
+      block
       v-model="name"
     />
     <p class="filed-demo-label">
@@ -19,6 +20,7 @@
       type="textarea"
       auto-size
       show-length
+      block
       max-length="500"
     />
     <p class="filed-demo-label">
