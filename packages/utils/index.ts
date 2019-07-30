@@ -4,7 +4,7 @@ import { VNode, Component } from 'vue/types'
 /* deprecate */
 export function use (name: string, app?: string) {
   return [
-    bem(name, app || 'esc')
+    bem(name, app || 'esc', true)
   ]
 }
 

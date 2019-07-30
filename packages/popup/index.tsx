@@ -25,7 +25,7 @@ export default class EscPopup extends Mixins(popup) {
 
     return (
       <transition name={transitionName}>
-        <div vShow={this.show} class={bem([this.position])}>
+        <div vShow={this.show} class={bem([this.position], true)}>
           {this.$slots.default}
         </div>
       </transition>
