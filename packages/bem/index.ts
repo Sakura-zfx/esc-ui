@@ -97,4 +97,4 @@ export function useBem (name: string, app?: string): UseBem {
   ) => fn(mod, modifierOrAuto || false, auto || false)
 }
 
-export default Bem
+export default UseBem
