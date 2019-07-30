@@ -61,7 +61,7 @@ function join (
  *      - bem('primary', 'text') => ['esc-button__primary', 'esc-button__primary--text'] 自动添加了父级 class
  *      - bem('primary', ['text', { loading: true }], false) => ['esc-button__primary--text', { 'esc-button__primary--loading': true }]
  */
-export default (name: string, app?: string) => (
+const Bem = (name: string, app?: string) => (
   module?: Mods,
   modifiers?: Mods | boolean,
   autoAddParent?: boolean
@@ -79,3 +79,22 @@ export default (name: string, app?: string) => (
   }
   return join(prefix, module, autoAddParent)
 }
+
+interface UseBem {
+  (
+    mod?: string,
+    modifierOrAuto?: string | boolean,
+    auto?: boolean
+  ): Mods
+}
+let fnCache: any
+export function useBem (name: string, app?: string): UseBem {
+  const fn = fnCache || (fnCache = Bem(name, app))
+  return (
+    mod?: string,
+    modifierOrAuto?: string | boolean,
+    auto?: boolean
+  ) => fn(mod, modifierOrAuto || false, auto || false)
+}
+
+export default Bem

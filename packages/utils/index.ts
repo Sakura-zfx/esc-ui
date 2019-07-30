@@ -1,29 +1,11 @@
 import bem from '../bem'
 import { VNode, Component } from 'vue/types'
-import { Mods } from 'types/bem'
 
 /* deprecate */
 export function use (name: string, app?: string) {
   return [
     bem(name, app || 'esc')
   ]
-}
-
-interface UseBem {
-  (
-    mod?: string,
-    modifierOrAuto?: string | boolean,
-    auto?: boolean
-  ): Mods
-}
-let fnCache: any
-export function useBem (name: string, app?: string): UseBem {
-  const fn = fnCache || (fnCache = bem(name, app))
-  return (
-    mod?: string,
-    modifierOrAuto?: string | boolean,
-    auto?: boolean
-  ) => fn(mod, modifierOrAuto || false, auto || false)
 }
 
 export function isVNode (node: VNode | string | void): boolean {
