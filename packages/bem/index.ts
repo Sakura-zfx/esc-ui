@@ -87,14 +87,12 @@ interface UseBem {
     auto?: boolean
   ): Mods
 }
-let fnCache: any
-export function useBem (name: string, app?: string): UseBem {
-  const fn = fnCache || (fnCache = Bem(name, app))
+
+export default function useBem (name: string, app?: string): UseBem {
   return (
     mod?: string,
     modifierOrAuto?: string | boolean,
     auto?: boolean
-  ) => fn(mod, modifierOrAuto || false, auto || false)
+  ) => Bem(name, app)(mod, modifierOrAuto || false, auto || false)
 }
-
-export default UseBem
+// export default useBem
