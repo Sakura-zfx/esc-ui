@@ -90,6 +90,11 @@
       />
       <esc-button
         type="primary"
+        text="灰色 - 禁用按钮"
+        disabled-gray
+      />
+      <esc-button
+        type="primary"
         loading-text="加载按钮"
         loading
       />

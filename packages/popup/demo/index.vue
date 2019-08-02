@@ -24,6 +24,8 @@
       close-on-click-layer
       v-model="show"
     >
+      <span slot="left">111</span>
+      <span slot="center">标题</span>
       <esc-button
         text="嵌套弹层"
         @on-click="$escDialog.alert('我是嵌套弹层的弹窗alert')"
@@ -37,6 +39,12 @@
         @on-click="show = false"
       />
     </esc-popup>
+    <p>带标题插槽</p>
+    <esc-button
+      type="primary"
+      text="带标题插槽"
+      @on-click="showPopup('bottom')"
+    />
   </demo-wrap>
 </template>
 
@@ -78,6 +86,7 @@ export default {
 
 <style lang="stylus">
   @import '../index.styl'
+  @import '~@@/style/animation.styl'
   @import '~@@/button/index.styl'
   @import '~@@/mask-layer/index.styl'
   @import '~@@/dialog/index.styl'

@@ -44,3 +44,10 @@ isLayerTransparent|`boolean`|`false`|蒙层遮罩是否透明
 openSelfAndLayer|`function`|-|手动打开弹层
 close|`function`|-|手动关闭弹层
 
+### Slot
+
+参数|类型|默认值|说明
+----|----|-----|----
+left|`vNode`|-|左插槽
+center|`vNode`|-|右标题
+right|`VNode`|关闭的x按钮|右插槽

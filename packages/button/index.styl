@@ -28,7 +28,7 @@
     background-color: black
     border-radius: inherit
     transform: translate(-50%, -50%)
-  &:active::before
+  &:active:not(&__disabled)::before
     opacity: .1
 
   &__default
@@ -75,6 +75,9 @@
     border-radius 0
   &__disabled
     opacity button-disabled-opacity
+  &__disabled-gray
+    background-color #CBCFD6
+    border-color #CBCFD6
   &__block
     display block
     width 100%
