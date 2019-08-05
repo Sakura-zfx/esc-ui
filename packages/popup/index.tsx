@@ -18,13 +18,19 @@ export default class EscPopup extends Mixins(popup) {
     return this.position === 'center'
   }
 
+  onClickTitle (type: string) {
+    this.$emit('on-click-title', type)
+  }
+
   render () {
     let transitionName = 'esc-dialog'
     if (!this.isCenter) {
       transitionName = `esc-fade-${this.position}`
     }
 
-    const { left, center, right } = this.$slots
+    const left = this.$slots['title-left']
+    const center = this.$slots['title-center']
+    const right = this.$slots['title-right']
     return (
       <transition name={transitionName}>
         <div
@@ -34,9 +40,26 @@ export default class EscPopup extends Mixins(popup) {
           {
             (left || center) ? (
               <div class={bem('title', false)}>
-                {left && <div class={bem('title', 'left', false)}>{left}</div>}
-                {center && <div class={bem('title', 'center', false)}>{center}</div>}
-                <div class={bem('title', 'right', false)}>
+                {left &&
+                  <div
+                    class={bem('title', 'left', false)}
+                    onClick={() => { this.onClickTitle('left') }}
+                  >
+                    {left}
+                  </div>
+                }
+                {center &&
+                  <div
+                    class={bem('title', 'center', false)}
+                    onClick={() => { this.onClickTitle('center') }}
+                  >
+                    {center}
+                  </div>
+                }
+                <div
+                  class={bem('title', 'right', false)}
+                  onClick={() => { this.onClickTitle('right') }}
+                >
                   {right || <img src={closeIcon} width="16px"/>}
                 </div>
               </div>

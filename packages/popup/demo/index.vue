@@ -24,8 +24,8 @@
       close-on-click-layer
       v-model="show"
     >
-      <span slot="left">111</span>
-      <span slot="center">标题</span>
+      <span slot="title-left">111</span>
+      <span slot="title-center">标题</span>
       <esc-button
         text="嵌套弹层"
         @on-click="$escDialog.alert('我是嵌套弹层的弹窗alert')"

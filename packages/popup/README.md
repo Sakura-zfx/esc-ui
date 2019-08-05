@@ -41,6 +41,11 @@ isLayerTransparent|`boolean`|`false`|蒙层遮罩是否透明
 ### Event
 参数|类型|默认值|说明
 ----|----|-----|----
+`on-click-title`|-|-|点击title触发的事件，接受`type`参数：`left, center, right`，表示点击的位置
+
+### Methods
+参数|类型|默认值|说明
+----|----|-----|----
 openSelfAndLayer|`function`|-|手动打开弹层
 close|`function`|-|手动关闭弹层
 
@@ -48,6 +53,6 @@ close|`function`|-|手动关闭弹层
 
 参数|类型|默认值|说明
 ----|----|-----|----
-left|`vNode`|-|左插槽
-center|`vNode`|-|右标题
-right|`VNode`|关闭的x按钮|右插槽
+`title-left`|`vNode`|-|左插槽
+`title-center`|`vNode`|-|右标题
+`title-right`|`VNode`|关闭的x按钮|右插槽
