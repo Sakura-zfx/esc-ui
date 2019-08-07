@@ -37,11 +37,7 @@ import { Popup } from 'esc-ui'
 position|`string`|`center`| 弹层方位
 closeOnClickLayer|`boolean`|`false`| 是否点击蒙层遮罩关闭
 isLayerTransparent|`boolean`|`false`|蒙层遮罩是否透明
-
-### Event
-参数|类型|默认值|说明
-----|----|-----|----
-`on-click-title`|-|-|点击title触发的事件，接受`type`参数：`left, center, right`，表示点击的位置
+beforeClickTitleClose|`(type: string) => Promise<any>`|-|点击标题栏关闭前的回调，如果`reject`则popup不会关闭
 
 ### Methods
 参数|类型|默认值|说明

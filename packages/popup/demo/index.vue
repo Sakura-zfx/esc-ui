@@ -5,6 +5,11 @@
       text="居中弹层"
       @on-click="showPopup('center')"
     />
+    <p>居上弹层</p>
+    <esc-button
+      text="居上弹层"
+      @on-click="showPopup('top')"
+    />
     <p>居右弹层</p>
     <esc-button
       type="primary"

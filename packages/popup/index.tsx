@@ -8,18 +8,23 @@ import '../style/animation.styl'
 const [bem] = use('popup')
 const closeIcon = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAGQAAABkBAMAAACCzIhnAAAAJ1BMVEUAAAAnJycmKjAoKTEmKi8mKi8nKy8mKjAmKjAmKjEpKTMmKjAoLDJ3Ovc0AAAAC3RSTlMABvkf59pB8+NJGWle3esAAAFMSURBVFjD7M2hDcJQFIXhvpCg3xqkFQgEHkdYgASBZwQkG5CwARNUUHFdQ/dCX/6k/wK98pyb8zXLLdc01R4KgyKTGK2vbZ01Vufyl6y7R5lF9uO15uQ2fBMD5HT/lIxE2x3KDLIb+0hMffbRJwZIG+0mbV7uEYkBEjFMKduPkRki0T2QJQYIFhHKIFJBEBvC3BEWgkiDLakUQWcISkXQOsLaEfZcEUYRMo6QUYSMI2QUIUPEGSDOEHEGiDNAnAGizPENxJjpAkQZIM4AcQaIMwlx5sd+HRsBDMJAEMyJ6IOWKE7NqC+pBM3Gcu6xAfF/d/7rj2RceQV+TJYPmyxHCQMjYwnDL1cMLrLEBYSSRB8ErMQ4lIVUEhSf1CuUuKACAIlgD8CVIByAouAoQK+gNQA8aALICCgPiBXoG0iiq+hceEGrQd73qY0CBgD+QcT0W2gJGAAAAABJRU5ErkJggg=='
 
-type Position = 'center' | 'bottom' | 'right'
+type Position = 'center' | 'bottom' | 'right' | 'top'
 
 @Component
 export default class EscPopup extends Mixins(popup) {
   @Prop({ type: String, default: 'center' }) readonly position!: Position
+  @Prop({ type: Function }) readonly beforeClickTitleClose!: (type: string) => Promise<any>
 
   get isCenter () {
     return this.position === 'center'
   }
 
   onClickTitle (type: string) {
-    this.$emit('on-click-title', type)
+    if (this.beforeClickTitleClose) {
+      this.beforeClickTitleClose(type).then(this.close)
+    } else {
+      this.close()
+    }
   }
 
   render () {
