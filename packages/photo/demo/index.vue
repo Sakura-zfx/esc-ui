@@ -1,12 +1,14 @@
 <template>
   <demo-wrap name="photo">
     <p>宽图 contain</p>
-    <photo
-      class="demo-photo"
-      is-lazy
-      :pro-status="5"
-      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzRyCZSH1cbo-KDIYwL9nMffX2hxzeWZFB97ML50FpRfMNTjdO"
-    />
+    <div class="demo-photo">
+      <photo
+        style="height: 100%"
+        is-lazy
+        :pro-status="5"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzRyCZSH1cbo-KDIYwL9nMffX2hxzeWZFB97ML50FpRfMNTjdO"
+      />
+    </div>
 
     <p>长图 contain</p>
     <photo

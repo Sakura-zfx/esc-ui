@@ -166,7 +166,8 @@ export default class EscField extends Vue {
         <textarea
           ref="input"
           style={{ minHeight: this.minHeight + 'px' }}
-          vModel_trim={this.inputValue}
+          value={this.inputValue}
+          vModel={this.inputValue}
           placeholder={this.placeholder}
           readonly={this.readonly}
           maxlength={this.maxLength}

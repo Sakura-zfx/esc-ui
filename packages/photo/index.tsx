@@ -1,5 +1,5 @@
 import { Vue, Component, Prop } from 'vue-property-decorator'
-import { use } from '../utils'
+import { use, isDef } from '../utils'
 
 // types
 import { Mods } from 'types/bem'
@@ -48,8 +48,10 @@ export default class EscPhoto extends Vue {
 
   load: boolean = false
 
-  size (num: number): string {
-    return `${this.vw ? num / 3.75 : num}${this.vw ? 'vw' : 'px'}`
+  size (num: number): string | undefined {
+    return isDef(num)
+      ? `${this.vw ? num / 3.75 : num}${this.vw ? 'vw' : 'px'}`
+      : undefined
   }
 
   // 通过 img 标签实现居中

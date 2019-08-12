@@ -21,7 +21,7 @@
       auto-size
       show-length
       block
-      max-length="500"
+      max-length="8"
     />
     <p class="filed-demo-label">
       数字输入框 - 精确到2位
