@@ -15,6 +15,7 @@ import Toast from '@@/toast/README.md'
 import TabNav from '@@/tab-nav/README.md'
 import ContentCard from '@@/content-card/README.md'
 import Empty from '@@/empty/README.md'
+import Skeleton from '@@/skeleton/README.md'
 /* inject import */
 
 export interface PackageItem {
@@ -104,6 +105,10 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'Empty 空组件',
         name: 'empty'
+      },
+      {
+        title: 'Skeleton 骨架',
+        name: 'skeleton'
       }
     ]
   },
@@ -120,6 +125,7 @@ export const routerDir: PackageItemGroup[] = [
 ]
 
 export const markdown = {
+  Skeleton,
   /* inject export */
   Dialog,
   Button,

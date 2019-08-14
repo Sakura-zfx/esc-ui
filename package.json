@@ -27,8 +27,8 @@
     "@sentry/integrations": "^5.2.0",
     "axios": "^0.18.0",
     "qs": "^6.7.0",
-    "vue-property-decorator": "^8.0.0",
-    "vue-lazyload": "^1.2.6"
+    "vue-lazyload": "^1.2.6",
+    "vue-property-decorator": "^8.0.0"
   },
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.4.0",
