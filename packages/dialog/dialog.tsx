@@ -1,10 +1,12 @@
 import { Component, Prop, Mixins } from 'vue-property-decorator'
 import { use } from '../utils'
+import { border } from '../bem'
 import popup from '../mixins/popup'
 // 关于loading的引入，是否可以采用外部引入？以减少代码冗余
 import Loading from '../loading/loading'
 
 import '../style/animation.styl'
+import '../style/border.styl'
 
 // Types
 import { VNode } from 'vue/types'
@@ -62,7 +64,7 @@ export default class Dialog extends Mixins(popup) {
   renderBtnItem (type: DialogAction) {
     return (
       <div
-        class={bem('btn-item', false)}
+        class={[bem('btn-item', false), type === 'cancel' ? border('r') : '']}
         onClick={this.handleAction.bind(this, type)}
       >
         {
@@ -78,7 +80,7 @@ export default class Dialog extends Mixins(popup) {
     const Title = this.title && <div class={bem('header', false)}>{this.title}</div>
     const Content = <div class={bem('content', false)}>{this.message}</div>
     const Btn = (this.showCancelButton || this.showConfirmButton) && (
-      <div class={bem('btn-wrap', false)}>
+      <div class={[border('t'), bem('btn-wrap', false)]}>
         {this.showCancelButton && this.renderBtnItem('cancel')}
         {this.showConfirmButton && this.renderBtnItem('confirm')}
       </div>

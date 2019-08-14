@@ -61,7 +61,7 @@ function join (
  *      - bem('primary', 'text') => ['esc-button__primary', 'esc-button__primary--text'] 自动添加了父级 class
  *      - bem('primary', ['text', { loading: true }], false) => ['esc-button__primary--text', { 'esc-button__primary--loading': true }]
  */
-export default (name: string, app?: string, defaultAuto: boolean = false) => (
+const bem = (name: string, app?: string, defaultAuto: boolean = false) => (
   module?: Mods,
   modifiers?: Mods | boolean,
   autoAddParent?: boolean
@@ -79,3 +79,6 @@ export default (name: string, app?: string, defaultAuto: boolean = false) => (
   }
   return join(prefix, module, auto)
 }
+
+export const border = bem('border', 'esc')
+export default bem
