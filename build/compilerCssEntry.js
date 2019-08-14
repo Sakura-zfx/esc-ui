@@ -50,12 +50,13 @@ module.exports = function writeStyle(component) {
   const styleArr = [...new Set(getDependence(component))]
   const componentPath = path.resolve(__dirname, '../lib', component, 'style/index.js')
   if (emptyStyleComponents.some(x => x === component)) {
-    fs.ensureFileSync(componentPath)
-  } else {
-    const expression = styleArr.map(x =>
-      `require("${component === x ? '../index.css' : `../../${x}/index.css`}")`
-    ).join('\n')
-    console.log(`组件 ${component} 注入依赖样式 ${styleArr.join('/')}`)
-    fs.outputFileSync(componentPath, expression)
+    // fs.ensureFileSync(componentPath)
+    fs.ensureFileSync(path.resolve(__dirname, '../lib', component, 'index.css'))
   }
+  const expression = styleArr.map(x =>
+    `require("${component === x ? '../index.css' : `../../${x}/index.css`}")`
+  ).join('\n')
+  console.log(`组件 ${component} 注入依赖样式 ${styleArr.join('/')}`)
+  fs.outputFileSync(componentPath, expression)
+  // }
 }
