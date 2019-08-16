@@ -23,7 +23,7 @@ module.exports = {
       {
         corejs: false,
         helpers: true,
-        regenerator: false,
+        regenerator: true,
         useESModules: false
       }
     ],
