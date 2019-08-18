@@ -20,19 +20,15 @@ export default class DemoDelete extends Vue {
     return (
       <demo-wrap name="slide-delete" no-padding>
         {
-          this.isMobile ? null : (
-            <p>此处未兼容mouse事件，请使用chrome 模拟器查看，
-              <a href="./demo.html#/slide-delete" target="_blank">点击打开</a>
-            </p>
-          )
-        }
-        {
-          this.list.map((item: number, i: number) => (
+          this.isMobile ? this.list.map((item: number, i: number) => (
             <esc-del>
               <div class="demo-slide-delete">左滑删除{ i + 1 }</div>
               <span slot="del">删除吗</span>
             </esc-del>
-          ))
+          )) : <div style="text-align: center;padding-top: 50px">
+            <img src={require('./1566120808.png')} alt=""/>
+            <p>扫码真机预览</p>
+          </div>
         }
       </demo-wrap>
     )
