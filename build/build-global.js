@@ -9,21 +9,34 @@ const rollup = require('rollup')
 // const { uglify } = require('rollup-plugin-uglify')
 const { exec } = require('child_process')
 const fs = require('fs-extra')
+const f = require('fs')
 const path = require('path')
 const resolve = p => path.resolve(__dirname, '../', p)
 
-const target = resolve('packages/utils')
+const target = {
+  'packages/dot/index.ts': 'dot/index.ts',
+  'packages/utils/index.ts': 'utils.ts',
+  'packages/bem/index.ts': 'bem.ts'
+}
+
 const tmp = resolve('lib-global/tmp')
 const tmpTsConfig = resolve('lib-global/tmp/tsconfig.json')
 
-fs.copySync(target, tmp)
+Object.keys(target).forEach(file => {
+  let content = f.readFileSync(resolve(file), 'utf8')
+  if (/utils/.test(file)) {
+    content = content.replace('../bem', './bem')
+  }
+  fs.outputFileSync(path.resolve(tmp, target[file]), content)
+})
 fs.outputFileSync(tmpTsConfig, JSON.stringify({
   compilerOptions: {
     target: 'es5',
     module: 'esnext'
   },
   include: [
-    './*'
+    './dot/index.ts',
+    './utils.ts'
   ]
 }))
 
@@ -45,7 +58,7 @@ exec(`tsc --project ${tmp}`, async (err, data) => {
  */
 `
   const inputOptions = {
-    input: tmp + '/dot.js',
+    input: tmp + '/dot/index.js',
     plugins: [
       // uglify()
     ]
