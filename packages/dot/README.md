@@ -47,4 +47,4 @@ base|`string`|`${domain}/dot-log/logExt.json`|打点的接口地址，默认到�
 ---|---|---
 hit|`did: string`|打点字符串，形如`0.0.4405.1`
 
-提示：4位打点字符串含义代表 `gid.bizType.mid.eid` 对应options `globalId.bizType.moduleId.eventId`
+⚠️提示：4位打点字符串含义代表 `gid.bizType.mid.eid` 对应options `globalId.bizType.moduleId.eventId`

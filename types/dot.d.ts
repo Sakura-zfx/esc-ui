@@ -9,20 +9,20 @@ export interface DotOptions {
   // bizType?: number
 }
 
-export interface Dot {
+export interface EscDot {
   options: DotOptions
   getUrl (didArr: string[] | void): string
   hit (did?: string): void
 }
 
-export interface DotInstance extends Dot {
-  new (options: DotOptions): Dot
+export interface DotInstance extends EscDot {
+  new (options: DotOptions): EscDot
 }
 
 declare module 'vue/types/vue' {
   interface Vue {
-    $dot: Dot
+    $dot: EscDot
   }
 }
 
-export const EscDot: DotInstance
+export const Dot: DotInstance

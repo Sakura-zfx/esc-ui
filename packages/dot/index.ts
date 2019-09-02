@@ -1,8 +1,9 @@
 import { isMobile, isIOS, online, isDef, cookieGet } from '../utils'
 
-import { DotOptions, Dot as EscDot } from 'types/dot'
+import { DotOptions, EscDot } from 'types/dot'
 
 const defaultOptions: DotOptions = {
+  globalId: undefined,
   moduleId: undefined,
   eventId: undefined,
   orgId: cookieGet('orgId'),
@@ -32,7 +33,7 @@ export default class Dot implements EscDot {
       const [ gid, bizType, mid, eid ] = didArr
       moduleId = mid || moduleId
       eventId = eid || eventId
-      globalId = gid || ''
+      globalId = gid || globalId || ''
       if (bizType && Number(bizType) > 0) {
         // bizType 存在时，为商品打点，此时 eventId 为 skuId
         eventId = `${bizType}_${eventId}`
