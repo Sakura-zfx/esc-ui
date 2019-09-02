@@ -27,18 +27,19 @@ export default class Dot implements EscDot {
   }
 
   getUrl (didArr: string[] | void): string {
-    let { platform, moduleId, eventId, userId, orgId, base } = this.options
+    let { platform, globalId, moduleId, eventId, userId, orgId, base } = this.options
     if (didArr) {
-      const [ , bizType, mid, eid ] = didArr
+      const [ gid, bizType, mid, eid ] = didArr
       moduleId = mid || moduleId
       eventId = eid || eventId
+      globalId = gid || ''
       if (bizType && Number(bizType) > 0) {
         // bizType 存在时，为商品打点，此时 eventId 为 skuId
         eventId = `${bizType}_${eventId}`
       }
     }
 
-    return `${base}?platform=${platform}&mid=${moduleId}&eid=${eventId}&uid=${userId || 1}${orgId ? `&orgId=${orgId}` : ''}`
+    return `${base}?platform=${platform}&gid=${globalId}&mid=${moduleId}&eid=${eventId}&uid=${userId || 1}${orgId ? `&orgId=${orgId}` : ''}`
   }
 
   /**

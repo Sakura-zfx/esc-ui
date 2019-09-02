@@ -5,7 +5,7 @@
 组件引入
 
 ```js
-import EscDot, { hit } from 'esc-ui/lib/dot'
+import { Dot } from 'esc-ui'
 ```
 
 CDN 引入
@@ -34,10 +34,11 @@ const hit = window.EscDot.hit
 ### DotOptions
 属性名|类型|默认值|说明
 ---|-----|----|----
-moduleId|`string`|-|模块id
-eventId|`string`|-|打点id
-orgId|`string`|-|企业id
-userId|`string`|-|用户id
+globalId|`string | number`|-|通用id
+moduleId|`string | number`|-|模块id
+eventId|`string | number`|-|打点id
+orgId|`string | number`|-|企业id
+userId|`string | number`|-|用户id
 platform|`string`|-|平台统计，默认：移动端 `iOS` `Android`，pc `undefined`
 base|`string`|`${domain}/dot-log/logExt.json`|打点的接口地址，默认到彩云
 
@@ -45,3 +46,5 @@ base|`string`|`${domain}/dot-log/logExt.json`|打点的接口地址，默认到�
 方法名|参数|描述
 ---|---|---
 hit|`did: string`|打点字符串，形如`0.0.4405.1`
+
+提示：4位打点字符串含义代表 `gid.bizType.mid.eid` 对应options `globalId.bizType.moduleId.eventId`

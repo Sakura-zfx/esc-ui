@@ -1,8 +1,9 @@
 export interface DotOptions {
-  moduleId?: string
-  eventId?: string
-  orgId?: string
-  userId?: string
+  globalId?: string | number,
+  moduleId?: string | number
+  eventId?: string | number
+  orgId?: string | number
+  userId?: string | number
   platform?: 'iOS' | 'android',
   base?: string
   // bizType?: number
