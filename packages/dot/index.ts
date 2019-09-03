@@ -61,6 +61,13 @@ export default class Dot implements EscDot {
       img = null
     }
   }
+
+  hitByMap (currentKey: string, keyMap: Array<{ key: string, value: string }>) {
+    const item = keyMap.find((x) => x.key === currentKey)
+    if (item) {
+      this.hit(item.value)
+    }
+  }
 }
 
 const dot = new Dot()

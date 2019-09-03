@@ -13,6 +13,7 @@ export interface EscDot {
   options: DotOptions
   getUrl (didArr: string[] | void): string
   hit (did?: string): void
+  hitByMap (currentKey: string, keyMap: Array<{ key: string, value: string }>): void
 }
 
 export interface DotInstance extends EscDot {
