@@ -162,13 +162,8 @@ export default class Http implements EscHttp {
     attaches?: UniversalMap,
     config?: AxiosRequestConfig
   ) {
-    const { beforeRequest, urlMap, loadingMethods, arrayFormat, contentType } = this.options
-    const pathArr: Array<string> = urlName.split('/')
-    let path = urlMap[urlName]
-    if (pathArr.length === 2 && typeof urlMap[pathArr[0]] === 'object') {
-      path = (<StringMap> urlMap[pathArr[0]])[pathArr[1]]
-    }
-
+    const { beforeRequest, loadingMethods, arrayFormat, contentType } = this.options
+    const path = this.getPath(urlName)
     const isBodyData = method === 'post'
     let mergeConfig = this.mergeConfig(isBodyData, data, config)
     if (beforeRequest && typeof beforeRequest === 'function') {
@@ -336,15 +331,50 @@ export default class Http implements EscHttp {
     }
   }
 
+  getPath (urlName: string): string {
+    const { urlMap } = this.options
+    const pathArr: Array<string> = urlName.split('/')
+    let path = urlMap[urlName]
+    if (pathArr.length === 2 && typeof urlMap[pathArr[0]] === 'object') {
+      path = (<StringMap> urlMap[pathArr[0]])[pathArr[1]]
+    }
+    if (typeof path === 'string') {
+      return path
+    }
+    throw new Error('urlName is not a object')
+  }
+
+  getHandle (
+    method: string,
+    urlName: string,
+    data?: UniversalMap,
+    attaches?: Attaches,
+    config?: AxiosRequestConfig
+  ) {
+    const path = this.getPath(urlName)
+
+    const isMiniprogramUa = /miniprogram/i.test(navigator.userAgent)
+    let isMini = this.options.isMiniprogram
+    if (attaches && attaches.isMiniprogram !== undefined) {
+      isMini = attaches.isMiniprogram
+    }
+    const { miniprogramRequestHandle } = this.options
+    if (isMini && isMiniprogramUa && miniprogramRequestHandle) {
+      return miniprogramRequestHandle(method, path, data, attaches)
+    }
+
+    return this.handle(method, urlName, data, attaches, config)
+      .then((res: AxiosResponse) => this.commonThen(res, attaches))
+      .catch((error: EscHttpResponse | AxiosError) => this.commonCatch(error, attaches))
+  }
+
   get (
     urlName: string,
     data?: UniversalMap,
     attaches?: Attaches,
     config?: AxiosRequestConfig
   ) {
-    return this.handle('get', urlName, data, attaches, config)
-      .then((res: AxiosResponse) => this.commonThen(res, attaches))
-      .catch((error: EscHttpResponse | AxiosError) => this.commonCatch(error, attaches))
+    return this.getHandle('get', urlName, data, attaches, config)
   }
 
   post (
@@ -353,9 +383,7 @@ export default class Http implements EscHttp {
     attaches?: Attaches,
     config?: AxiosRequestConfig
   ) {
-    return this.handle('post', urlName, data, attaches, config)
-      .then((res: AxiosResponse) => this.commonThen(res, attaches))
-      .catch((error: EscHttpResponse | AxiosError) => this.commonCatch(error, attaches))
+    return this.getHandle('post', urlName, data, attaches, config)
   }
 
   cancel (all?: boolean, name?: string, message?: string) {

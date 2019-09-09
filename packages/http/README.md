@@ -9,9 +9,9 @@ import { Http } from 'esc-ui'
 基础演示
 
 ```js
-Vue.prototype.$http = new Http(options: EscHttpOptions)
+http = new Http(options: EscHttpOptions)
 
-this.$http.get(
+http.get(
   uriName: string, 
   data?: any, 
   attaches?: { [key: string]: any },
@@ -21,12 +21,26 @@ this.$http.get(
 .catch((error: EscHttpResponse | AxiosError) => {})
 
 // 实例
-this.$http.get(
+http.get(
   'getList', 
   { siteId: 1 }, 
   { loading: false, notify: false }, 
   { params: { siteType: 2 } }
 )
+```
+
+小程序请求示例
+
+```js
+const http = new Http({
+  // ...
+  miniprogramRequestHandle: (method, url, data, attaches) => wepy.wx.request(url, data, method),
+  // 支持全局传递 options
+  isMiniprogram: true
+})
+
+// 也支持在某个方法总单独指定是小程序请求
+http.get('test', {}, { isMiniprogram: true })
 ```
 
 初始化 urlMap 支持传递命名空间，例如
@@ -46,15 +60,15 @@ new Http({
 })
 
 // 使用
-this.$http.get('order/list')
-this.$http.get('cart/list')
-this.$http.get('list')
+http.get('order/list')
+http.get('cart/list')
+http.get('list')
 
 // 取消全部请求
-this.$http.cancel(true)
+http.cancel(true)
 
 // 取消某个请求
-this.$http.cancel(false, 'order/list', 'cancel from me !')
+http.cancel(false, 'order/list', 'cancel from me !')
 ```
 
 > 仅支持 get 和 post
@@ -70,6 +84,7 @@ notify|`boolean`|`true`| 是否打开提示
 successMessage|`string`|-|接口操作成功的提示文案
 codeCallback|`{ [code: string]: (error: EscHttpResponse, message) => any }`|-|接口指定的某种code下的特定行为
 isUpload|`boolean`|-|是否为上传文件
+isMiniprogram|`boolean`|-|是否为小程序请求接口
 
 ### EscHttpOptions
 
@@ -80,6 +95,7 @@ urlMap|`{ [name: string]: string }`|-|必传的接口map，例如：`{ getList: 
 timeout|`number`|20000|-
 notify|`(message: string) => void`|`console.log`|类似 toast 的提示函数
 loadingMethods|`LoadingObject`|`{ open: console.log, close: console.log }`|请求loading的开关函数对象
+isMiniprogram|`boolean`|-|是否为小程序请求接口
 contentType|`ContentType`|`application/x-www-form-urlencoded`|request 文本类型
 arrayFormat|`ArrayFormat`|`repeat`|可选 `repeat` `indices` `brackets` `comma`
 headers|`{ [name: string]: string }`|-|-
