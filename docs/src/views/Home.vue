@@ -33,11 +33,12 @@ import Layout from '../components/Layout.vue'
 // console.log(bem('goods', ['img', { normal: true }]))
 // import H from '@@/http'
 // const http = new H({
-//   baseUrl: 'http://api.jituancaiyun.net',
+//   // baseUrl: 'http://api.jituancaiyun.net',
+//   baseUrl: 'http://youli.uban360.net',
 //   // baseUrl: 'https://filesystem.api.jituancaiyun.com',
 //   urlMap: {
-//     // user: 'gift-front/user/me',
-//     // upload: '/sfs/webUpload/srvfile?fileType=2&src=cdn'
+//     user: '/gift-front/user/me',
+//     upload: '/sfs/webUpload/srvfile?fileType=2&src=cdn',
 //     check: '/webaace/VpmnProduct/check'
 //   },
 //   contentType: 'application/json',
@@ -72,6 +73,7 @@ import Layout from '../components/Layout.vue'
 //   },
 //   { params: { siteType: 3 }
 //   })
+// http.cancel(false, 'user')
 
 @Component({
   components: {

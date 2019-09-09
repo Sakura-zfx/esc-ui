@@ -23,7 +23,6 @@ export type Attaches = {
   loading?: boolean
   notify?: boolean
   successMessage?: string
-  isMiniprogram?: boolean
   codeCallback?: {
     [name: number]: (error: EscHttpResponse, msg: string) => any
   },
@@ -45,7 +44,6 @@ export interface EscHttpOptions {
   arrayFormat?: ArrayFormat
   headers?: StringMap
   useQsStringifyBody?: boolean
-  isMiniprogram?: boolean
   miniprogramRequestHandle?: (method: string, url: string, data?: UniversalMap, attaches?: UniversalMap) => Promise<EscHttpResponse>
   bindSentry?: EscSentryInstance
   beforeRequest?: (data: UniversalMap, config?: AxiosRequestConfig, attaches?: UniversalMap) => { data: UniversalMap, config?: AxiosRequestConfig }

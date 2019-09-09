@@ -4,6 +4,9 @@
 
 ```js
 import { Http } from 'esc-ui'
+
+// 小程序引入
+import Http from 'esc-ui/lib/http/miniprogram'
 ```
 
 基础演示
@@ -24,7 +27,16 @@ http.get(
 http.get(
   'getList', 
   { siteId: 1 }, 
-  { loading: false, notify: false }, 
+  { 
+    loading: false, 
+    notify: false,
+    codeCallback: {
+      // 指定状态码对应的回调
+      400: (err, msg) => {
+        console.log(err, msg)
+      }
+    }
+  }, 
   { params: { siteType: 2 } }
 )
 ```
@@ -32,15 +44,14 @@ http.get(
 小程序请求示例
 
 ```js
+import Http from 'esc-ui/lib/http/miniprogram'
+
 const http = new Http({
   // ...
   miniprogramRequestHandle: (method, url, data, attaches) => wepy.wx.request(url, data, method),
-  // 支持全局传递 options
-  isMiniprogram: true
 })
 
-// 也支持在某个方法总单独指定是小程序请求
-http.get('test', {}, { isMiniprogram: true })
+http.get('test', {}, {})
 ```
 
 初始化 urlMap 支持传递命名空间，例如
