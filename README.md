@@ -2,6 +2,8 @@
 
 demo entry: [esc-ui](https://competent-bose-f6b47c.netlify.com/)
 
+![](./demo.jpg)
+
 create one component
 ```
 npm run create [component-name]
