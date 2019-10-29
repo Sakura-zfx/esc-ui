@@ -43,7 +43,7 @@ function TabNav (): FunctionalComponentOptions<TabNavProps> {
       e.stopPropagation()
       listeners.input && listeners.input(index)
       if (redirect && item.to) {
-        if (/^http:/.test(item.to)) {
+        if (/^http/.test(item.to)) {
           replace ? (location.href = item.to) : location.replace(item.to)
         } else if (route && parent.$router) {
           parent.$router[replace ? 'replace' : 'push'](item.to)
