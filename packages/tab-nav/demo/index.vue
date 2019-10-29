@@ -29,7 +29,9 @@ export default {
           name: '首页',
           icon: 'https://i.loli.net/2019/07/09/5d24844e099a890696.jpg',
           iconSelected: 'https://i.loli.net/2019/07/09/5d24844e1d6f977943.jpg'
-        }, { name: '购物车', info: 5 }, { name: '个人中心', info: '99+' }
+        },
+        { name: '购物车', info: 5, to: 'https://www.baidu.com' },
+        { name: '个人中心', info: '99+' }
       ]
     }
   },
