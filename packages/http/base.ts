@@ -147,6 +147,7 @@ export default class Base {
   ): Promise<EscHttpResponse> {
     if (axios.isCancel(error)) {
       console.log('Request canceled')
+      loading.pop(attaches)
       return Promise.reject(error)
     }
 
