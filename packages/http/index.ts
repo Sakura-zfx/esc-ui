@@ -116,7 +116,6 @@ export default class Http extends BaseHttp implements EscHttp {
     return this.handle('get', urlName, data, attaches, config)
       .then((res: AxiosResponse) => this.commonThen<AxiosResponse>(res, attaches))
       .catch((error: EscHttpResponse | AxiosError) => this.commonCatch(error, attaches))
-      .catch(this.cancelCatch)
   }
 
   post (
@@ -128,7 +127,6 @@ export default class Http extends BaseHttp implements EscHttp {
     return this.handle('post', urlName, data, attaches, config)
       .then((res: AxiosResponse) => this.commonThen<AxiosResponse>(res, attaches))
       .catch((error: EscHttpResponse | AxiosError) => this.commonCatch(error, attaches))
-      .catch(this.cancelCatch)
   }
 
   cancel (all?: boolean, name?: string, message?: string) {
@@ -138,11 +136,10 @@ export default class Http extends BaseHttp implements EscHttp {
       cancelQueen.cancel(name, message)
     }
   }
-
-  cancelCatch (error: EscHttpResponse) {
-    if (axios.isCancel(error) || axios.isCancel(error.error)) {
-      console.log('Request canceled')
-    }
-    return Promise.reject(error)
-  }
+  // cancelCatch (error: EscHttpResponse) {
+  //   if (axios.isCancel(error) || axios.isCancel(error.error)) {
+  //     console.log('Request canceled')
+  //   }
+  //   return Promise.reject(error)
+  // }
 }

@@ -1,7 +1,6 @@
+import axios, { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios'
 import { loading } from './loading'
-
 import { EscHttpOptions, EscHttpResponse, Notify, NotifyObject, StringMap, UniversalMap } from 'types/http'
-import { AxiosResponse, AxiosRequestConfig, AxiosError } from 'axios'
 
 const defaultOptions: EscHttpOptions = {
   urlMap: {},
@@ -146,6 +145,11 @@ export default class Base {
     error: EscHttpResponse | AxiosError,
     attaches?: UniversalMap
   ): Promise<EscHttpResponse> {
+    if (axios.isCancel(error)) {
+      console.log('Request canceled')
+      return Promise.reject(error)
+    }
+
     let finalError: EscHttpResponse
     const isResponseReject = (<EscHttpResponse> error).success !== undefined
     // @ts-ignore
