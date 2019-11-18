@@ -152,9 +152,14 @@ export default class InfiniteScroll extends Vue {
 
   renderTop () {
     const dir = this.dir === 'down' ? -1 : 0
-    const translateY = isDef(this.topHideSize)
+    let translateY: string = isDef(this.topHideSize)
       ? `${Math.min.call(null, this.topHideSize, this.topHeight) * dir}px`
       : `${dir * 100}%`
+    const isWx = /microMessenger/i.test(navigator.userAgent)
+    // 在微信中，由于存在“橡皮筋”效果，会导致 top 栏错位
+    if (isWx) {
+      translateY = '0'
+    }
     return (
       <div
         ref="top"
