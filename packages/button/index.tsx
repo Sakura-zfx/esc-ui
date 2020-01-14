@@ -32,7 +32,7 @@ export default class EscButton extends Vue implements EscButtonProps {
   @Prop({ default: false, type: Boolean }) readonly loading!: boolean
   @Prop({ default: false, type: Boolean }) readonly block!: boolean
   @Prop({ default: false, type: Boolean }) readonly replace!: boolean
-  @Prop(Number) readonly radius!: number
+  @Prop([Number, String]) readonly radius!: number | string
   @Prop(String) readonly color!: string
   @Prop(String) readonly url!: string
 
@@ -65,6 +65,7 @@ export default class EscButton extends Vue implements EscButtonProps {
   onClick (): void {
     if (!this.loading && !this.disabled && !this.disabledGray) {
       this.$emit('on-click')
+      this.$emit('click')
       this.routeRedirect()
     }
   }
@@ -97,7 +98,7 @@ export default class EscButton extends Vue implements EscButtonProps {
         {
           this.loading
             ? this.renderLoading()
-            : <span class={bem('text', false)}>{this.text}</span>
+            : <span class={bem('text', false)}>{this.$slots.default || this.text}</span>
         }
       </button>
     )

@@ -2,10 +2,9 @@
   <demo-wrap name="button">
     <div>
       <p>按钮尺寸</p>
-      <esc-button
-        text="普通按钮"
-        url="/"
-      />
+      <esc-button url="/">
+        普通按钮
+      </esc-button>
       <esc-button
         text="小号按钮"
         size="small"

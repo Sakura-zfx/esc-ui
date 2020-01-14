@@ -14,17 +14,17 @@ import { Dialog } from 'esc-ui'
 
 ```js
 Vue.use(Dialog)
-// 传入字符串
-this.$escDialog.alert('我是内容')
+// 无标题
+this.$escDialog({ title: '', message: '我是内容' })
 
-// 带标题
-this.$escDialog.confirm({
-  title: '标题',
-  message: '我是内容'
-})
+// 默认带标题
+this.$escDialog.confirm('我是内容')
+
+// 内容加粗
+this.$escDialog({ title: '我是内容', message: '' })
 
 // 传入 VNode
-this.$escDialog.alert(this.$createElement('p', undefined, '我是VNode'))
+this.$escDialog(this.$createElement('span', undefined, '我是VNode'))
 
 // 异步关闭
 this.$escDialog.confirm({

@@ -20,6 +20,13 @@
       text="确认弹窗"
       @on-click="handleClick(2)"
     />
+    <p>内容加粗弹窗</p>
+    <esc-button
+      plain
+      color="#07c160"
+      text="内容加粗弹窗"
+      @on-click="handleClick(5)"
+    />
     <p>异步关闭</p>
     <esc-button
       plain
@@ -61,6 +68,7 @@ export default class Home extends Vue {
     //   isLayerTransparent: true
     // })
     Vue.use(Dialog)
+    // this.$escDialog(this.$createElement('span', undefined, '我是VNode'))
   }
 
   handleClick (type: number) {
@@ -75,11 +83,17 @@ export default class Home extends Vue {
       showCancelButton: false,
       beforeClose: undefined
     }
-    if (type === 1) {
-      options.title = '标题呢'
+    if (type === 0) {
+      this.$escDialog.alert(options)
+    } else if (type === 5) {
+      options.title = '确定要删除吗？'
+      options.message = ''
+      this.$escDialog.confirm(options)
+    } else if (type === 1) {
+      this.$escDialog.alert(options.message as string)
     } else if (type === 2) {
-      options.title = '确认'
-      options.showCancelButton = true
+      options.title = ''
+      this.$escDialog.confirm(options)
     } else if (type === 3) {
       options.title = '异步2s关闭'
       options.showCancelButton = true
@@ -88,13 +102,12 @@ export default class Home extends Vue {
           done()
         }, 2000)
       }
+      this.$escDialog(options)
     } else if (type === 4) {
       options.title = 'VNode'
-      options.message = this.$createElement('p', undefined, '我是VNode')
+      options.message = this.$createElement('span', undefined, '我是VNode')
+      this.$escDialog(options)
     }
-    this.$escDialog.alert(options).then((action: DialogAction) => {
-      console.log(action)
-    })
   }
 }
 </script>

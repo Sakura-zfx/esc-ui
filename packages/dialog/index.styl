@@ -16,12 +16,16 @@
   &__header
     font-weight: 500
     padding: 20px 20px 0
+    color #000000
   &__content
     max-height: 250px
     overflow: auto
-    color: #262a30
-    padding: 15px 20px
+    color: #030303
+    padding: 6px 15px 15px 15px
     font-size 14px
+    &--no-title {
+      padding-top 19px
+    }
   &__btn-wrap
     display flex
     align-items center
@@ -39,3 +43,6 @@
     //border-right 1px border-color solid
     //&:last-child
     //  border-right none
+    &--cancel {
+      color #262a30
+    }

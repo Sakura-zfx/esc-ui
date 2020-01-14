@@ -10,8 +10,8 @@ const DialogDefaultOptions = {
   title: '提示',
   message: '',
   show: true,
-  confirmButtonText: '确 定',
-  cancelButtonText: '取 消',
+  confirmButtonText: '确定',
+  cancelButtonText: '取消',
   showConfirmButton: true,
   showCancelButton: false,
   beforeClose: undefined,
@@ -20,11 +20,10 @@ const DialogDefaultOptions = {
   container: 'body'
 }
 
-const DialogClass: EscDialog = options => new Promise((resolve, reject) => {
-  const multiTypeOptions = typeof options === 'string'
-    ? { message: options }
-    : options
+const isOptions = (opt: any) => typeof opt === 'object' && (opt.title !== undefined || opt.message !== undefined)
 
+const DialogClass: EscDialog = options => new Promise((resolve, reject) => {
+  const multiTypeOptions = (isOptions(options) ? options : { message: options }) as DialogOptions
   if (!instance) {
     const DialogConstructor = Vue.extend(VueDialog)
     instance = new DialogConstructor({
@@ -48,7 +47,11 @@ const DialogClass: EscDialog = options => new Promise((resolve, reject) => {
 })
 
 DialogClass.alert = DialogClass
-DialogClass.confirm = options => DialogClass(options)
+DialogClass.confirm = options => {
+  const multiTypeOptions = (isOptions(options) ? options : { message: options }) as DialogOptions
+  multiTypeOptions.showCancelButton = true
+  return DialogClass(multiTypeOptions)
+}
 DialogClass.close = () => {
   instance && instance.close()
 }

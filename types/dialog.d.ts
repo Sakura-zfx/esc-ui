@@ -19,9 +19,9 @@ export interface DialogOptions {
 }
 
 export interface EscDialog {
-  (options: string | DialogOptions): Promise<DialogAction>
-  alert(options: string | DialogOptions): Promise<DialogAction>
-  confirm(options: string | DialogOptions): Promise<DialogAction>
+  (options: string | VNode | DialogOptions): Promise<DialogAction>
+  alert(options: string | VNode | DialogOptions): Promise<DialogAction>
+  confirm(options: string | VNode | DialogOptions): Promise<DialogAction>
   close(): void
   install(): void
 }

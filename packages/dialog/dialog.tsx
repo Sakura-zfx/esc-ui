@@ -70,7 +70,7 @@ export default class Dialog extends Mixins(popup) {
         {
           this.loading[type]
             ? <esc-loading value={true} />
-            : <span>{type === 'cancel' ? this.cancelButtonText : this.confirmButtonText}</span>
+            : <span class={[bem('btn-item', type)]}>{type === 'cancel' ? this.cancelButtonText : this.confirmButtonText}</span>
         }
       </div>
     )
@@ -78,7 +78,9 @@ export default class Dialog extends Mixins(popup) {
 
   render () {
     const Title = this.title && <div class={bem('header', false)}>{this.title}</div>
-    const Content = <div class={bem('content', false)}>{this.message}</div>
+    const Content = <div class={bem('content', this.title ? false : 'no-title')}>
+      {this.message || this.$slots.default}
+    </div>
     const Btn = (this.showCancelButton || this.showConfirmButton) && (
       <div class={[border('t'), bem('btn-wrap', false)]}>
         {this.showCancelButton && this.renderBtnItem('cancel')}
