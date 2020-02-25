@@ -16,6 +16,7 @@ import TabNav from '@@/tab-nav/README.md'
 import ContentCard from '@@/content-card/README.md'
 import Empty from '@@/empty/README.md'
 import Skeleton from '@@/skeleton/README.md'
+import PageButton from '@@/page-button/README.md'
 /* inject import */
 
 export interface PackageItem {
@@ -56,7 +57,7 @@ export const routerDir: PackageItemGroup[] = [
     ]
   },
   {
-    title: '基础业务组件',
+    title: '基础组件',
     items: [
       {
         title: 'Dialog 弹出框',
@@ -77,6 +78,23 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'Popup 弹出层',
         name: 'popup'
+      },
+      {
+        title: 'Empty 空组件',
+        name: 'empty'
+      },
+      {
+        title: 'Skeleton 骨架',
+        name: 'skeleton'
+      }
+    ]
+  },
+  {
+    title: '高级组件',
+    items: [
+      {
+        title: 'PageButton 页面按钮',
+        name: 'page-button'
       },
       {
         title: 'Field 字段输入',
@@ -101,14 +119,6 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'ContentCard 内容卡片',
         name: 'content-card'
-      },
-      {
-        title: 'Empty 空组件',
-        name: 'empty'
-      },
-      {
-        title: 'Skeleton 骨架',
-        name: 'skeleton'
       }
     ]
   },
@@ -126,6 +136,7 @@ export const routerDir: PackageItemGroup[] = [
 
 export const markdown = {
   Skeleton,
+  PageButton,
   /* inject export */
   Dialog,
   Button,

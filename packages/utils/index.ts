@@ -54,3 +54,10 @@ export const cookieGet = (name: string): string => {
 export const aliasComponent = (...args: Array<Component>) => args
 
 export function noop () {}
+
+export function hexToRgba (hex: string, opacity: number) {
+  return 'rgba(' + parseInt('0x' + hex.slice(1, 3)) +
+    ',' + parseInt('0x' + hex.slice(3, 5)) +
+    ',' + parseInt('0x' + hex.slice(5, 7)) +
+    ',' + opacity + ')'
+}

@@ -1,13 +1,25 @@
 <template>
   <div class="esc-demo-wrap">
     <div class="esc-title">
-      <div class="esc-title__back" @click="back">返回</div>
+      <div
+        class="esc-title__back"
+        @click="back"
+      >
+        返回
+      </div>
       <div
         class="esc-title__content"
       >
-        <slot name="title">{{ name[0].toUpperCase() + name.substr(1) }}</slot>
+        <slot name="title">
+          {{ name[0].toUpperCase() + name.substr(1) }}
+        </slot>
       </div>
-      <div class="esc-title__right" @click="edit()">编辑</div>
+      <div
+        class="esc-title__right"
+        @click="edit()"
+      >
+        编辑
+      </div>
     </div>
     <div
       class="esc-demo-content"
@@ -30,12 +42,12 @@ export default {
   },
 
   methods: {
-    back() {
+    back () {
       // this.$router.back()
       history.go(-2)
     },
 
-    edit() {
+    edit () {
       window.open(`https://github.com/Jmingzi/esc-ui/tree/master/packages/${this.name || 'button'}/demo/index.vue`)
     }
   }
@@ -47,10 +59,11 @@ export default {
 .esc-demo
   &-wrap
     padding-top 45px
-  &-content
+    font-size 14px
+  // &-content
     // padding 10px
-    & .esc-button
-      margin-right 10px
+    // & .esc-button
+    // margin-right 10px
   &-pd
     padding 10px
 .esc-title

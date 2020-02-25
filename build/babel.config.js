@@ -2,6 +2,7 @@ const transferCommonStyle = require('./plugin/transferCommonStyle')
 
 module.exports = {
   presets: [
+    'vca-jsx',
     [
       '@babel/preset-env',
       {
@@ -18,6 +19,7 @@ module.exports = {
     '@babel/preset-typescript'
   ],
   plugins: [
+    '@babel/plugin-proposal-optional-chaining',
     [
       '@babel/plugin-transform-runtime',
       {

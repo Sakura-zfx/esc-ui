@@ -1,5 +1,8 @@
 <template>
-  <demo-wrap name="button">
+  <demo-wrap
+    class="demo-button"
+    name="button"
+  >
     <div>
       <p>按钮尺寸</p>
       <esc-button url="/">
@@ -135,4 +138,7 @@ export default {
 </script>
 
 <style lang="stylus">
+.demo-button
+  .esc-button
+    margin-right 10px
 </style>
