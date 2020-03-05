@@ -21,6 +21,7 @@ export default class InfiniteScroll extends Vue {
   @Prop({ type: Boolean, default: true }) readonly loadFirst!: boolean
   @Prop({ type: Function, required: true }) readonly loadFun!: () => Promise<any[]>
   @Prop({ type: String, default: 'id' }) readonly keyName!: string
+  @Prop({ type: Number }) readonly count!: number
 
   get hasTop (): boolean {
     return this.windowScroll && !!this.$slots.top
@@ -37,9 +38,8 @@ export default class InfiniteScroll extends Vue {
       this.topHeight = (this.$refs.top as HTMLDivElement).offsetHeight
     }
 
-    this.containerHeight = this.windowScroll
-      ? document.documentElement.clientHeight || document.body.clientHeight
-      : (this.$refs.container as HTMLDivElement).offsetHeight
+    const container = this.windowScroll ? (document.documentElement || document.body) : (this.$refs.container as HTMLDivElement)
+    this.containerHeight = container.clientHeight || container.offsetHeight
     this.addDocumentListener()
   }
 
@@ -68,14 +68,25 @@ export default class InfiniteScroll extends Vue {
     this.loadFun().then((res: any) => {
       this.list = this.list.concat(res)
       this.loading = false
-      if (this.list.length === 0) {
-        this.showEmpty = true
+      // 没有更多
+      if (isDef(this.count)) {
+        this.noData = this.list.length >= this.count
       } else {
         this.noData = res.length === 0
+      }
+      // 无数据
+      if (this.list.length === 0) {
+        this.showEmpty = true
       }
     }).catch(() => {
       this.loading = false
     })
+  }
+
+  reset () {
+    this.list = []
+    this.showEmpty = false
+    this.noData = false
   }
 
   addDocumentListener (type: boolean = true) {
@@ -126,8 +137,8 @@ export default class InfiniteScroll extends Vue {
         {'加载中...'}
       </div>
     )
-    const genEmpty = () => this.$slots.empty || <p class={bem('empty', false)}>暂无数据</p>
-    const genNoData = () => <p class={bem('empty', false)}>没有更多了</p>
+    const genEmpty = () => this.$slots.empty || <p class={bem('empty', false)}>暂无数据~</p>
+    const genNoData = () => <p class={bem('empty', false)}>没有更多了~</p>
     const result = this.list.map((item: any, i: number) => genItem(item[this.keyName] || i, item))
       .concat(genLoading())
 
@@ -155,7 +166,7 @@ export default class InfiniteScroll extends Vue {
     let translateY: string = isDef(this.topHideSize)
       ? `${Math.min.call(null, this.topHideSize, this.topHeight) * dir}px`
       : `${dir * 100}%`
-    const isWx = /microMessenger/i.test(navigator.userAgent)
+    const isWx = /microMessenger|alipay/i.test(navigator.userAgent)
     // 在微信中，由于存在“橡皮筋”效果，会导致 top 栏错位
     if (isWx) {
       translateY = '0'

@@ -40,15 +40,13 @@ export default {
 
   methods: {
     fetch () {
-      console.log(1)
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          if (this.num === 2) {
+          if (this.num === 0) {
             console.log('null')
             resolve([])
             return
           }
-          console.log(2)
           this.num += 1
           resolve(Array.from(new Array(20)).fill(1))
         }, 2000)
