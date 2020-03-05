@@ -42,7 +42,7 @@ export default {
     fetch () {
       return new Promise((resolve, reject) => {
         setTimeout(() => {
-          if (this.num === 0) {
+          if (this.num === 2) {
             console.log('null')
             resolve([])
             return

@@ -52,6 +52,7 @@ keyName|`string`|`id`|列表循环作为 key 的字段
 方法名|说明
 ----|----
 load|手动触发获取数据函数
+reset|重置
 spliceList|更新数据列表，`spliceList (oldItem: any, newItem?: any) => void`
 
 ### Slots
