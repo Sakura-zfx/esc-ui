@@ -22,6 +22,7 @@ export type UniversalMap = {
 export type Attaches = {
   loading?: boolean
   notify?: boolean
+  isReallyPath?: boolean
   successMessage?: string
   codeCallback?: {
     [name: number]: (error: EscHttpResponse, msg: string) => any
