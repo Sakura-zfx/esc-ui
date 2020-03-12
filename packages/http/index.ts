@@ -45,7 +45,7 @@ export default class Http extends BaseHttp implements EscHttp {
     attaches?: UniversalMap,
     config?: AxiosRequestConfig
   ) {
-    const path = attaches && attaches.isReallyPath ? urlName : this.getPath(urlName)
+    let path = attaches && attaches.isReallyPath ? urlName : this.getPath(urlName)
     const isBodyData = method === 'post'
     let mergeConfig = this.mergeConfig(isBodyData, data, config)
 
@@ -74,6 +74,9 @@ export default class Http extends BaseHttp implements EscHttp {
     mergeConfig.cancelToken = source.token
     cancelQueen.add(urlName, source)
 
+    // parse params
+    path = this.dealPathParams(path, isBodyData ? mergeConfig.data : mergeConfig.params)
+
     const { loadingMethods } = this.options
     loading.add(loadingMethods, attaches)
 
@@ -97,7 +100,6 @@ export default class Http extends BaseHttp implements EscHttp {
           : JSON.stringify(mergeConfig.data)
       }
     }
-
     // @ts-ignore 除了 get 和 post，也可以使用 put 或 delete，此处缺少索引
     return (<AxiosInstance> this.instance)[method](
       path,

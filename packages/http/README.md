@@ -15,8 +15,8 @@ import Http from 'esc-ui/lib/http/miniprogram'
 http = new Http(options: EscHttpOptions)
 
 http.get(
-  uriName: string, 
-  data?: any, 
+  uriName: string,
+  data?: any,
   attaches?: { [key: string]: any },
   config?: AxiosRequestConfig
 )
@@ -25,10 +25,10 @@ http.get(
 
 // 实例
 http.get(
-  'getList', 
-  { siteId: 1 }, 
-  { 
-    loading: false, 
+  'getList',
+  { siteId: 1 },
+  {
+    loading: false,
     notify: false,
     codeCallback: {
       // 指定状态码对应的回调
@@ -36,7 +36,7 @@ http.get(
         console.log(err, msg)
       }
     }
-  }, 
+  },
   { params: { siteType: 2 } }
 )
 ```
@@ -54,26 +54,28 @@ const http = new Http({
 http.get('test', {}, {})
 ```
 
-初始化 urlMap 支持传递命名空间，例如
+初始化 urlMap 支持传递**命名空间**和**动态参数**，例如
 
 ```js
 // 定义
 new Http({
   urlMap: {
+    // 命名空间
     order: {
       list: '/path/order/list'
     },
     cart: {
       list: '/path/cart/list'
     },
-    list: '/path/index/list' 
+    // 动态参数
+    list: '/path/index/:id/:name'
   }
 })
 
 // 使用
 http.get('order/list')
 http.get('cart/list')
-http.get('list')
+http.get('list', { id: 1, name: 'ym' })
 
 // 取消全部请求
 http.cancel(true)
@@ -114,7 +116,7 @@ headers|`{ [name: string]: string }`|-|-
 useQsStringifyBody|`boolean`|`true`|使用 qs stringify post body
 bindSentry|`EscSentry`|-|将 sentry 绑定使用，会捕获 http 非 200 的错误
 withCredentials|`boolean`|`true`|-
-successRequestAssert|`(serverResponse: EscHttpResponse) => boolean`|`res => res.success`|如何认为接口返回了正常结果 
+successRequestAssert|`(serverResponse: EscHttpResponse) => boolean`|`res => res.success`|如何认为接口返回了正常结果
 beforeRequest|`(data?: AxiosRequestConfig, attaches?: UniversalMap) => AxiosRequestConfig`|-|-
 beforeThen|`(res: EscHttpResponse, attaches?: UniversalMap) => EscHttpResponse`|-|-
 beforeCatch|`(res: EscHttpResponse, attaches?: UniversalMap) => EscHttpResponse`|-|-

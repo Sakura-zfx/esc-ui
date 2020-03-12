@@ -80,6 +80,19 @@ export default class Base {
     throw new Error('urlName is not a object')
   }
 
+  dealPathParams (path: string, data?: UniversalMap) {
+    const matches = path.match(/(:[\w\d-_]+)/g)
+    if (matches) {
+      const dataRes = data || {}
+      matches.forEach(mat => {
+        const key = mat.substr(1)
+        path = path.replace(mat, dataRes[key])
+        delete dataRes[key]
+      })
+    }
+    return path
+  }
+
   notify (
     res: EscHttpResponse,
     attaches?: UniversalMap,

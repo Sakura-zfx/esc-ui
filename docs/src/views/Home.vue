@@ -53,7 +53,7 @@ import Layout from '../components/Layout.vue'
 //   }
 //   // arrayFormat: 'brackets'
 // })
-// http.get('user')
+// http.post('user', { id: 1 })
 // http.cancel(true)
 
 // http.post('check', null, null, {
