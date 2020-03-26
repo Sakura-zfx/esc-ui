@@ -13,6 +13,7 @@ type Prop = {
     color: string
     click: () => void
     opacity: number
+    round: boolean
   }>
 }
 const bem = useBem('page-button', 'esc')
@@ -46,8 +47,10 @@ export default defineComponent<Prop>({
               type="primary"
               color={/#/.test(it.color) ? hexToRgba(it.color, it.opacity || 1) : it.color}
               onClick={it.click || noop}
+              round={!!it.round}
+              plain={it.opacity === 0}
               style={{
-                color: it.opacity && it.opacity < 1 && it.color
+                color: it.opacity !== undefined && it.opacity < 1 && it.color
               }}
             >{it.text}</esc-button>
           ))

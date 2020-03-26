@@ -4,7 +4,7 @@
   >
     <page-button
       :buttons="[
-        { text: '联系客服', color: '#FF4D4D', opacity: 0.15 },
+        { text: '联系客服', color: '#FF4D4D', opacity: 0, round: true },
         { text: '审批通过', color: '#2DC888', click: handleClick }
       ]"
     />
