@@ -91,6 +91,7 @@ export default class EscButton extends Vue implements EscButtonProps {
   render () {
     return (
       <button
+        type={'button'}
         class={this.buttonClass}
         style={this.hackButtonStyle}
         onClick={this.onClick}
