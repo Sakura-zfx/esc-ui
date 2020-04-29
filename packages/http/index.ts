@@ -87,7 +87,12 @@ export default class Http extends BaseHttp implements EscHttp {
         const form = new FormData()
         Object.keys(mergeConfig.data).forEach(key => {
           // @ts-ignore
-          form.append(key, mergeConfig.data[key], mergeConfig.data[key].name)
+          const it: File = mergeConfig.data[key]
+          if (it instanceof File) {
+            form.append(key, it, it.name)
+          } else {
+            form.append(key, it)
+          }
         })
         mergeConfig.data = form
       } else {
