@@ -28,11 +28,11 @@ export default {
 
   methods: {
     toast () {
-      console.log(1)
-      this.$escToast('1秒后改变文案')
-      setTimeout(() => {
-        Toast('反而更恶搞话题人流后加入盐计划统计和蛮好用和借款人太阳镜将')
-      }, 1000)
+      // console.log(1)
+      // this.$escToast('1秒后改变文案')
+      Toast('代码是写给人看的，同样的')
+      // setTimeout(() => {
+      // }, 1000)
     }
   }
 }

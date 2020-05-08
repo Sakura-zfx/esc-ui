@@ -22,8 +22,8 @@ const getInstance = () => {
   }
 }
 
+let timer: NodeJS.Timeout | null = null
 const ToastFn = (message: string) => {
-  let timer = null
   getInstance()
   if (timer) {
     clearTimeout(timer)
