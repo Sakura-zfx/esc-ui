@@ -20,38 +20,32 @@ const upCase = (str) => {
 // README.md
 // demo/index.vue
 const fnName = upCase(camelCase(name))
-const tsxContent = `import Vue from 'vue'
-import { ComponentOptions } from 'vue/types'
-import { plugin, state, value, computed, watch, onMounted } from 'vue-function-api'
+const tsxContent = `import { defineComponent, computed, watch, onMounted } from '@vue/composition-api'
 import { vw, isDef } from '../utils'
 import useBem from '../bem'
 
-Vue.use(plugin)
 type Prop = {
 }
 const bem = useBem('${name}', 'esc')
 
-function ${fnName} (): ComponentOptions<Prop> {
-  return {
-    name: '${fnName}',
-    
-    setup (props, context) {
-      console.log(context)
-    },
-    
-    render (h) {
-      return (
-        <div class={bem()}>
-        </div>
-      )
-    },
-    
-    install (vue: any) {
-      vue.component(this.name, this)
-    }
+export default defineComponent({
+  name: '${fnName}',
+
+  setup (props, context) {
+    console.log(context)
+  },
+
+  render () {
+    return (
+      <div class={bem()}>
+      </div>
+    )
+  },
+
+  install (vue: any) {
+    vue.component(this.name, this)
   }
-}
-export default ${fnName}()
+})
 `
 const demoContent = `<template>
   <demo-wrap name="${name}">

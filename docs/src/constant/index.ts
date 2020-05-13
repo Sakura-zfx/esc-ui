@@ -17,6 +17,7 @@ import ContentCard from '@@/content-card/README.md'
 import Empty from '@@/empty/README.md'
 import Skeleton from '@@/skeleton/README.md'
 import PageButton from '@@/page-button/README.md'
+import CitySelect from '@@/city-select/README.md'
 /* inject import */
 
 export interface PackageItem {
@@ -119,6 +120,10 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'ContentCard 内容卡片',
         name: 'content-card'
+      },
+      {
+        title: 'CitySelect 级联选择',
+        name: 'city-select'
       }
     ]
   },
@@ -137,6 +142,7 @@ export const routerDir: PackageItemGroup[] = [
 export const markdown = {
   Skeleton,
   PageButton,
+  CitySelect,
   /* inject export */
   Dialog,
   Button,

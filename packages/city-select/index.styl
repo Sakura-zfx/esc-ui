@@ -1,0 +1,47 @@
+.esc-city-select
+  position relative
+  padding-top 40px
+  overflow auto
+  -webkit-overflow-scrolling touch
+  &__title
+    position absolute
+    top 0
+    left 0
+    width 100%
+    display flex
+    align-items center
+    height 40px
+    background #fff
+    font-size 12px
+    border-bottom 1px #eee solid
+  &__title-item
+    position relative
+    display flex
+    text-align center
+    align-items center
+    height 100%
+    padding 0 10px
+    color #666
+    &--active
+      position absolute
+      height 2px
+      left 10px
+      right 10px
+      background red
+      bottom 0
+      border-radius 2px
+  &__loading
+    text-align center
+    font-size 12px
+    padding-top 20px
+    color #999
+  &__item
+    padding 10px
+    border-bottom 1px #eee solid
+    color #333
+    &:active
+      background #f2f2f2
+  &__content
+    min-height 150px
+    background #fff
+    font-size 14px
