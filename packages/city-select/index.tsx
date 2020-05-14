@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { RenderContext } from 'vue/types'
+// import { RenderContext } from 'vue/types'
 import Composition, { defineComponent, reactive, ref } from '@vue/composition-api'
 // import { vw, isDef } from '../utils'
 import useBem from '../bem'
@@ -11,6 +11,7 @@ type Prop = {
 }
 type State = {
   curLevel: number
+  selectTitleIndex: number
   selected: Item[]
   end: boolean
   loading: boolean
@@ -20,38 +21,6 @@ type Item = {
   code: number
 }
 const bem = useBem('city-select', 'esc')
-
-const Title = (cp: RenderContext) => {
-  // console.log(cp)
-  const state = cp.props.state as State
-  return (
-    <div class={bem('title')}>
-      {
-        state.selected.map((it, i) => {
-          return (
-            <div
-              key={it.name}
-              class={bem('title-item')}
-              onClick={() => (cp.listeners.tab as Function)(it, i)}
-            >
-              { it.name }
-              {
-                state.curLevel - 1 === i &&
-                  <span
-                    class={bem('title-item', 'active')}
-                    style={{ background: cp.props.color }}
-                  />
-              }
-            </div>
-          )
-        })
-      }
-      {
-        !state.end && <div class={bem('title-item')}>请选择</div>
-      }
-    </div>
-  )
-}
 
 export default defineComponent<Prop>({
   name: 'CitySelect',
@@ -71,23 +40,37 @@ export default defineComponent<Prop>({
   },
 
   setup (props, context) {
+    const cacheLevelList: Item[] = []
     const state = reactive<State>({
       curLevel: 0,
+      selectTitleIndex: -1,
       selected: [],
       end: false,
       loading: false
     })
     const list = ref<Item[]>([])
     const handleTab = (item: Item, i: number) => {
-      if (state.curLevel !== i + 1) {
-        state.curLevel = i + 1
+      if (state.curLevel !== i) {
+        state.curLevel = i
+        state.selectTitleIndex = i
         state.selected = state.selected.slice(0, i + 1)
-        loadData()
+        if (cacheLevelList[i]) {
+          state.end = false
+          // @ts-ignore
+          list.value = cacheLevelList[i]
+        } else {
+          loadData()
+        }
       }
     }
     const handleSelect = (item: Item) => {
       state.curLevel += 1
-      state.selected.push(item)
+      if (state.selectTitleIndex > -1) {
+        state.selected.splice(state.selectTitleIndex, 1, item)
+      } else {
+        state.selected.push(item)
+      }
+      state.selectTitleIndex = -1
       loadData()
     }
 
@@ -98,6 +81,8 @@ export default defineComponent<Prop>({
         const hasData = res && res.length
         state.end = !hasData
         list.value = hasData ? res : []
+        // @ts-ignore
+        cacheLevelList[state.curLevel] = list.value
         if (state.end) {
           context.emit('input', state.selected)
         }
@@ -110,17 +95,47 @@ export default defineComponent<Prop>({
 
     return () => (
       <div class={bem()}>
-        <Title
-          // @ts-ignore
-          color={props.color}
-          state={state}
-          onTab={handleTab}
-        />
+        <div class={bem('title')}>
+          {
+            state.selected.map((it, i) => {
+              return (
+                <div
+                  key={it.name}
+                  class={bem('title-item')}
+                  onClick={() => handleTab(it, i)}
+                >
+                  { it.name }
+                  {
+                    state.curLevel === i &&
+                    <span
+                      class={bem('title-item', 'active')}
+                      style={{ background: props.color }}
+                    />
+                  }
+                </div>
+              )
+            })
+          }
+          {
+            !state.end && (
+              <div class={bem('title-item')}>
+                请选择
+                <span
+                  style={{
+                    display: state.selectTitleIndex > -1 ? 'none' : undefined,
+                    background: props.color
+                  }}
+                  class={bem('title-item', 'active')}
+                />
+              </div>
+            )
+          }
+        </div>
         <div class={bem('content')}>
           {
             state.loading || state.end ? (
               <div class={bem('loading')}>
-                <span>{ state.end ? '选择完成' : '加载中...' }</span>
+                <span>{ state.end ? '没有下一级了~' : '加载中...' }</span>
               </div>
             ) : list.value.map(it => {
               return (

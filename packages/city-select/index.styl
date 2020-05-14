@@ -1,13 +1,6 @@
 .esc-city-select
   position relative
-  padding-top 40px
-  overflow auto
-  -webkit-overflow-scrolling touch
   &__title
-    position absolute
-    top 0
-    left 0
-    width 100%
     display flex
     align-items center
     height 40px
@@ -39,9 +32,13 @@
     padding 10px
     border-bottom 1px #eee solid
     color #333
+    font-size 12px
     &:active
       background #f2f2f2
   &__content
     min-height 150px
     background #fff
     font-size 14px
+    overflow auto
+    -webkit-overflow-scrolling touch
+    height calc(100% - 40px)

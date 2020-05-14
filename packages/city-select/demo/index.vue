@@ -6,6 +6,7 @@
     <city-select
       color="blue"
       :load="load"
+      style="height: 250px"
     />
     <p class="plr10">
       结合 popup 一起使用
@@ -59,7 +60,16 @@ export default {
           if (level === 0) {
             resolve([{ name: '中国', code: 0 }])
           } else if (level === 1) {
-            resolve([{ name: '浙江', code: 1 }, { name: '湖北', code: 2 }])
+            resolve([
+              { name: '浙江', code: 1 },
+              { name: '湖北', code: 2 },
+              { name: '湖南', code: 3 },
+              { name: '海南', code: 4 },
+              { name: '北京', code: 5 },
+              { name: '天津', code: 6 },
+              { name: '重庆', code: 7 },
+              { name: '河南', code: 8 }
+            ])
           } else if (level === 2) {
             resolve([{ name: '杭州', code: 1 }, { name: '绍兴', code: 2 }])
           } else {
