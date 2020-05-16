@@ -5,7 +5,7 @@ export interface StringMap {
   [name: string]: string
 }
 export interface UrlMap {
-  [name: string]: string | StringMap
+  [name: string]: string | UrlMap
 }
 export type LoadingObject = {
   open: () => void

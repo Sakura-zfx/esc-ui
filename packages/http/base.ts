@@ -70,14 +70,23 @@ export default class Base {
   getPath (urlName: string): string {
     const { urlMap } = this.options
     const pathArr: Array<string> = urlName.split('/')
-    let path = urlMap[urlName]
-    if (pathArr.length === 2 && typeof urlMap[pathArr[0]] === 'object') {
-      path = (<StringMap> urlMap[pathArr[0]])[pathArr[1]]
+    let i = 0
+    let path = urlMap[pathArr[i]]
+    // path 多级嵌套
+    while (typeof path === 'object' && i < 10) {
+      i++
+      path = path[pathArr[i]]
     }
+    if (i >= 10) {
+      throw new Error(`${urlName} is not found in urlMap!`)
+    }
+    // if (pathArr.length === 2 && typeof urlMap[pathArr[0]] === 'object') {
+    //   path = (<StringMap> urlMap[pathArr[0]])[pathArr[1]]
+    // }
     if (typeof path === 'string') {
       return path
     }
-    throw new Error('urlName is not a object')
+    throw new Error(`${urlName} 在 urlMap 里没有找到！`)
   }
 
   dealPathParams (path: string, data?: UniversalMap) {
@@ -135,8 +144,12 @@ export default class Base {
     // loading
     loading.pop(attaches)
 
-    if (!result || (result && typeof result !== 'object')) {
-      throw new Error('beforeThen 返回的结果不合法')
+    if (!result || typeof result !== 'object') {
+      // throw new Error('beforeThen 返回的结果不合法')
+      // if (res.status === 200) {
+      //   return result
+      // }
+      return Promise.reject(res)
     }
 
     const finalResponse = {
