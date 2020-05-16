@@ -31,37 +31,37 @@ import Layout from '../components/Layout.vue'
 // console.log(bem())
 // console.log(bem('goods', false))
 // console.log(bem('goods', ['img', { normal: true }]))
-import H from '@@/http'
-const http = new H({
-  // baseUrl: 'http://api.jituancaiyun.net',
-  baseUrl: 'http://youli.uban360.net',
-  // baseUrl: 'https://filesystem.api.jituancaiyun.com',
-  urlMap: {
-    a: {
-      b: {
-        user: '/gift-front/user/me',
-        upload: '/sfs/webUpload/srvfile?fileType=2&src=cdn',
-        check: '/webaace/VpmnProduct/check'
-      }
-    }
-  },
-  contentType: 'application/json',
-  useQsStringifyBody: false,
-  beforeRequest (data, config) {
-    // data.id = 1
-    return {
-      data: {
-        siteId: 1
-      }
-    }
-  },
-  beforeThen (res, attaches) {
-    console.log(res)
-    return null
-  }
-  // arrayFormat: 'brackets'
-})
-http.get('a/b/user', { id: 1 })
+// import H from '@@/http'
+// const http = new H({
+//   // baseUrl: 'http://api.jituancaiyun.net',
+//   baseUrl: 'http://youli.uban360.net',
+//   // baseUrl: 'https://filesystem.api.jituancaiyun.com',
+//   urlMap: {
+//     a: {
+//       b: {
+//         user: '/gift-front/user/me',
+//         upload: '/sfs/webUpload/srvfile?fileType=2&src=cdn',
+//         check: '/webaace/VpmnProduct/check'
+//       }
+//     }
+//   },
+//   contentType: 'application/json',
+//   useQsStringifyBody: false,
+//   beforeRequest (data, config) {
+//     // data.id = 1
+//     return {
+//       data: {
+//         siteId: 1
+//       }
+//     }
+//   },
+//   beforeThen (res, attaches) {
+//     console.log(res)
+//     return null
+//   }
+//   // arrayFormat: 'brackets'
+// })
+// http.get('a/b/user', { id: 1 })
 // http.cancel(true)
 
 // http.post('check', null, null, {
