@@ -143,17 +143,18 @@ export default class Base {
     }
     // loading
     loading.pop(attaches)
-    const finalResponse = {
-      ...result,
-      attaches
-    }
     if (/multipart\/form-data/.test(res.headers['content-type'])) {
       // 返回文件流
-      return finalResponse
+      return result
     }
     if (!result || typeof result !== 'object') {
       // throw new Error('beforeThen 返回的结果不合法')
       return Promise.reject(res)
+    }
+
+    const finalResponse = {
+      ...result,
+      attaches
     }
     if (
       successRequestAssert &&
