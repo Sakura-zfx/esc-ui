@@ -143,18 +143,17 @@ export default class Base {
     }
     // loading
     loading.pop(attaches)
-
-    if (!result || typeof result !== 'object') {
-      // throw new Error('beforeThen 返回的结果不合法')
-      // if (res.status === 200) {
-      //   return result
-      // }
-      return Promise.reject(res)
-    }
-
     const finalResponse = {
       ...result,
       attaches
+    }
+    if (/multipart\/form-data/.test(res.headers['content-type'])) {
+      // 返回文件流
+      return finalResponse
+    }
+    if (!result || typeof result !== 'object') {
+      // throw new Error('beforeThen 返回的结果不合法')
+      return Promise.reject(res)
     }
     if (
       successRequestAssert &&
