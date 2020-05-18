@@ -1,6 +1,6 @@
 {
   "name": "esc-ui",
-  "version": "2.0.16",
+  "version": "2.0.17",
   "private": false,
   "scripts": {
     "docs": "vue-cli-service serve",
