@@ -18,6 +18,7 @@ import Empty from '@@/empty/README.md'
 import Skeleton from '@@/skeleton/README.md'
 import PageButton from '@@/page-button/README.md'
 import CitySelect from '@@/city-select/README.md'
+import Tag from '@@/tag/README.md'
 /* inject import */
 
 export interface PackageItem {
@@ -79,6 +80,10 @@ export const routerDir: PackageItemGroup[] = [
       {
         title: 'Popup 弹出层',
         name: 'popup'
+      },
+      {
+        title: 'Tag 标签',
+        name: 'tag'
       },
       {
         title: 'Empty 空组件',
@@ -143,6 +148,7 @@ export const markdown = {
   Skeleton,
   PageButton,
   CitySelect,
+  Tag,
   /* inject export */
   Dialog,
   Button,
