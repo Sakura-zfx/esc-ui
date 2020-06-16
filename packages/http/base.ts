@@ -143,7 +143,7 @@ export default class Base {
     }
     // loading
     loading.pop(attaches)
-    if (/multipart\/form-data/.test(res.headers['content-type'])) {
+    if (res.headers && /multipart\/form-data/.test(res.headers['content-type'])) {
       // 返回文件流
       return result
     }
