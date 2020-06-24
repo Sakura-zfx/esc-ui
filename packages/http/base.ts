@@ -143,7 +143,8 @@ export default class Base {
     }
     // loading
     loading.pop(attaches)
-    if (res.headers && /multipart\/form-data/.test(res.headers['content-type'])) {
+    const fileContentType = /application\/vnd\.ms-excel|multipart\/form-data/
+    if (res.headers && fileContentType.test(res.headers['content-type'])) {
       // 返回文件流
       return result
     }
