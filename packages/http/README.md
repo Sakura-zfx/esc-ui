@@ -98,6 +98,7 @@ isReallyPath|`boolean`|`false`| path 直接使用，不通过 urlMap
 successMessage|`string`|-|接口操作成功的提示文案
 codeCallback|`{ [code: string]: (error: EscHttpResponse, message) => any }`|-|接口指定的某种code下的特定行为
 isUpload|`boolean`|-|是否为上传文件
+maybeFile|`boolean`|-|返回的结果可能是文件流
 isMiniprogram|`boolean`|-|是否为小程序请求接口
 
 ### EscHttpOptions

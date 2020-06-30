@@ -144,8 +144,15 @@ export default class Base {
     // loading
     loading.pop(attaches)
     const fileContentType = /application\/vnd\.ms-excel|multipart\/form-data/
-    if (res.headers && fileContentType.test(res.headers['content-type'])) {
-      // 返回文件流
+    const headerResponse = (res.headers && res.headers['content-type']) || 'application/json'
+    const isResponseTypeAccept = /json|html|text/.test(headerResponse)
+    if (
+      !isResponseTypeAccept && (
+        fileContentType.test(res.headers['content-type']) ||
+        (attaches && attaches.maybeFile)
+      )
+    ) {
+      // 返回结果本身
       return result
     }
     if (!result || typeof result !== 'object') {
