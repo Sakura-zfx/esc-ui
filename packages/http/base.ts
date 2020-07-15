@@ -95,8 +95,11 @@ export default class Base {
       const dataRes = data || {}
       matches.forEach(mat => {
         const key = mat.substr(1)
-        path = path.replace(mat, dataRes[key])
-        delete dataRes[key]
+        // 必须以字母开头
+        if (/^[a-z]/.test(key)) {
+          path = path.replace(mat, dataRes[key])
+          delete dataRes[key]
+        }
       })
     }
     return path
@@ -137,6 +140,19 @@ export default class Base {
     attaches?: UniversalMap
   ): EscHttpResponse | Promise<EscHttpResponse> {
     let result = res.data
+
+    // 适配 jsonp
+    if (attaches && attaches.jsonp) {
+      try {
+        // eslint-disable-next-line no-eval
+        eval(result)
+      } catch (e) {
+        return Promise.reject(e)
+      }
+      // @ts-ignore
+      return
+    }
+
     const { beforeThen, successRequestAssert } = this.options
     if (beforeThen && typeof beforeThen === 'function') {
       result = beforeThen(result, attaches)
