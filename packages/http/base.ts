@@ -149,6 +149,7 @@ export default class Base {
       } catch (e) {
         return Promise.reject(e)
       }
+      loading.pop(attaches)
       // @ts-ignore
       return
     }
