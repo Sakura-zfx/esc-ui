@@ -19,6 +19,7 @@ import Skeleton from '@@/skeleton/README.md'
 import PageButton from '@@/page-button/README.md'
 import CitySelect from '@@/city-select/README.md'
 import Tag from '@@/tag/README.md'
+import Avatar from '@@/avatar/README.md'
 /* inject import */
 
 export interface PackageItem {
@@ -61,6 +62,10 @@ export const routerDir: PackageItemGroup[] = [
   {
     title: '基础组件',
     items: [
+      {
+        title: 'Avatar 头像',
+        name: 'avatar'
+      },
       {
         title: 'Dialog 弹出框',
         name: 'dialog'
@@ -149,6 +154,7 @@ export const markdown = {
   PageButton,
   CitySelect,
   Tag,
+  Avatar,
   /* inject export */
   Dialog,
   Button,
