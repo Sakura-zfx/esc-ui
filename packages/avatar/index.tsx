@@ -59,7 +59,7 @@ export default Vue.extend<{}, {}, {}, Prop>({
     return (
       <div class={bem()} style={style}>
         {!this.defaultUrl && this.name && <span>{ this.name.substr(-2) }</span>}
-        {this.uid && <div class={bem('img')} style={{ backgroundImage: bgUrl }} />}
+        {this.uid && <div class={bem('img')} style={{ backgroundImage: `url(${bgUrl})` }} />}
       </div>
     )
   },
