@@ -19,9 +19,9 @@ type Prop = {
 const bem = useBem('page-button', 'esc')
 
 export default defineComponent<Prop>({
-  components: {
-    EscButton: Button
-  },
+  // components: {
+  //   EscButton: Button
+  // },
   props: {
     buttons: {
       type: Array,
@@ -43,7 +43,8 @@ export default defineComponent<Prop>({
       <div class={bem()}>
         {
           props.buttons.map(it => (
-            <esc-button
+            <Button
+              // @ts-ignore
               type="primary"
               color={/#/.test(it.color) ? hexToRgba(it.color, it.opacity || 1) : it.color}
               onClick={it.click || noop}
@@ -52,7 +53,7 @@ export default defineComponent<Prop>({
               style={{
                 color: it.opacity !== undefined && it.opacity < 1 && it.color
               }}
-            >{it.text}</esc-button>
+            >{it.text}</Button>
           ))
         }
       </div>
