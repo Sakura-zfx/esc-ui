@@ -103,4 +103,4 @@ load| `(level: number, selected: Item[]) => Promise<Item[]>` | - | 加载数据�
 
 名称|类型
 ---|---
-click-item|`(item: Item, level) => void`
+click-item|`(item: Item, level, Item[]) => void`

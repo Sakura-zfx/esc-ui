@@ -72,7 +72,7 @@ export default defineComponent<Prop>({
       }
       state.selectTitleIndex = -1
       loadData()
-      context.emit('click-item', item, state.curLevel)
+      context.emit('click-item', item, state.curLevel, state.selected)
     }
 
     const loadData = () => {
