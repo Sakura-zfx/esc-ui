@@ -5,6 +5,7 @@
     </p>
     <city-select
       color="blue"
+      @click-item="handleClickItem"
       :load="load"
       style="height: 250px"
     />
@@ -28,6 +29,7 @@
       <city-select
         :load="load"
         @input="handleEnd"
+        @click-item="handleClickItem"
       />
     </Popup>
   </demo-wrap>
@@ -82,6 +84,10 @@ export default {
     handleEnd (arr) {
       this.selected = arr
       this.showPopup = false
+    },
+
+    handleClickItem (item, level) {
+      console.log(item, level)
     }
   }
 }

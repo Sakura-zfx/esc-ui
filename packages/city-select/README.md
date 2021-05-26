@@ -98,3 +98,9 @@ color|`string`|`red`| -
 load| `(level: number, selected: Item[]) => Promise<Item[]>` | - | 加载数据的方法
 
 > 注意，返回的数据 type Item = { name, code }
+
+### Events
+
+名称|类型
+---|---
+click-item|`(item: Item, level) => void`
