@@ -61,6 +61,7 @@ export default defineComponent<Prop>({
         } else {
           loadData()
         }
+        context.emit('click-item', item, state.curLevel, state.selected)
       }
     }
     const handleSelect = (item: Item) => {
