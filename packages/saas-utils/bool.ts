@@ -1,0 +1,5 @@
+export const isWx = /MicroMessenger/i.test(navigator.userAgent)
+export const isAlipay = /alipay/i.test(navigator.userAgent)
+export const isCaiyun = /caiyun/i.test(navigator.userAgent)
+export const isAndroid = /android/i.test(navigator.userAgent)
+export const isMiniProgram = /miniprogram/i.test(navigator.userAgent)

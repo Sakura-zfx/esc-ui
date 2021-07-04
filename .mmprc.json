@@ -1,0 +1,13 @@
+{
+  "ciType": "fix",
+  "ciMessage": "dialog => esc-dialog 为了避免声明冲突",
+  "isNeedBuild": true,
+  "prFilePath": [],
+  "prBr": [],
+  "mainBrList": [
+    "master",
+    "develop"
+  ],
+  "lastCheckTs": 1559025930073,
+  "master": "npm version patch && npm run build && npm publish"
+}

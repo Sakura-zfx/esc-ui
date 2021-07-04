@@ -1,73 +1,64 @@
-import { Vue, Component, Watch, Prop } from 'vue-property-decorator'
-import { VNode } from 'vue/types'
-import EscMask from '../../mask-layer/index.vue'
+import { Vue, Component, Watch, Prop, Model } from 'vue-property-decorator'
 import context from './context'
-
-interface layerVNode extends VNode{
-  visible: boolean,
-  $el: any
-}
-
-let layerInstance: layerVNode
-const layerInstanceInit = (): void => {
-  const MaskConstructor = Vue.extend(EscMask)
-  layerInstance = new MaskConstructor({
-    el: document.createElement('div')
-  })
-}
+import { showLayer, closeLayer } from './mask-layer'
 
 @Component
 export default class Popup extends Vue {
-  showDialog: boolean = false
+  containerElement: Node | null = null
 
-  containerElement: HTMLElement | HTMLBodyElement = document.body
+  @Model('input', { type: Boolean, default: false }) readonly show!: boolean
+  @Prop(String) readonly container!: string
+  @Prop({ type: Boolean, default: false }) readonly isLayerTransparent!: boolean
+  @Prop({ default: false, type: Boolean }) readonly pointEventsNone!: boolean
+  @Prop({ type: Boolean, default: false }) readonly closeOnClickLayer!: boolean
 
-  @Prop() readonly container!: string
-
-  @Watch('container')
-  onContainerChange(): void {
-    this.initContainer()
-    this.open()
-  }
-
-  @Watch('showDialog')
-  onVisibleChange(val: boolean): void {
+  // @Watch('container')
+  // onContainerChange(): void {
+  //   this.openSelfAndLayer()
+  // }
+  @Watch('show')
+  onVisibleChange (val: boolean): void {
     if (val) {
-      this.open()
+      this.openSelfAndLayer()
+    } else {
+      closeLayer(this)
     }
   }
 
-  mounted() {
-    if (this.showDialog) {
+  mounted () {
+    if (this.show) {
+      this.openSelfAndLayer()
     }
   }
 
-  initContainer() {
+  initContainer () {
     if (this.container) {
-      this.containerElement = document.querySelector(this.container) || document.body
+      this.containerElement = document.querySelector(this.container)
+    } else if (this.$parent) {
+      this.containerElement = this.$parent.$el
+    } else {
+      this.containerElement = document.body
     }
   }
 
-  open() {
-    this.showLayer()
+  openSelfAndLayer () {
+    this.initContainer()
+    showLayer(this, {
+      zIndex: context.index++,
+      isTransparent: this.isLayerTransparent,
+      pointEventsNone: this.pointEventsNone,
+      containerElement: <Node> this.containerElement
+    })
+    this.showSelf()
+  }
+
+  close () {
+    this.$emit('input', false)
+  }
+
+  showSelf () {
     // @ts-ignore
     this.$el.style.zIndex = context.index++
-    this.containerElement.appendChild(this.$el)
-  }
-
-  close() {
-    this.showDialog = false
-    layerInstance.visible = false
-  }
-
-  showLayer() {
-    if (!layerInstance) {
-      layerInstanceInit()
-    }
-    Object.assign(layerInstance, {
-      zIndex: context.index++,
-      visible: true
-    })
-    this.containerElement.appendChild(layerInstance.$el)
+    (<Node> this.containerElement).appendChild(this.$el)
   }
 }

@@ -1,0 +1,33 @@
+.m-slide {
+  position: relative;
+
+  .m-slide__top {
+    position: relative;
+    width: 100%;
+    z-index: 1;
+    background-color: #fff;
+  }
+
+  .m-slide__del {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 70px;
+    color: #fff;
+    z-index: 0;
+    overflow hidden
+
+    span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+    }
+  }
+
+  .m-slide__del-red {
+    background-color: #f23030;
+  }
+}

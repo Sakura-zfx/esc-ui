@@ -1,0 +1,8 @@
+/test/**/*
+/lib/**/*
+/node_modules/**
+/build/**
+/packages/*/README.md
+/packages/*/*.styl
+/lib-global/**/*
+output.js

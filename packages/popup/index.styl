@@ -1,0 +1,42 @@
+.esc-popup
+  position fixed
+  background-color #fff
+  &__center
+    top 50%
+    left 50%
+    transform translate(-50%, -50%)
+    width 80%
+  &__right
+    top 0
+    bottom 0
+    right 0
+    width 85%
+  &__bottom
+    left 0
+    bottom 0
+    width 100%
+  &__top
+    top 0
+    left 0
+    width 100%
+  &__title
+    position relative
+    height 44px
+    display flex
+    justify-content center
+    align-items center
+    border-bottom 1px #f2f2f2 solid
+    &--left
+    &--right
+      position absolute
+      top 0
+      height 100%
+      display flex
+      justify-content center
+      align-items center
+    &--center
+      font-size 16px
+    &--left
+      left 10px
+    &--right
+      right 10px
