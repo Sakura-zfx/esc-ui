@@ -20,6 +20,6 @@ module.exports = function (excludesType) {
   }
 
   const dirs = fs.readdirSync(path.resolve(__dirname, '../packages'))
-  return dirs.filter(dirName => excludes.indexOf(dirName) === -1)
+  return dirs.filter(dirName => excludes.indexOf(dirName) === -1).filter(x => !path.extname(x))
 }
 

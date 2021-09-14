@@ -12,7 +12,8 @@
     "build": "npm run build:js && npm run build:css && npm run build:css-entry",
     "build:global": "node build/build-global.js",
     "create": "node build/create-one.js",
-    "build:one": "node build/build-one.js"
+    "build:one": "node build/build-one.js",
+    "build:umd": "node build/gen-umd-entry.js && webpack --config build/webpack.config.js --mode production"
   },
   "files": [
     "lib",
@@ -40,6 +41,7 @@
     "@babel/plugin-transform-runtime": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
     "@babel/preset-typescript": "^7.3.3",
+    "@babel/runtime": "^7.15.4",
     "@vant/markdown-loader": "^1.0.3",
     "@vue/cli-plugin-babel": "^3.5.0",
     "@vue/cli-plugin-typescript": "^3.5.0",
@@ -52,6 +54,7 @@
     "camelcase": "^5.3.1",
     "clean-css": "^4.2.1",
     "core-js": "^2.6.5",
+    "css-loader": "^6.2.0",
     "dependency-tree": "^7.0.2",
     "esc-ui": "^0.1.22",
     "eslint": "^5.16.0",
@@ -60,6 +63,7 @@
     "fs-extra": "^7.0.1",
     "husky": "^2.3.0",
     "lint-staged": "^8.1.7",
+    "mini-css-extract-plugin": "^2.3.0",
     "qs": "^6.7.0",
     "rollup": "^1.12.1",
     "stylus": "^0.54.5",
@@ -69,7 +73,9 @@
     "vue-class-component": "^6.0.0",
     "vue-router": "^3.0.1",
     "vue-template-compiler": "^2.6.11",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "webpack": "^5.52.1",
+    "webpack-cli": "^4.8.0"
   },
   "peerDependencies": {
     "vue": ">= 2.5.0"
