@@ -1,0 +1,56 @@
+.esc-tab-nav
+  display flex
+  background-color #ffffff
+  &__fixed
+    position fixed
+    bottom 0
+    left 0
+    width 100%
+    z-index 3000
+  &__border
+    border-top 1px #eee solid
+  &__ipx-bottom
+    padding-bottom constant(safe-area-inset-bottom)
+    padding-bottom env(safe-area-inset-bottom)
+  &__item
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    height 50px
+    color #5c626b
+    &:active
+      background-color #f2f2f2
+    &--icon
+      position relative
+      width 24px
+      height 24px
+      margin-bottom 4px
+      img
+        width 100%
+        height 100%
+      i
+        font-size 24px
+    &--icon-info
+      position: absolute
+      top: -4px
+      right: 0
+      box-sizing: border-box
+      min-width: 16px
+      padding: 0 3px
+      color: #fff
+      font-weight: 500
+      font-size: 12px
+      font-family: PingFang SC, Helvetica Neue, Arial, sans-serif
+      line-height: 14px
+      text-align: center
+      background-color: #f44
+      border: 1px solid #fff
+      border-radius: 16px
+      transform: translateX(50%)
+      transform-origin: 100%
+    &--icon-bg
+      background-color #f2f2f2
+    &--name
+      font-size 10px
+

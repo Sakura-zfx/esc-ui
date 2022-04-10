@@ -1,0 +1,72 @@
+@import '../style/var.styl'
+.esc-field
+  display flex
+  align-items center
+  background-color #fff
+  font-size 14px
+  &__wrap
+    min-height 45px
+    padding 10px
+  &__flex-start
+    align-items flex-start
+  &__label
+    width 80px
+    color #666
+  &__column
+    flex-direction column
+    & ^[0]__label
+      width auto
+    & ^[0]__input-wrap
+      width 100%
+  &__right
+    justify-content space-between
+    input
+      text-align right
+  &__input-wrap
+    display flex
+    flex-grow 1
+    flex-direction column
+    input
+      font-family inherit
+      font-size inherit
+      height 100%
+    &--length
+      text-align right
+      color #B4B6B9
+      font-size 12px
+  &__input-number-tool
+    display flex
+    border 1px border-color solid
+    border-radius 2px
+    & ^[0]__input-wrap
+      width 60px
+      border-width 0 1px
+      border-color border-color
+      border-style solid
+      input
+        text-align center
+    &--add
+    &--sub
+      display flex
+      justify-content center
+      align-items center
+      width 29px
+      height 29px
+      &:active
+        background-color hover-color
+    &--disabled
+      background-color hover-color
+
+  textarea
+    resize none
+  input
+  textarea
+    display block
+    width 100%
+    margin 0
+    padding 0
+    border none
+    outline none
+    font inherit
+    &:focus
+      outline none

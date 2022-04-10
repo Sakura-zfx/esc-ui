@@ -1,29 +1,29 @@
-# ts
+### Vue typescript component`s best practices
 
-## Project setup
+demo entry: [esc-ui](https://competent-bose-f6b47c.netlify.com/)
+
+![](./demo.jpg)
+
+create one component
 ```
-npm install
+npm run create [component-name]
 ```
 
-### Compiles and hot-reloads for development
+build one component
 ```
-npm run serve
+npm run build:one [component-name]
 ```
 
-### Compiles and minifies for production
+build all
 ```
 npm run build
 ```
 
-### Run your tests
+run demo
 ```
-npm run test
-```
-
-### Lints and fixes files
-```
-npm run lint
+npm run docs
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+about ts
+
+- [Typescript 入门梳理](https://github.com/Jmingzi/blog/blob/master/post/ts.md)

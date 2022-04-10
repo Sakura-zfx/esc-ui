@@ -1,0 +1,24 @@
+.esc-content-card
+  display flex
+  background-color #fff
+  &__center
+    align-items center
+    flex-shrink 0
+    &--wrap
+      display flex
+      flex-direction column
+      justify-content space-between
+      height 100%
+  &__grow
+    width 0
+    flex-grow 1
+  &__left
+    width unit(80 / 3.75, 'vw')
+    margin-right unit(10 / 3.75, 'vw')
+    flex-shrink 0
+  &__right
+    display flex
+    align-items center
+    justify-content flex-end
+    margin-left unit(10 / 3.75, 'vw')
+    flex-shrink 0
